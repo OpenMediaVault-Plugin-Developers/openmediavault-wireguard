@@ -5,8 +5,6 @@ set -e
 . /etc/default/openmediavault
 . /usr/share/openmediavault/scripts/helper-functions
 
-ipFwdConf="/etc/sysctl.d/ip_forward.conf"
-
 case "$1" in
     configure)
         # Activate package triggers.
@@ -20,8 +18,10 @@ case "$1" in
             omv-confdbadm migrate "conf.service.wireguard" "${2}"
         fi
 
-        echo 'net.ipv4.ip_forward=1' > ${ipFwdConf}
-        sysctl -p ${ipFwdConf}
+        # load system settings
+        sysctl -p /etc/sysctl.d/ip_forward.conf
+        # load wireguard module
+        modprobe wireguard
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

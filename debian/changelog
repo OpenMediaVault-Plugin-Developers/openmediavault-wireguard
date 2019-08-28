@@ -1,3 +1,9 @@
+openmediavault-wireguard (5.0.1) stable; urgency=low
+
+  * Load wireguard module
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 28 Aug 2019 11:26:37 -0500
+
 openmediavault-wireguard (5.0) stable; urgency=low
 
   * Initial release
