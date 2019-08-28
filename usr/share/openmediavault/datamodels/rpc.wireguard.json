@@ -11,6 +11,9 @@
         	        "nic": {
                 	        "type": "string"
 	                },
+        	        "endpoint": {
+                	        "type": "string"
+	                },
                 	"port": {
                         	"type": "integer",
 	                        "minimum": 1,

@@ -27,6 +27,7 @@ if ! omv_config_exists "${SERVICE_XPATH}"; then
     omv_config_add_node "/config/services" "${SERVICE_XPATH_NAME}"
     omv_config_add_key "${SERVICE_XPATH}" "enable" "0"
     omv_config_add_key "${SERVICE_XPATH}" "nic" ""
+    omv_config_add_key "${SERVICE_XPATH}" "endpoint" ""
     omv_config_add_key "${SERVICE_XPATH}" "port" "51820"
     omv_config_add_key "${SERVICE_XPATH}" "privatekeyserver" "${privkeyserver}"
     omv_config_add_key "${SERVICE_XPATH}" "privatekeyclient" "${pubkeyserver}"

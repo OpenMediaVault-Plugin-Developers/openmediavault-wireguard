@@ -84,6 +84,11 @@ Ext.define("OMV.module.admin.service.wireguard.Settings", {
                     }]
                 })
             },{
+                xtype: "textfield",
+                name: "endpoint",
+                value: "",
+                fieldLabel: _("Endpoint address")
+            },{
                 xtype: "numberfield",
                 name: "port",
                 fieldLabel: _("Port"),
