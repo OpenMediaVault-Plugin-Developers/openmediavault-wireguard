@@ -1,0 +1,34 @@
+[{
+	"type": "rpc",
+	"id": "rpc.wireguard.setsettings",
+	"params": {
+		"type": "object",
+		"properties": {
+			"enable": {
+                        	"type": "boolean",
+	                        "default": 0
+        	        },
+        	        "nic": {
+                	        "type": "string"
+	                },
+                	"port": {
+                        	"type": "integer",
+	                        "minimum": 1,
+        	                "maximum": 65535,
+                	        "default": 51820
+	                },
+        	        "privatekeyserver": {
+                	        "type": "string"
+	                },
+        	        "privatekeyclient": {
+                	        "type": "string"
+	                },
+        	        "publickeyserver": {
+                	        "type": "string"
+	                },
+        	        "publickeyclient": {
+                	        "type": "string"
+	                }
+		}
+	}
+}]

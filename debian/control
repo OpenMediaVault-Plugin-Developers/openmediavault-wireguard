@@ -1,0 +1,23 @@
+Source: openmediavault-wireguard
+Section: net
+XB-Plugin-Section: network
+Priority: optional
+Maintainer: OpenMediaVault Plugin Developers <plugins@omv-extras.org>
+Build-Depends: debhelper (>= 9.0.0 )
+Standards-Version: 3.9.6
+Homepage: http://omv-extras.org/
+
+Package: openmediavault-wireguard
+Architecture: all
+Depends: qrencode,
+         wireguard,
+         openmediavault (>= 5.0),
+         ${misc:Depends}
+Description: openmediavault WireGuard plugin
+ WireGuard is an extremely simple yet fast and modern VPN
+ that utilizes state-of-the-art cryptography. It aims to be
+ faster, simpler, leaner, and more useful than IPsec, while
+ avoiding the massive headache. It intends to be considerably
+ more performant than OpenVPN. WireGuard is designed as a
+ general purpose VPN for running on embedded interfaces and
+ super computers alike, fit for many different circumstances.

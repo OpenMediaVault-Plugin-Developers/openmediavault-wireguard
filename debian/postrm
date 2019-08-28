@@ -1,0 +1,41 @@
+#!/bin/sh
+
+set -e
+
+. /etc/default/openmediavault
+. /usr/share/openmediavault/scripts/helper-functions
+
+ipFwdConf="/etc/sysctl.conf.d/ip_forward.conf"
+qrCodePng="/var/www/openmediavault/images/clientqrcode.png"
+
+remove_action() {
+    if [ -f "${ipFwdConf}" ]; then
+        rm ${ipFwdConf}
+    fi    
+    if [ -f "${qrCodePng}" ]; then
+        rm ${qrCodePng}
+    fi    
+    dpkg-trigger update-fixperms
+}
+
+case "$1" in
+    purge)
+        remove_action
+        # Remove the configuration data
+        omv_config_delete "/config/services/wireguard"
+    ;;
+
+    remove)
+        remove_action
+    ;;
+
+    upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+    ;;
+
+    *)
+        echo "postrm called with unknown argument '$1'" >&2
+        exit 1
+    ;;
+esac
+
+exit 0

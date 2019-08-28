@@ -1,0 +1,38 @@
+#!/bin/sh
+
+set -e
+
+. /etc/default/openmediavault
+. /usr/share/openmediavault/scripts/helper-functions
+
+ipFwdConf="/etc/sysctl.d/ip_forward.conf"
+
+case "$1" in
+    configure)
+        # Activate package triggers.
+        dpkg-trigger update-fixperms
+        dpkg-trigger update-locale
+
+        # Initialize and migrate configuration database.
+        echo "Updating configuration database ..."
+        omv-confdbadm create "conf.service.wireguard"
+        if [ -n "$2" ]; then
+            omv-confdbadm migrate "conf.service.wireguard" "${2}"
+        fi
+
+        echo 'net.ipv4.ip_forward=1' > ${ipFwdConf}
+        sysctl -p ${ipFwdConf}
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument '$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

@@ -1,0 +1,5 @@
+openmediavault-wireguard (5.0) stable; urgency=low
+
+  * Initial release
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 24 Aug 2019 21:25:21 -0500
