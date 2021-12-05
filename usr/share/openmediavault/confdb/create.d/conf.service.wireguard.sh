@@ -35,4 +35,17 @@ if ! omv_config_exists "${SERVICE_XPATH}"; then
     omv_config_add_key "${SERVICE_XPATH}" "publickeyclient" "${pubkeyclient}"
 fi
 
+if [ -z "$(omv_config_get "${SERVICE_XPATH}/privatekeyserver")" ]; then
+    omv_config_update "${SERVICE_XPATH}/privatekeyserver" "$(cat ${privateKeyServer})"
+fi
+if [ -z "$(omv_config_get "${SERVICE_XPATH}/publickeyserver")" ]; then
+    omv_config_update "${SERVICE_XPATH}/publickeyserver" "$(cat ${publicKeyServer})"
+fi
+if [ -z "$(omv_config_get "${SERVICE_XPATH}/privatekeyclient")" ]; then
+    omv_config_update "${SERVICE_XPATH}/privatekeyclient" "$(cat ${privateKeyClient})"
+fi
+if [ -z "$(omv_config_get "${SERVICE_XPATH}/publickeyclient")" ]; then
+    omv_config_update "${SERVICE_XPATH}/publickeyclient" "$(cat ${publicKeyClient})"
+fi
+
 exit 0
