@@ -1,0 +1,73 @@
+version: "1.0"
+type: component
+data:
+  name: omv-services-wireguard-form-page
+  type: formPage
+  config:
+    request:
+      service: WireGuard
+      get:
+        method: getSettings
+      post:
+        method: setSettings
+    fields:
+      - type: checkbox
+        name: enable
+        label: _("Enable")
+        value: false
+      - type: select
+        name: nic
+        label: _('Network adapter')
+        textField: devicename
+        valueField: devicename
+        store:
+          proxy:
+            service: Network
+            get:
+              method: enumerateDevices
+      - type: textInput
+        name: endpoint
+        label: _("Endpoint")
+        value: ""
+      - type: numberInput
+        name: port
+        label: _("Port")
+        value: 51820
+        validators:
+          min: 1
+          max: 65535
+          patternType: port
+          required: true
+      - type: textInput
+        name: privatekeyserver
+        label: _("Private key - server")
+        value: ""
+        readonly: true
+      - type: textInput
+        name: privatekeyclient
+        label: _("Private key - client")
+        value: ""
+        readonly: true
+      - type: textInput
+        name: publickeyserver
+        label: _("Public key - server")
+        value: ""
+        readonly: true
+      - type: textInput
+        name: publickeyclient
+        label: _("Public key - client")
+        value: ""
+        readonly: true
+    buttons:
+      - template: submit
+      - template: cancel
+        execute:
+          type: url
+          url: "/services"
+      - text: _("Show client QR code")
+        execute:
+          type: request
+          request:
+            service: WireGuard
+            method: getClientQrcode
+            successUrl: '/externalRedirect/http%3A%2F%2F{{ location() | get("hostname") }}/images/clientqrcode.png'

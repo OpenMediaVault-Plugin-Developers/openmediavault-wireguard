@@ -1,0 +1,6 @@
+version: "1.0"
+type: route
+data:
+  url: "/services/wireguard"
+  title: _("Wireguard")
+  component: omv-services-wireguard-form-page

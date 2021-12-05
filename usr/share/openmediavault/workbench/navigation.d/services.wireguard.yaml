@@ -1,0 +1,7 @@
+version: "1.0"
+type: navigation-item
+data:
+  path: "services.wireguard"
+  text: _("Wireguard")
+  icon: "mdi:lan-pending"
+  url: "/services/wireguard"

@@ -3,15 +3,15 @@ Section: net
 XB-Plugin-Section: network
 Priority: optional
 Maintainer: OpenMediaVault Plugin Developers <plugins@omv-extras.org>
-Build-Depends: debhelper (>= 9.0.0 )
-Standards-Version: 3.9.6
+Build-Depends: debhelper (>= 12 )
+Standards-Version: 4.3.0
 Homepage: http://omv-extras.org/
 
 Package: openmediavault-wireguard
 Architecture: all
 Depends: qrencode,
          wireguard,
-         openmediavault (>= 5.0),
+         openmediavault (>= 6.0),
          ${misc:Depends}
 Description: openmediavault WireGuard plugin
  WireGuard is an extremely simple yet fast and modern VPN
