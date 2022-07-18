@@ -3,7 +3,7 @@ Address = 10.192.122.1/24
 SaveConfig = true
 ListenPort = {{ config.port }}
 PostUp = iptables -A FORWARD -i wgnet0 -j ACCEPT; iptables -A FORWARD -o wgnet0 -j ACCEPT; iptables -t nat -A POSTROUTING -o {{ config.nic }} -j MASQUERADE
-PostDown = iptables -D FORWARD -i wgnet0 -j ACCEPT; iptables -D FORWARD -o wgnet0 -j ACCEPT; iptables -t nat -D POSTROUTING -o ${{ config.nic }} -j MASQUERADE
+PostDown = iptables -D FORWARD -i wgnet0 -j ACCEPT; iptables -D FORWARD -o wgnet0 -j ACCEPT; iptables -t nat -D POSTROUTING -o {{ config.nic }} -j MASQUERADE
 PrivateKey = {{ config.privatekeyserver }}
 
 [Peer]
