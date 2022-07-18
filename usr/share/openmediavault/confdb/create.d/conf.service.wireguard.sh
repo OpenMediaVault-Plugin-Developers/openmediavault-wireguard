@@ -30,8 +30,8 @@ if ! omv_config_exists "${SERVICE_XPATH}"; then
     omv_config_add_key "${SERVICE_XPATH}" "endpoint" ""
     omv_config_add_key "${SERVICE_XPATH}" "port" "51820"
     omv_config_add_key "${SERVICE_XPATH}" "privatekeyserver" "${privkeyserver}"
-    omv_config_add_key "${SERVICE_XPATH}" "privatekeyclient" "${pubkeyserver}"
-    omv_config_add_key "${SERVICE_XPATH}" "publickeyserver" "${privkeyclient}"
+    omv_config_add_key "${SERVICE_XPATH}" "privatekeyclient" "${privkeyclient}"
+    omv_config_add_key "${SERVICE_XPATH}" "publickeyserver" "${pubkeyserver}"
     omv_config_add_key "${SERVICE_XPATH}" "publickeyclient" "${pubkeyclient}"
 fi
 
