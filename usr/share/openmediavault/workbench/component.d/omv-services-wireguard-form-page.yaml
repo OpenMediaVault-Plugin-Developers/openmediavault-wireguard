@@ -70,4 +70,4 @@ data:
           request:
             service: WireGuard
             method: getClientQrcode
-            successUrl: '/externalRedirect/http%3A%2F%2F{{ location() | get("hostname") }}/images/clientqrcode.png'
+            successUrl: '/externalRedirect/http%3A%2F%2F{{ location() | get("hostname") }}/clientqrcode.png'

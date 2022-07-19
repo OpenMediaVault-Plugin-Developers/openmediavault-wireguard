@@ -61,7 +61,7 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
         $clientQrcode = "";
         $result = "";
-        exec("export LANG=C; qrencode -t png -o /var/www/openmediavault/images/clientqrcode.png < /etc/wireguard/wgnet_client.conf", $result);
+        exec("export LANG=C; qrencode -t png -o /var/www/openmediavault/clientqrcode.png < /etc/wireguard/wgnet_client.conf", $result);
         $clientQrcode = implode("\n", $result) . "\n";
         return [ "clientQrcode" => $clientQrcode ];
     }
