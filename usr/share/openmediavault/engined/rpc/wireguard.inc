@@ -27,7 +27,6 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
     {
         $this->registerMethod("getSettings");
         $this->registerMethod("setSettings");
-        $this->registerMethod("getClientQrcode");
     }
 
     public function getSettings($params, $context)
@@ -51,18 +50,15 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $object = $db->get("conf.service.wireguard");
         $object->setAssoc($params);
         $db->set($object);
+        // generate qr code image
+        $cmdArgs = [];
+        $cmdArgs[] = '--type=png';
+        $cmdArgs[] = '--output=/var/www/openmediavault/clientqrcode.png';
+        $cmdArgs[] = '--read-from=/etc/wireguard/wgnet_client.conf';
+        $cmd = new \OMV\System\Process('qrencode', $cmdArgs);
+        $cmd->setQuiet(true);
+        $cmd->execute($output);
         // Return the configuration object.
         return $object->getAssoc();
-    }
-
-    public function getClientQrcode($params, $context)
-    {
-        // Validate the RPC caller context.
-        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
-        $clientQrcode = "";
-        $result = "";
-        exec("export LANG=C; qrencode -t png -o /var/www/openmediavault/clientqrcode.png < /etc/wireguard/wgnet_client.conf", $result);
-        $clientQrcode = implode("\n", $result) . "\n";
-        return [ "clientQrcode" => $clientQrcode ];
     }
 }

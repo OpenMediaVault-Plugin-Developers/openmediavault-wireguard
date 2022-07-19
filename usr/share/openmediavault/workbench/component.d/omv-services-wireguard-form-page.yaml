@@ -66,8 +66,5 @@ data:
           url: "/services"
       - text: _("Show client QR code")
         execute:
-          type: request
-          request:
-            service: WireGuard
-            method: getClientQrcode
-            successUrl: '/externalRedirect/http%3A%2F%2F{{ location() | get("hostname") }}/clientqrcode.png'
+          type: url
+          url: "/externalRedirect/http{{ ['://', location() | get('hostname')] | join | encodeuricomponent }}/clientqrcode.png"
