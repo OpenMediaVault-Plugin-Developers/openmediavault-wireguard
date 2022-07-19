@@ -3,4 +3,5 @@ type: route
 data:
   url: "/services/wireguard"
   title: _("Wireguard")
+  editing: true
   component: omv-services-wireguard-form-page
