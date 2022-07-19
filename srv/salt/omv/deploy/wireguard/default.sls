@@ -49,7 +49,6 @@ start_wireguard_service:
     - enable: True
     - watch:
       - file: configure_wireguard_wgnet0
-      - file: configure_wireguard_client
 
 {% else %}
 
