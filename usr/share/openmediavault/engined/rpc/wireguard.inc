@@ -27,6 +27,7 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
     {
         $this->registerMethod("getSettings");
         $this->registerMethod("setSettings");
+        $this->registerMethod("getClientConfig");
     }
 
     public function getSettings($params, $context)
@@ -36,6 +37,11 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         // Get the configuration object.
         $db = \OMV\Config\Database::getInstance();
         $object = $db->get("conf.service.wireguard");
+        $config = '';
+        if (file_exists('/etc/wireguard/wgnet_client.conf')) {
+            $config = file_get_contents('/etc/wireguard/wgnet_client.conf');
+        }
+        $object->add('clientConfig', 'string', $config);
         return $object->getAssoc();
     }
 
@@ -50,20 +56,19 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $object = $db->get("conf.service.wireguard");
         $object->setAssoc($params);
         $db->set($object);
-        // Apply changes immmediately
-        \OMV\Rpc\Rpc::call('Config', 'applyChanges', [
-            'modules' => [ 'wireguard' ],
-            'force' => TRUE
-        ], $context);
-        // generate qr code image
-        $cmdArgs = [];
-        $cmdArgs[] = '--type=png';
-        $cmdArgs[] = '--output=/var/www/openmediavault/clientqrcode.png';
-        $cmdArgs[] = '--read-from=/etc/wireguard/wgnet_client.conf';
-        $cmd = new \OMV\System\Process('qrencode', $cmdArgs);
-        $cmd->setQuiet(true);
-        $cmd->execute($output);
         // Return the configuration object.
         return $object->getAssoc();
+    }
+
+    public function getClientConfig($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        if (file_exists('/etc/wireguard/wgnet_client.conf')) {
+            $config = file_get_contents('/etc/wireguard/wgnet_client.conf');
+        }
+        $lines = explode(PHP_EOL, $config);
+        $lines[] = "<a href='/clientqrcode.png' target='_blank'>QR code</a>";
+        return (implode('<br/>', $lines));
     }
 }

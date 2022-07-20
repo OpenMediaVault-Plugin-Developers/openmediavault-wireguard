@@ -53,4 +53,8 @@ start_wireguard_service:
     - name: wg-quick@wgnet0
     - enable: True
 
+create_wireguard_qa_code:
+  cmd.run:
+    - name: "qrencode --type=png --output=/var/www/openmediavault/clientqrcode.png --read-from=/etc/wireguard/wgnet_client.conf"
+
 {% endif %}
