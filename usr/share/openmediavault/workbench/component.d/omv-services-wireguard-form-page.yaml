@@ -15,8 +15,6 @@ data:
         name: enable
         label: _("Enable")
         value: false
-      - type: divider
-        title: _("Settings")
       - type: select
         name: nic
         label: _('Network adapter')
@@ -40,28 +38,54 @@ data:
           max: 65535
           patternType: port
           required: true
-      - type: divider
-        title: _("Keys")
+      - type: checkbox
+        name: showkeys
+        label: _("Show keys")
+        submitValue: false
       - type: textInput
         name: privatekeyserver
         label: _("Private key - server")
         value: ""
         readonly: true
+        modifiers:
+          - type: visible
+            constraint:
+              operator: truthy
+              arg0:
+                prop: showkeys
       - type: textInput
         name: privatekeyclient
         label: _("Private key - client")
         value: ""
         readonly: true
+        modifiers:
+          - type: visible
+            constraint:
+              operator: truthy
+              arg0:
+                prop: showkeys
       - type: textInput
         name: publickeyserver
         label: _("Public key - server")
         value: ""
         readonly: true
+        modifiers:
+          - type: visible
+            constraint:
+              operator: truthy
+              arg0:
+                prop: showkeys
       - type: textInput
         name: publickeyclient
         label: _("Public key - client")
         value: ""
         readonly: true
+        modifiers:
+          - type: visible
+            constraint:
+              operator: truthy
+              arg0:
+                prop: showkeys
     buttons:
       - template: submit
         execute:
