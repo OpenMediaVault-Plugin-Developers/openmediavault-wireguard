@@ -17,6 +17,11 @@
 
 {% set config = salt['omv_conf.get']('conf.service.wireguard') %}
 
+stop_wireguard_service:
+  service.dead:
+    - name: wg-quick@wgnet0
+    - enable: False
+
 {% if config.enable | to_bool %}
 
 configure_wireguard_wgnet0:
@@ -47,14 +52,5 @@ start_wireguard_service:
   service.running:
     - name: wg-quick@wgnet0
     - enable: True
-    - watch:
-      - file: configure_wireguard_wgnet0
-
-{% else %}
-
-stop_wireguard_service:
-  service.dead:
-    - name: wg-quick@wgnet0
-    - enable: False
 
 {% endif %}

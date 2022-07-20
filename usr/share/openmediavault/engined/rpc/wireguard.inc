@@ -50,6 +50,11 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $object = $db->get("conf.service.wireguard");
         $object->setAssoc($params);
         $db->set($object);
+        // Apply changes immmediately
+        \OMV\Rpc\Rpc::call('Config', 'applyChanges', [
+            'modules' => [ 'wireguard' ],
+            'force' => TRUE
+        ], $context);
         // generate qr code image
         $cmdArgs = [];
         $cmdArgs[] = '--type=png';
