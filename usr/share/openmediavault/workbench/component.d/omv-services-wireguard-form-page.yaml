@@ -69,3 +69,6 @@ data:
               request:
                 service: Wireguard
                 method: getClientConfig
+              buttons:
+                stop:
+                  hidden: true
