@@ -38,60 +38,34 @@ data:
           max: 65535
           patternType: port
           required: true
-      - type: checkbox
-        name: showkeys
-        label: _("Show keys")
-        submitValue: false
-      - type: textInput
+        hint: "<a href='/clientqrcode.png' target='_blank'>QR code</a>"
+      - type: hidden
         name: privatekeyserver
-        label: _("Private key - server")
         value: ""
-        readonly: true
-        modifiers:
-          - type: visible
-            constraint:
-              operator: truthy
-              arg0:
-                prop: showkeys
-      - type: textInput
+      - type: hidden
         name: privatekeyclient
-        label: _("Private key - client")
         value: ""
-        readonly: true
-        modifiers:
-          - type: visible
-            constraint:
-              operator: truthy
-              arg0:
-                prop: showkeys
-      - type: textInput
+      - type: hidden
         name: publickeyserver
-        label: _("Public key - server")
         value: ""
-        readonly: true
-        modifiers:
-          - type: visible
-            constraint:
-              operator: truthy
-              arg0:
-                prop: showkeys
-      - type: textInput
+      - type: hidden
         name: publickeyclient
-        label: _("Public key - client")
         value: ""
-        readonly: true
-        modifiers:
-          - type: visible
-            constraint:
-              operator: truthy
-              arg0:
-                prop: showkeys
     buttons:
       - template: submit
         execute:
           type: url
           url: "/services/wireguard"
-      - template: cancel
+      - text: _("Client Config")
         execute:
-          type: url
-          url: "/services"
+          type: taskDialog
+          taskDialog:
+            config:
+              title: _("Client Config")
+              autoScroll: false
+              showCompletion: false
+              startOnInit: true
+              width: "50%"
+              request:
+                service: Wireguard
+                method: getClientConfig

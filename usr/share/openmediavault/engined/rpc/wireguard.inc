@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2019 OpenMediaVault Plugin Developers
+ * Copyright (C) 2019-2022 OpenMediaVault Plugin Developers
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,11 +37,11 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         // Get the configuration object.
         $db = \OMV\Config\Database::getInstance();
         $object = $db->get("conf.service.wireguard");
-        $config = '';
-        if (file_exists('/etc/wireguard/wgnet_client.conf')) {
-            $config = file_get_contents('/etc/wireguard/wgnet_client.conf');
+        $config = "";
+        if (file_exists("/etc/wireguard/wgnet_client.conf")) {
+            $config = file_get_contents("/etc/wireguard/wgnet_client.conf");
         }
-        $object->add('clientConfig', 'string', $config);
+        $object->add("clientconfig", "string", $config);
         return $object->getAssoc();
     }
 
@@ -64,11 +64,16 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
     {
         // Validate the RPC caller context.
         $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
-        if (file_exists('/etc/wireguard/wgnet_client.conf')) {
-            $config = file_get_contents('/etc/wireguard/wgnet_client.conf');
-        }
-        $lines = explode(PHP_EOL, $config);
-        $lines[] = "<a href='/clientqrcode.png' target='_blank'>QR code</a>";
-        return (implode('<br/>', $lines));
-    }
+        // Create the background process.
+        return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
+            use ($params) {
+                $conf = "/etc/wireguard/wgnet_client.conf";
+                $cmd = new \OMV\System\Process("cat $conf");
+                $cmdLine = $cmd->getCommandLine();
+                if (0 !== $this->exec($cmdLine, $output, $bgOutputFilename))
+                    throw new \OMV\ExecException($cmdLine, $output);
+                return $output;
+            }
+        );
+	}
 }
