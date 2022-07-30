@@ -51,6 +51,9 @@ data:
       - type: hidden
         name: publickeyclient
         value: ""
+      - type: hidden
+        name: presharedkeyclient
+        value: ""
     buttons:
       - template: submit
         execute:

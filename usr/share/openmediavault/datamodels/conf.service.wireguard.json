@@ -26,13 +26,16 @@
 		"privatekeyserver": {
 			"type": "string"
 		},
-		"privatekeyclient": {
-			"type": "string"
-		},
 		"publickeyserver": {
 			"type": "string"
 		},
+		"privatekeyclient": {
+			"type": "string"
+		},
 		"publickeyclient": {
+			"type": "string"
+		},
+		"presharedkeyclient": {
 			"type": "string"
 		}
 	}
