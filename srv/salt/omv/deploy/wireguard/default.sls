@@ -61,7 +61,7 @@ start_wireguard_service_wgnet{{ client.netnum }}:
 create_wireguard_qa_code_wgnet{{ client.netnum }}:
   cmd.run:
     - name: "qrencode --type=png --output={{ qr }} --read-from={{ ccfg }}"
-    - watch:
+    - onchanges:
       - file: "{{ ccfg }}"
       - file: "{{ scfg }}"
 
