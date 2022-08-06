@@ -1,0 +1,8 @@
+version: "1.0"
+type: route
+data:
+  url: "/services/wireguard/edit/:uuid"
+  title: _("Edit")
+  editing: true
+  notificationTitle: _("Edit client.")
+  component: omv-services-wireguard-form-page

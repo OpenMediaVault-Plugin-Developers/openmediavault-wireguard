@@ -22,7 +22,9 @@ case "$1" in
         sysctl -p /etc/sysctl.d/ip_forward.conf
 
         # load wireguard module
-        modprobe wireguard
+        if ! lsmod | grep -q wireguard; then
+            modprobe wireguard || :
+        fi
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

@@ -8,9 +8,8 @@ set -e
 qrCodePng="/var/www/openmediavault/clientqrcode.png"
 
 remove_action() {
-    if [ -f "${qrCodePng}" ]; then
-        rm ${qrCodePng}
-    fi    
+    find /var/www/openmediavault/ -type f -name "clientqrcode*.png" -print -delete
+    find /etc/wireguard/ -type f -name "wgnet*.conf" -print -delete
     dpkg-trigger update-workbench
 }
 

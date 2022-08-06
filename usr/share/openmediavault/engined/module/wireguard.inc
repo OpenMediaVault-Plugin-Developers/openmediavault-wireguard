@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (C) 2019 OpenMediaVault Plugin Developers
+ * Copyright (C) 2019-2022 OpenMediaVault Plugin Developers
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,32 +18,20 @@
  */
 
 class OMVModuleWireGuard extends \OMV\Engine\Module\ServiceAbstract
-    implements \OMV\Engine\Notify\IListener, \OMV\Engine\Module\IServiceStatus
+    implements \OMV\Engine\Notify\IListener
 {
     public function getName()
     {
         return "wireguard";
     }
 
-    public function getStatus()
-    {
-        $db = \OMV\Config\Database::getInstance();
-        $object = $db->get("conf.service.wireguard");
-        $systemCtl = new \OMV\System\SystemCtl("wg-quick@wgnet0");
-        return array(
-            "name" => $this->getName(),
-            "title" => gettext("WireGuard"),
-            "enabled" => $object->get("enable"),
-            "running" => $systemCtl->isActive()
-        );
-    }
-
     public function bindListeners(\OMV\Engine\Notify\Dispatcher $dispatcher)
     {
         $dispatcher->addListener(
-            OMV_NOTIFY_MODIFY,
-            "org.openmediavault.conf.service.wireguard",
+            OMV_NOTIFY_CREATE | OMV_NOTIFY_MODIFY | OMV_NOTIFY_DELETE,
+            "org.openmediavault.conf.service.wireguard.client",
             [ $this, "setDirty" ]
         );
+
     }
 }

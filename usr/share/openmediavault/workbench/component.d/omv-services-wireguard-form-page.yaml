@@ -5,16 +5,31 @@ data:
   type: formPage
   config:
     request:
-      service: WireGuard
+      service: Wireguard
       get:
-        method: getSettings
+        method: getClient
+        params:
+          uuid: "{{ _routeParams.uuid }}"
       post:
-        method: setSettings
+        method: setClient
     fields:
+      - type: confObjUuid
       - type: checkbox
         name: enable
         label: _("Enable")
         value: false
+      - type: numberInput
+        name: netnum
+        label: _("Network number")
+        value: 0
+        validators:
+          min: 0
+          max: 999
+          required: true
+      - type: textInput
+        name: name
+        label: _("Name")
+        value: ""
       - type: select
         name: nic
         label: _('Network adapter')
@@ -38,7 +53,6 @@ data:
           max: 65535
           patternType: port
           required: true
-        hint: "<a href='/clientqrcode.png' target='_blank'>QR code</a>"
       - type: hidden
         name: privatekeyserver
         value: ""
@@ -59,19 +73,7 @@ data:
         execute:
           type: url
           url: "/services/wireguard"
-      - text: _("Client Config")
+      - template: cancel
         execute:
-          type: taskDialog
-          taskDialog:
-            config:
-              title: _("Client Config")
-              autoScroll: false
-              showCompletion: false
-              startOnInit: true
-              width: "50%"
-              request:
-                service: Wireguard
-                method: getClientConfig
-              buttons:
-                stop:
-                  hidden: true
+          type: url
+          url: "/services/wireguard"

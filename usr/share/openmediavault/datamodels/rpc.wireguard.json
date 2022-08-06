@@ -1,40 +1,49 @@
-[{
-	"type": "rpc",
-	"id": "rpc.wireguard.setsettings",
-	"params": {
-		"type": "object",
-		"properties": {
-				"enable": {
-					"type": "boolean",
-					"default": 0
-				},
-				"nic": {
-					"type": "string"
-				},
-				"endpoint": {
-					"type": "string"
-				},
-				"port": {
-					"type": "integer",
-					"minimum": 1,
-					"maximum": 65535,
-					"default": 51820
-				},
-				"privatekeyserver": {
-					"type": "string"
-				},
-				"publickeyserver": {
-					"type": "string"
-				},
-				"privatekeyclient": {
-					"type": "string"
-				},
-				"publickeyclient": {
-					"type": "string"
-				},
-				"presharedkeyclient": {
-					"type": "string"
-				}
-		}
-	}
-}]
+[
+  {
+    "type": "rpc",
+    "id": "rpc.wireguard.setclient",
+    "params": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        },
+        "netnum": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 999
+        },
+        "name": {
+          "type": "string"
+        },
+        "nic": {
+          "type": "string"
+        },
+        "endpoint": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535,
+          "default": 51820
+        },
+        "privatekeyserver": {
+          "type": "string"
+        },
+        "publickeyserver": {
+          "type": "string"
+        },
+        "privatekeyclient": {
+          "type": "string"
+        },
+        "publickeyclient": {
+          "type": "string"
+        },
+        "presharedkeyclient": {
+          "type": "string"
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,7 @@
+version: "1.0"
+type: route
+data:
+  url: "/services/wireguard/create"
+  title: _("Create")
+  notificationTitle: _("Created client.")
+  component: omv-services-wireguard-form-page

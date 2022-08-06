@@ -1,6 +1,6 @@
 # @license   http://www.gnu.org/licenses/gpl.html GPL Version 3
 # @author    OpenMediaVault Plugin Developers <plugins@omv-extras.org>
-# @copyright Copyright (c) 2019-2020 OpenMediaVault Plugin Developers
+# @copyright Copyright (c) 2019-2022 OpenMediaVault Plugin Developers
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,44 +17,63 @@
 
 {% set config = salt['omv_conf.get']('conf.service.wireguard') %}
 
-stop_wireguard_service:
-  service.dead:
-    - name: wg-quick@wgnet0
-    - enable: False
+{% for client in config.clients.client %}
 
-{% if config.enable | to_bool %}
+{% set qr = '/var/www/openmediavault/clientqrcode' ~ client.netnum ~ '.png' %}
+{% set scfg = '/etc/wireguard/wgnet' ~ client.netnum ~ '.conf' %}
+{% set ccfg = '/etc/wireguard/wgnet_client' ~ client.netnum ~ '.conf' %}
 
-configure_wireguard_wgnet0:
+{% if client.enable | to_bool %}
+
+configure_wireguard_wgnet{{ client.netnum }}:
   file.managed:
-    - name: "/etc/wireguard/wgnet0.conf"
+    - name: "{{ scfg }}"
     - source:
-      - salt://{{ tpldir }}/files/etc-wireguard-wgnet0_conf.j2
+      - salt://{{ tpldir }}/files/etc-wireguard-wgnet_conf.j2
     - template: jinja
     - context:
-        config: {{ config | json }}
+        config: {{ client | json }}
     - user: root
     - group: root
     - mode: 644
 
-configure_wireguard_client:
+configure_wireguard_client_wgnet{{ client.netnum }}:
   file.managed:
-    - name: "/etc/wireguard/wgnet_client.conf"
+    - name: "{{ ccfg }}"
     - source:
       - salt://{{ tpldir }}/files/etc-wireguard-wgnet_client_conf.j2
     - template: jinja
     - context:
-        config: {{ config | json }}
+        config: {{ client | json }}
     - user: root
     - group: root
     - mode: 644
 
-start_wireguard_service:
+start_wireguard_service_wgnet{{ client.netnum }}:
   service.running:
-    - name: wg-quick@wgnet0
+    - name: wg-quick@wgnet{{ client.netnum }}
     - enable: True
+    - watch:
+      - file: configure_wireguard_wgnet{{ client.netnum }}
+      - file: configure_wireguard_client_wgnet{{ client.netnum }}
 
-create_wireguard_qa_code:
+create_wireguard_qa_code_wgnet{{ client.netnum }}:
   cmd.run:
-    - name: "qrencode --type=png --output=/var/www/openmediavault/clientqrcode.png --read-from=/etc/wireguard/wgnet_client.conf"
+    - name: "qrencode --type=png --output={{ qr }} --read-from={{ ccfg }}"
+
+{% else %}
+
+stop_wireguard_service_wgnet{{ client.netnum }}:
+  service.dead:
+    - name: wg-quick@wgnet{{ client.netnum }}
+    - enable: False
+
+remove_wireguard_conf_files{{ client.netnum }}:
+  file.absent:
+    - names:
+      - "{{ qr }}"
+      - "{{ ccfg }}"
+      - "{{ scfg }}"
 
 {% endif %}
+{% endfor %}
