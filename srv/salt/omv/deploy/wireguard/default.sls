@@ -53,13 +53,17 @@ start_wireguard_service_wgnet{{ client.netnum }}:
   service.running:
     - name: wg-quick@wgnet{{ client.netnum }}
     - enable: True
+    - reload: true
     - watch:
-      - file: configure_wireguard_wgnet{{ client.netnum }}
-      - file: configure_wireguard_client_wgnet{{ client.netnum }}
+      - file: "{{ ccfg }}"
+      - file: "{{ scfg }}"
 
 create_wireguard_qa_code_wgnet{{ client.netnum }}:
   cmd.run:
     - name: "qrencode --type=png --output={{ qr }} --read-from={{ ccfg }}"
+    - watch:
+      - file: "{{ ccfg }}"
+      - file: "{{ scfg }}"
 
 {% else %}
 
