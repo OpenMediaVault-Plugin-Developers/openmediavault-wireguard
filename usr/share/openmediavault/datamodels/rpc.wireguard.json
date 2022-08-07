@@ -8,12 +8,43 @@
         "enable": {
           "type": "boolean"
         },
-        "netnum": {
+        "clientnum": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 255
+        },
+        "tunnelnum": {
           "type": "integer",
           "minimum": 0,
           "maximum": 255
         },
         "name": {
+          "type": "string"
+        },
+        "publickeyclient": {
+          "type": "string"
+        },
+        "presharedkeyclient": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "type": "rpc",
+    "id": "rpc.wireguard.settunnel",
+    "params": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        },
+        "tunnelnum": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "tunnelname": {
           "type": "string"
         },
         "nic": {
@@ -32,15 +63,6 @@
           "type": "string"
         },
         "publickeyserver": {
-          "type": "string"
-        },
-        "privatekeyclient": {
-          "type": "string"
-        },
-        "publickeyclient": {
-          "type": "string"
-        },
-        "presharedkeyclient": {
           "type": "string"
         }
       }

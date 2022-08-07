@@ -7,10 +7,10 @@
     "iterable": false
   },
   "properties": {
-    "clients": {
+    "tunnels": {
       "type": "object",
       "properties": {
-        "client": {
+        "tunnel": {
           "type": "array",
           "items": {
             "type": "object",
@@ -23,12 +23,12 @@
                 "type": "boolean",
                 "default": 0
               },
-              "netnum": {
+              "tunnelenum": {
                 "type": "integer",
                 "minimum": 0,
                 "maximum": 255
               },
-              "name": {
+              "tunnelname": {
                 "type": "string"
               },
               "nic": {
@@ -47,6 +47,40 @@
                 "type": "string"
               },
               "publickeyserver": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "clients": {
+      "type": "object",
+      "properties": {
+        "client": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "format": "uuidv4"
+              },
+              "enable": {
+                "type": "boolean",
+                "default": 0
+              },
+              "clientnum": {
+                "type": "integer",
+                "minimum": 2,
+                "maximum": 255
+              },
+              "tunnelnum": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              },
+              "clientname": {
                 "type": "string"
               },
               "privatekeyclient": {

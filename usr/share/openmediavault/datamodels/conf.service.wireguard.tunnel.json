@@ -1,9 +1,9 @@
 {
   "type": "config",
-  "id": "conf.service.wireguard.client",
-  "title": "wireguard client",
+  "id": "conf.service.wireguard.tunnel",
+  "title": "wireguard tunnel",
   "queryinfo": {
-    "xpath": "//services/wireguard/clients/client",
+    "xpath": "//services/wireguard/tunnels/tunnel",
     "iterable": true,
     "idproperty": "uuid"
   },
@@ -16,26 +16,30 @@
       "type": "boolean",
       "default": 0
     },
-    "clientnum": {
-      "type": "integer",
-      "minimum": 2,
-      "maximum": 255
-    },
     "tunnelnum": {
       "type": "integer",
       "minimum": 0,
       "maximum": 255
     },
-    "clientname": {
+    "tunnelname": {
       "type": "string"
     },
-    "privatekeyclient": {
+    "nic": {
       "type": "string"
     },
-    "publickeyclient": {
+    "endpoint": {
       "type": "string"
     },
-    "presharedkeyclient": {
+    "port": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 65535,
+      "default": 51820
+    },
+    "privatekeyserver": {
+      "type": "string"
+    },
+    "publickeyserver": {
       "type": "string"
     }
   }
