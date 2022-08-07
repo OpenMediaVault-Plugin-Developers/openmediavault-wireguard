@@ -39,7 +39,7 @@ data:
         sortable: true
       - name: _("QR Code")
         prop: qrcode
-        flexGrow: 1
+        flexGrow: 3
         sortable: true
     actions:
       - template: create
