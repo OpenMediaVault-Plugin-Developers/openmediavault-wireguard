@@ -11,7 +11,7 @@
         "netnum": {
           "type": "integer",
           "minimum": 0,
-          "maximum": 999
+          "maximum": 255
         },
         "name": {
           "type": "string"

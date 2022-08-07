@@ -24,7 +24,7 @@ data:
         value: 0
         validators:
           min: 0
-          max: 999
+          max: 255
           required: true
       - type: textInput
         name: name

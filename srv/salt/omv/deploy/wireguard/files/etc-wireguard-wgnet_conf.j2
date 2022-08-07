@@ -1,5 +1,5 @@
 [Interface]
-Address = 10.192.122.1/24
+Address = 10.192.{{ config.netnum }}.1/24
 SaveConfig = true
 ListenPort = {{ config.port }}
 PostUp = iptables -A FORWARD -i wgnet{{ config.netnum }} -j ACCEPT; iptables -A FORWARD -o wgnet{{ config.netnum }} -j ACCEPT; iptables -t nat -A POSTROUTING -o {{ config.nic }} -j MASQUERADE
@@ -8,5 +8,5 @@ PrivateKey = {{ config.privatekeyserver }}
 
 [Peer]
 PublicKey = {{ config.publickeyclient }}
-AllowedIPs = 10.192.122.2/32
+AllowedIPs = 10.192.{{ config.netnum }}.2/32
 PresharedKey = {{ config.presharedkeyclient }}
