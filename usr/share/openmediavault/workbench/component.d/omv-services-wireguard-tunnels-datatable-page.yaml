@@ -37,6 +37,10 @@ data:
         prop: endpoint
         flexGrow: 1
         sortable: true
+      - name: _("Port")
+        prop: port
+        flexGrow: 1
+        sortable: true
       - name: _("Clients")
         prop: numclients
         flexGrow: 1

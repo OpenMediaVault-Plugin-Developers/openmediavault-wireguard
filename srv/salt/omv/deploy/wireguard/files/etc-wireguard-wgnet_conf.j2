@@ -1,7 +1,0 @@
-[Interface]
-Address = 10.192.{{ tunnel.tunnelnum }}.1/24
-SaveConfig = true
-ListenPort = {{ tunnel.port }}
-PostUp = iptables -A FORWARD -i wgnet{{ tunnel.tunnelnum }} -j ACCEPT; iptables -A FORWARD -o wgnet{{ tunnel.tunnelnum }} -j ACCEPT; iptables -t nat -A POSTROUTING -o {{ tunnel.nic }} -j MASQUERADE
-PostDown = iptables -D FORWARD -i wgnet{{ tunnel.tunnelnum }} -j ACCEPT; iptables -D FORWARD -o wgnet{{ tunnel.tunnelnum }} -j ACCEPT; iptables -t nat -D POSTROUTING -o {{ tunnel.nic }} -j MASQUERADE
-PrivateKey = {{ tunnel.privatekeyserver }}

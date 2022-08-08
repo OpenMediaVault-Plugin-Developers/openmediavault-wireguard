@@ -50,9 +50,14 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         // Add additional share informations.
         $objectsAssoc = [];
         foreach ($objects as $objectk => &$objectv) {
-            // Add the new property 'sharedfoldername'.
-            $objectv->add("numclients", "integer", 0);
             $tunnelnum = $objectv->get("tunnelnum");
+            $clients = $db->getByFilter("conf.service.wireguard.client", [
+                "operator" => "stringEquals",
+                "arg0" => "tunnelnum",
+                "arg1" => $tunnelnum
+            ]);
+            // Add the new property 'sharedfoldername'.
+            $objectv->add("numclients", "integer", count($clients));
             $objectsAssoc[] = $objectv->getAssoc();
         }
         // Filter the result.
@@ -68,7 +73,13 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $this->validateMethodParams($params, "rpc.common.objectuuid");
         // Get the configuration object.
         $db = \OMV\Config\Database::getInstance();
-        return $db->getAssoc("conf.service.wireguard.tunnel", $params["uuid"]);
+        $object = $db->get("conf.service.wireguard.tunnel", $params["uuid"]);
+        $ro = false;
+        if (strlen($object->get("privatekeyserver")) == 44) {
+            $ro = true;
+        }
+        $object->add("numro", "boolean", $ro);
+        return ($object->getAssoc());
     }
 
     public function setTunnel($params, $context)
@@ -194,7 +205,13 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $this->validateMethodParams($params, "rpc.common.objectuuid");
         // Get the configuration object.
         $db = \OMV\Config\Database::getInstance();
-        return $db->getAssoc("conf.service.wireguard.client", $params["uuid"]);
+        $object = $db->get("conf.service.wireguard.client", $params["uuid"]);
+        $ro = false;
+        if (strlen($object->get("privatekeyclient")) == 44) {
+            $ro = true;
+        }
+        $object->add("numro", "boolean", $ro);
+        return ($object->getAssoc());
     }
 
     public function setClient($params, $context)
@@ -242,6 +259,7 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         if (TRUE === $isNew) {
             // Check uniqueness - name
             $db->assertIsUnique($object, "clientname");
+            $db->assertIsUnique($object, "clientnum");
         }
         $db->set($object);
         // Return the configuration object.

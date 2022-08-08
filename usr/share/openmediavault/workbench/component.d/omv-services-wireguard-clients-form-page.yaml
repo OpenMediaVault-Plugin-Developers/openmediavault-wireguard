@@ -18,6 +18,10 @@ data:
         name: enable
         label: _("Enable")
         value: false
+      - type: hidden
+        name: numro
+        value: false
+        submitValue: false
       - type: numberInput
         name: clientnum
         label: _("Client number")
@@ -26,6 +30,12 @@ data:
           min: 2
           max: 255
           required: true
+        modifiers:
+          - type: disabled
+            constraint:
+              operator: truthy
+              arg0:
+                prop: numro
       - type: select
         name: tunnelnum
         label: _('Tunnel number')
@@ -36,6 +46,12 @@ data:
             service: Wireguard
             get:
               method: enumerateTunnels
+        modifiers:
+          - type: disabled
+            constraint:
+              operator: truthy
+              arg0:
+                prop: numro
       - type: textInput
         name: clientname
         label: _("Name")
