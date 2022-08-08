@@ -23,7 +23,7 @@
                 "type": "boolean",
                 "default": 0
               },
-              "tunnelenum": {
+              "tunnelnum": {
                 "type": "integer",
                 "minimum": 0,
                 "maximum": 255

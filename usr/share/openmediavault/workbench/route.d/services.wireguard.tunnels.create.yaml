@@ -1,0 +1,7 @@
+version: "1.0"
+type: route
+data:
+  url: "/services/wireguard/tunnels/create"
+  title: _("Create")
+  notificationTitle: _("Created tunnel.")
+  component: omv-services-wireguard-tunnels-form-page

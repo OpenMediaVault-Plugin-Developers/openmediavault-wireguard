@@ -1,0 +1,76 @@
+version: "1.0"
+type: component
+data:
+  name: omv-services-wireguard-tunnels-datatable-page
+  type: datatablePage
+  config:
+    autoReload: false
+    hasSearchField: true
+    stateId: 080aba28-16a6-11ed-bdfc-53cda5732432
+    sorters:
+      - dir: asc
+        prop: tunnelname
+    store:
+      proxy:
+        service: Wireguard
+        get:
+          method: getTunnelList
+    columns:
+      - name: _("Enable")
+        prop: enable
+        flexGrow: 1
+        sortable: true
+        cellTemplateName: checkIcon
+      - name: _("Name")
+        prop: tunnelname
+        flexGrow: 1
+        sortable: true
+      - name: _("Tunnel Number")
+        prop: tunnelnum
+        flexGrow: 1
+        sortable: true
+      - name: _("Network Adapter")
+        prop: nic
+        flexGrow: 1
+        sortable: true
+      - name: _("Endpoint")
+        prop: endpoint
+        flexGrow: 1
+        sortable: true
+      - name: _("Clients")
+        prop: numclients
+        flexGrow: 1
+        sortable: true
+    actions:
+      - template: create
+        execute:
+          type: url
+          url: "/services/wireguard/tunnels/create"
+      - template: edit
+        execute:
+          type: url
+          url: "/services/wireguard/tunnels/edit/{{ _selected[0].uuid }}"
+      - type: iconButton
+        icon: mdi:delete
+        tooltip: _("Delete")
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+          constraint:
+            - operator: and
+              arg0:
+                operator: eq
+                arg0:
+                  prop: numclients
+                arg1: 0
+              arg1:
+                operator: falsy
+                arg0:
+                  prop: enable
+        execute:
+          type: request
+          request:
+            service: Wireguard
+            method: deleteTunnel
+            params:
+              uuid: "{{ _selected[0].uuid }}"

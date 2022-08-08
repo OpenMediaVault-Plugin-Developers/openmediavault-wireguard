@@ -3,4 +3,4 @@ type: route
 data:
   url: "/services/wireguard"
   title: _("Wireguard")
-  component: omv-services-wireguard-datatable-page
+  component: omv-services-wireguard-navigation-page

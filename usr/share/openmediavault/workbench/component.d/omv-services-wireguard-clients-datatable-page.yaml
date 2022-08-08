@@ -1,15 +1,15 @@
 version: "1.0"
 type: component
 data:
-  name: omv-services-wireguard-datatable-page
+  name: omv-services-wireguard-clients-datatable-page
   type: datatablePage
   config:
     autoReload: false
     hasSearchField: true
-    stateId: 40b50aca-141e-11ed-bbcc-6fc41854a832
+    stateId: c598ba78-16a5-11ed-bd66-ff37e424bc06
     sorters:
       - dir: asc
-        prop: name
+        prop: clientname
     store:
       proxy:
         service: Wireguard
@@ -22,19 +22,15 @@ data:
         sortable: true
         cellTemplateName: checkIcon
       - name: _("Name")
-        prop: name
+        prop: clientname
         flexGrow: 1
         sortable: true
-      - name: _("Network Number")
-        prop: netnum
+      - name: _("Client Number")
+        prop: clientnum
         flexGrow: 1
         sortable: true
-      - name: _("Network Adapter")
-        prop: nic
-        flexGrow: 1
-        sortable: true
-      - name: _("Endpoint")
-        prop: endpoint
+      - name: _("Tunnel Number")
+        prop: tunnelnum
         flexGrow: 1
         sortable: true
       - name: _("QR Code")
@@ -45,11 +41,11 @@ data:
       - template: create
         execute:
           type: url
-          url: "/services/wireguard/create"
+          url: "/services/wireguard/clients/create"
       - template: edit
         execute:
           type: url
-          url: "/services/wireguard/edit/{{ _selected[0].uuid }}"
+          url: "/services/wireguard/clients/edit/{{ _selected[0].uuid }}"
       - type: iconButton
         icon: mdi:delete
         tooltip: _("Delete")

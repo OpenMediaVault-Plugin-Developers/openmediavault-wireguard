@@ -1,0 +1,60 @@
+version: "1.0"
+type: component
+data:
+  name: omv-services-wireguard-clients-form-page
+  type: formPage
+  config:
+    request:
+      service: Wireguard
+      get:
+        method: getClient
+        params:
+          uuid: "{{ _routeParams.uuid }}"
+      post:
+        method: setClient
+    fields:
+      - type: confObjUuid
+      - type: checkbox
+        name: enable
+        label: _("Enable")
+        value: false
+      - type: numberInput
+        name: clientnum
+        label: _("Client number")
+        value: 2
+        validators:
+          min: 2
+          max: 255
+          required: true
+      - type: select
+        name: tunnelnum
+        label: _('Tunnel number')
+        textField: description
+        valueField: tunnelnum
+        store:
+          proxy:
+            service: Wireguard
+            get:
+              method: enumerateTunnels
+      - type: textInput
+        name: clientname
+        label: _("Name")
+        value: ""
+      - type: hidden
+        name: privatekeyclient
+        value: ""
+      - type: hidden
+        name: publickeyclient
+        value: ""
+      - type: hidden
+        name: presharedkeyclient
+        value: ""
+    buttons:
+      - template: submit
+        execute:
+          type: url
+          url: "/services/wireguard/clients"
+      - template: cancel
+        execute:
+          type: url
+          url: "/services/wireguard/clients"

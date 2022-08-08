@@ -1,12 +1,7 @@
 [Interface]
-Address = 10.192.{{ config.netnum }}.1/24
+Address = 10.192.{{ tunnel.tunnelnum }}.1/24
 SaveConfig = true
-ListenPort = {{ config.port }}
-PostUp = iptables -A FORWARD -i wgnet{{ config.netnum }} -j ACCEPT; iptables -A FORWARD -o wgnet{{ config.netnum }} -j ACCEPT; iptables -t nat -A POSTROUTING -o {{ config.nic }} -j MASQUERADE
-PostDown = iptables -D FORWARD -i wgnet{{ config.netnum }} -j ACCEPT; iptables -D FORWARD -o wgnet{{ config.netnum }} -j ACCEPT; iptables -t nat -D POSTROUTING -o {{ config.nic }} -j MASQUERADE
-PrivateKey = {{ config.privatekeyserver }}
-
-[Peer]
-PublicKey = {{ config.publickeyclient }}
-AllowedIPs = 10.192.{{ config.netnum }}.2/32
-PresharedKey = {{ config.presharedkeyclient }}
+ListenPort = {{ tunnel.port }}
+PostUp = iptables -A FORWARD -i wgnet{{ tunnel.tunnelnum }} -j ACCEPT; iptables -A FORWARD -o wgnet{{ tunnel.tunnelnum }} -j ACCEPT; iptables -t nat -A POSTROUTING -o {{ tunnel.nic }} -j MASQUERADE
+PostDown = iptables -D FORWARD -i wgnet{{ tunnel.tunnelnum }} -j ACCEPT; iptables -D FORWARD -o wgnet{{ tunnel.tunnelnum }} -j ACCEPT; iptables -t nat -D POSTROUTING -o {{ tunnel.nic }} -j MASQUERADE
+PrivateKey = {{ tunnel.privatekeyserver }}

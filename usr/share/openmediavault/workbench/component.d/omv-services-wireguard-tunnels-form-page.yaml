@@ -1,17 +1,17 @@
 version: "1.0"
 type: component
 data:
-  name: omv-services-wireguard-form-page
+  name: omv-services-wireguard-tunnels-form-page
   type: formPage
   config:
     request:
       service: Wireguard
       get:
-        method: getClient
+        method: getTunnel
         params:
           uuid: "{{ _routeParams.uuid }}"
       post:
-        method: setClient
+        method: setTunnel
     fields:
       - type: confObjUuid
       - type: checkbox
@@ -19,15 +19,15 @@ data:
         label: _("Enable")
         value: false
       - type: numberInput
-        name: netnum
-        label: _("Network number")
+        name: tunnelnum
+        label: _("Tunnel number")
         value: 0
         validators:
           min: 0
           max: 255
           required: true
       - type: textInput
-        name: name
+        name: tunnelname
         label: _("Name")
         value: ""
       - type: select
@@ -57,23 +57,14 @@ data:
         name: privatekeyserver
         value: ""
       - type: hidden
-        name: privatekeyclient
-        value: ""
-      - type: hidden
         name: publickeyserver
-        value: ""
-      - type: hidden
-        name: publickeyclient
-        value: ""
-      - type: hidden
-        name: presharedkeyclient
         value: ""
     buttons:
       - template: submit
         execute:
           type: url
-          url: "/services/wireguard"
+          url: "/services/wireguard/tunnels"
       - template: cancel
         execute:
           type: url
-          url: "/services/wireguard"
+          url: "/services/wireguard/tunnels"

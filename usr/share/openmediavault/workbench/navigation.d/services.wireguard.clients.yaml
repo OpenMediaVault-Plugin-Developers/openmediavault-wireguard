@@ -1,0 +1,8 @@
+version: "1.0"
+type: navigation-item
+data:
+  path: "services.wireguard.clients"
+  text: _("Clients")
+  position: 20
+  icon: "mdi:router-network"
+  url: "/services/wireguard/clients"

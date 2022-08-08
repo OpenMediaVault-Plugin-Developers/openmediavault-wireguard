@@ -17,67 +17,96 @@
 
 {% set config = salt['omv_conf.get']('conf.service.wireguard') %}
 
-{% for client in config.clients.client %}
+{% for tunnel in config.tunnels.tunnel %}
+{% set scfg = '/etc/wireguard/wgnet' ~ tunnel.tunnelnum ~ '.conf' %}
+{% if tunnel.enable | to_bool %}
 
-{% set qr = '/var/www/openmediavault/clientqrcode' ~ client.netnum ~ '.png' %}
-{% set scfg = '/etc/wireguard/wgnet' ~ client.netnum ~ '.conf' %}
-{% set ccfg = '/etc/wireguard/wgnet_client' ~ client.netnum ~ '.conf' %}
-
-{% if client.enable | to_bool %}
-
-configure_wireguard_wgnet{{ client.netnum }}:
+configure_wireguard_wgnet{{ tunnel.tunnelnum }}:
   file.managed:
     - name: "{{ scfg }}"
     - source:
       - salt://{{ tpldir }}/files/etc-wireguard-wgnet_conf.j2
     - template: jinja
     - context:
-        config: {{ client | json }}
+        tunnel: {{ tunnel | json }}
     - user: root
     - group: root
     - mode: 644
 
-configure_wireguard_client_wgnet{{ client.netnum }}:
+{% else %}
+
+stop_wireguard_service_wgnet{{ tunnel.tunnelnum }}:
+  service.dead:
+    - name: wg-quick@wgnet{{ tunnel.tunnelnum }}
+    - enable: False
+
+remove_wireguard_conf_file{{ tunnel.tunnelnum }}:
+  file.absent:
+    - names:
+      - "{{ scfg }}"
+
+{% endif %}
+
+{% for client in config.clients.client | selectattr("tunnelnum", "equalto", tunnel.tunnelnum) %}
+{% set qr = '/var/www/openmediavault/clientqrcode' ~ client.clientnum ~ '.png' %}
+{% set ccfg = '/etc/wireguard/wgnet_client' ~ client.clientnum ~ '.conf' %}
+{% if client.enable | to_bool %}
+
+configure_wireguard_client_wgnet{{ client.clientnum }}:
   file.managed:
     - name: "{{ ccfg }}"
     - source:
       - salt://{{ tpldir }}/files/etc-wireguard-wgnet_client_conf.j2
     - template: jinja
     - context:
-        config: {{ client | json }}
+        client: {{ client | json }}
     - user: root
     - group: root
     - mode: 644
 
-start_wireguard_service_wgnet{{ client.netnum }}:
+configure_wireguard_wgnet{{ tunnel.tunnelnum }}_peer:
+  file.append:
+    - name: "{{ scfg }}"
+    - source:
+      - salt://{{ tpldir }}/files/etc-wireguard-wgnet_conf_peer.j2
+    - template: jinja
+    - context:
+        tunnel: {{ tunnel | json }}
+        client: {{ client | json }}
+
+configure_wireguard_client_wgnet{{ client.clientnum }}_peer:
+  file.append:
+    - name: "{{ ccfg }}"
+    - source:
+      - salt://{{ tpldir }}/files/etc-wireguard-wgnet_client_conf_peer.j2
+    - template: jinja
+    - context:
+        tunnel: {{ tunnel | json }}
+        client: {{ client | json }}
+
+start_wireguard_service_wgnet{{ tunnel.tunnelnum }}:
   service.running:
-    - name: wg-quick@wgnet{{ client.netnum }}
+    - name: wg-quick@wgnet{{ tunnel.tunnelnum }}
     - enable: True
     - reload: true
     - watch:
       - file: "{{ ccfg }}"
       - file: "{{ scfg }}"
 
-create_wireguard_qa_code_wgnet{{ client.netnum }}:
+create_wireguard_qa_code_wgnet{{ client.clientnum }}:
   cmd.run:
     - name: "qrencode --type=png --output={{ qr }} --read-from={{ ccfg }}"
     - onchanges:
       - file: "{{ ccfg }}"
       - file: "{{ scfg }}"
-
 {% else %}
 
-stop_wireguard_service_wgnet{{ client.netnum }}:
-  service.dead:
-    - name: wg-quick@wgnet{{ client.netnum }}
-    - enable: False
-
-remove_wireguard_conf_files{{ client.netnum }}:
+remove_wireguard_conf_files{{ client.clientnum }}:
   file.absent:
     - names:
       - "{{ qr }}"
       - "{{ ccfg }}"
-      - "{{ scfg }}"
 
 {% endif %}
+{% endfor %}
 {% endfor %}

@@ -25,11 +25,136 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
 
     public function initialize()
     {
+        $this->registerMethod("getTunnelList");
+        $this->registerMethod("getTunnel");
+        $this->registerMethod("setTunnel");
+        $this->registerMethod("deleteTunnel");
+        $this->registerMethod("enumerateTunnels");
+
         $this->registerMethod("getClientList");
         $this->registerMethod("getClient");
         $this->registerMethod("setClient");
         $this->registerMethod("deleteClient");
         $this->registerMethod("getClientConfig");
+    }
+
+    public function getTunnelList($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, "rpc.common.getlist");
+        // Get configuration data.
+        $db = \OMV\Config\Database::getInstance();
+        $objects = $db->get("conf.service.wireguard.tunnel");
+        // Add additional share informations.
+        $objectsAssoc = [];
+        foreach ($objects as $objectk => &$objectv) {
+            // Add the new property 'sharedfoldername'.
+            $objectv->add("numclients", "integer", 0);
+            $tunnelnum = $objectv->get("tunnelnum");
+            $objectsAssoc[] = $objectv->getAssoc();
+        }
+        // Filter the result.
+        return $this->applyFilter($objectsAssoc, $params['start'], $params['limit'],
+            $params['sortfield'], $params['sortdir']);
+    }
+
+    public function getTunnel($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, "rpc.common.objectuuid");
+        // Get the configuration object.
+        $db = \OMV\Config\Database::getInstance();
+        return $db->getAssoc("conf.service.wireguard.tunnel", $params["uuid"]);
+    }
+
+    public function setTunnel($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, "rpc.wireguard.settunnel");
+        // Create keys if empty
+        // privatekeyserver
+        if (strlen($params["privatekeyserver"]) != 44) {
+            $output = [];
+            $cmdArgs = [];
+            $cmdArgs[] = "genkey";
+            $cmd = new \OMV\System\Process("wg", $cmdArgs);
+            $cmd->execute($output);
+            $params["privatekeyserver"] = $output[0];
+        }
+        // publickeyserver
+        if (strlen($params["publickeyserver"]) != 44) {
+            $output = [];
+            $cmdArgs = [];
+            $cmdArgs[] = sprintf("echo '%s'", $params["privatekeyserver"]);
+            $cmdArgs[] = "| wg pubkey";
+            $cmd = new \OMV\System\Process($cmdArgs);
+            $cmd->execute($output);
+            $params["publickeyserver"] = $output[0];
+        }
+        // Verify that shared folder is set
+        $db = \OMV\Config\Database::getInstance();
+        // Prepare the configuration object.
+        $object = new \OMV\Config\ConfigObject("conf.service.wireguard.tunnel");
+        $object->setAssoc($params);
+        // Set the configuration object.
+        $isNew = $object->isNew();
+        if (TRUE === $isNew) {
+            // Check uniqueness - name
+            $db->assertIsUnique($object, "tunnelname");
+            $db->assertIsUnique($object, "tunnelnum");
+            $db->assertIsUnique($object, "port");
+        }
+        $db->set($object);
+        // Return the configuration object.
+        return $object->getAssoc();
+    }
+
+    public function deleteTunnel($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, "rpc.common.objectuuid");
+        // Verify that shared folder is set
+        $db = \OMV\Config\Database::getInstance();
+        // Delete the configuration object.
+        $object = $db->get("conf.service.wireguard.tunnel", $params["uuid"]);
+        $tunnelnum = $object->get("tunnelnum");
+        $conf = sprintf("/etc/wireguard/wgnet_client%d.conf", $tunnelnum);
+        if (file_exists($conf)) {
+            $msg1 = gettext("Please disable client and apply changes before deleting!");
+            $msg2 = sprintf("Client '%s' - %s", $object->get("name"), $msg1);
+            throw new \OMV\Exception($msg2);
+        }
+        $db->delete($object);
+        // Return the deleted configuration object.
+        return $object->getAssoc();
+    }
+
+    public function enumerateTunnels($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Get configuration data.
+        $db = \OMV\Config\Database::getInstance();
+        $objects = $db->get("conf.service.wireguard.tunnel");
+        $tunnels = [];
+        foreach ($objects as $objectk => &$objectv) {
+            $tunnelnum = $objectv->get("tunnelnum");
+            $tunnelname = $objectv->get("tunnelname");
+            $tunnels[] = [
+                'tunnelnum' => $tunnelnum,
+                'description' => sprintf('%s - %s', $tunnelnum, $tunnelname)
+            ];
+        }
+        // Filter the result.
+        return ($tunnels);
     }
 
     public function getClientList($params, $context)
@@ -47,10 +172,10 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             // Add the new property 'sharedfoldername'.
             $objectv->add("qrcode", "string", gettext("n/a"));
             if ($objectv->get("enable")) {
-                $netnum = $objectv->get("netnum");
-                $image = sprintf("/var/www/openmediavault/clientqrcode%d.png", $netnum);
+                $clientnum = $objectv->get("clientnum");
+                $image = sprintf("/var/www/openmediavault/clientqrcode%d.png", $clientnum);
                 if (file_exists($image)) {
-                    $url = sprintf("<img src='/clientqrcode%d.png'>", $netnum);
+                    $url = sprintf("<img src='/clientqrcode%d.png'>", $clientnum);
                     $objectv->set("qrcode", $url);
                 }
             }
@@ -79,25 +204,6 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         // Validate the parameters of the RPC service method.
         $this->validateMethodParams($params, "rpc.wireguard.setclient");
         // Create keys if empty
-        // privatekeyserver
-        if (strlen($params["privatekeyserver"]) != 44) {
-            $output = [];
-            $cmdArgs = [];
-            $cmdArgs[] = "genkey";
-            $cmd = new \OMV\System\Process("wg", $cmdArgs);
-            $cmd->execute($output);
-            $params["privatekeyserver"] = $output[0];
-        }
-        // publickeyserver
-        if (strlen($params["publickeyserver"]) != 44) {
-            $output = [];
-            $cmdArgs = [];
-            $cmdArgs[] = sprintf("echo '%s'", $params["privatekeyserver"]);
-            $cmdArgs[] = "| wg pubkey";
-            $cmd = new \OMV\System\Process($cmdArgs);
-            $cmd->execute($output);
-            $params["publickeyserver"] = $output[0];
-        }
         // privatekeyclient
         if (strlen($params["privatekeyclient"]) != 44) {
             $output = [];
@@ -135,9 +241,7 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $isNew = $object->isNew();
         if (TRUE === $isNew) {
             // Check uniqueness - name
-            $db->assertIsUnique($object, "name");
-            $db->assertIsUnique($object, "netnum");
-            $db->assertIsUnique($object, "port");
+            $db->assertIsUnique($object, "clientname");
         }
         $db->set($object);
         // Return the configuration object.
@@ -154,11 +258,11 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $db = \OMV\Config\Database::getInstance();
         // Delete the configuration object.
         $object = $db->get("conf.service.wireguard.client", $params["uuid"]);
-        $netnum = $object->get("netnum");
-        $conf = sprintf("/etc/wireguard/wgnet_client%d.conf", $netnum);
+        $clientnum = $object->get("clientnum");
+        $conf = sprintf("/etc/wireguard/wgnet_client%d.conf", $clientnum);
         if (file_exists($conf)) {
             $msg1 = gettext("Please disable client and apply changes before deleting!");
-            $msg2 = sprintf("Client '%s' - %s", $object->get("name"), $msg1);
+            $msg2 = sprintf("Client '%s' - %s", $object->get("clientname"), $msg1);
             throw new \OMV\Exception($msg2);
         }
         $db->delete($object);
@@ -175,8 +279,8 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         // Create the background process.
         return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
             use ($object) {
-                $netnum = $object->get("netnum");
-                $conf = sprintf("/etc/wireguard/wgnet_client%d.conf", $netnum);
+                $clientnum = $object->get("clientnum");
+                $conf = sprintf("/etc/wireguard/wgnet_client%d.conf", $clientnum);
                 $cmd = new \OMV\System\Process("cat", $conf);
                 $cmdLine = $cmd->getCommandLine();
                 if (0 !== $this->exec($cmdLine, $output, $bgOutputFilename))

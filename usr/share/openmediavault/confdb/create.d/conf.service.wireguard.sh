@@ -6,6 +6,7 @@ set -e
 
 if ! omv_config_exists "/config/services/wireguard"; then
     omv_config_add_node "/config/services" "wireguard"
+    omv_config_add_node "/config/services/wireguard" "tunnels"
     omv_config_add_node "/config/services/wireguard" "clients"
 fi
 

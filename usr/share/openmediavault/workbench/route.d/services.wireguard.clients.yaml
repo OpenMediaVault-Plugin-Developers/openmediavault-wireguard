@@ -1,0 +1,6 @@
+version: "1.0"
+type: route
+data:
+  url: "/services/wireguard/clients"
+  title: _("Clients")
+  component: omv-services-wireguard-clients-datatable-page

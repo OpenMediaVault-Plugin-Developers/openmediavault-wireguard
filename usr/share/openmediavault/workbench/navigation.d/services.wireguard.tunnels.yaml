@@ -1,0 +1,8 @@
+version: "1.0"
+type: navigation-item
+data:
+  path: "services.wireguard.tunnels"
+  text: _("Tunnels")
+  position: 10
+  icon: "mdi:relation-one-to-one"
+  url: "/services/wireguard/tunnels"
