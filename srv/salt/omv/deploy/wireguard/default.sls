@@ -23,10 +23,17 @@
 {% set scfg = '/etc/wireguard/wgnet' ~ tnum ~ '.conf' %}
 {% if tl.enable | to_bool %}
 
-configure_wireguard_wgnet{{ tnum }}_{{ tname }}:
+configure_wireguard_wgnet{{ tnum }}_{{ tname }}_perms:
   file.managed:
     - name: "{{ scfg }}"
-    - content: |
+    - user: root
+    - group: root
+    - mode: 644
+
+configure_wireguard_wgnet{{ tnum }}_{{ tname }}:
+  file.append:
+    - name: "{{ scfg }}"
+    - text: |
         [Interface]
         Address = 10.192.{{ tnum }}.1/24
         SaveConfig = true
@@ -34,9 +41,6 @@ configure_wireguard_wgnet{{ tnum }}_{{ tname }}:
         PostUp = iptables -A FORWARD -i wgnet{{ tnum }} -j ACCEPT; iptables -A FORWARD -o wgnet{{ tnum }} -j ACCEPT; iptables -t nat -A POSTROUTING -o {{ tl.nic }} -j MASQUERADE
         PostDown = iptables -D FORWARD -i wgnet{{ tnum }} -j ACCEPT; iptables -D FORWARD -o wgnet{{ tnum }} -j ACCEPT; iptables -t nat -D POSTROUTING -o {{ tl.nic }} -j MASQUERADE
         PrivateKey = {{ tl.privatekeyserver }}
-    - user: root
-    - group: root
-    - mode: 644
 
 {% else %}
 
@@ -59,16 +63,20 @@ remove_wireguard_conf_file{{ tnum }}:
 {% set ccfg = '/etc/wireguard/wgnet_client' ~ cnum ~ '.conf' %}
 {% if ct.enable | to_bool and tl.enable | to_bool %}
 
-configure_wireguard_client_wgnet{{ cnum }}:
+configure_wireguard_client_wgnet{{ cnum }}_perms:
   file.managed:
     - name: "{{ ccfg }}"
-    - content: |
-        [Interface]
-        Address = 10.192.{{ tnum }}.{{ cnum }}/32
-        PrivateKey = {{ ct.privatekeyclient }}
     - user: root
     - group: root
     - mode: 644
+
+configure_wireguard_client_wgnet{{ cnum }}:
+  file.append:
+    - name: "{{ ccfg }}"
+    - text: |
+        [Interface]
+        Address = 10.192.{{ tnum }}.{{ cnum }}/32
+        PrivateKey = {{ ct.privatekeyclient }}
 
 configure_wireguard_wgnet{{ tnum }}_{{ cname }}_peer:
   file.append:
