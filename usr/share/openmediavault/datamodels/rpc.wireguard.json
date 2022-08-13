@@ -21,6 +21,9 @@
         "name": {
           "type": "string"
         },
+        "privatekeyclient": {
+          "type": "string"
+        },
         "publickeyclient": {
           "type": "string"
         },
