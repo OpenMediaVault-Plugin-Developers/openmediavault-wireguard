@@ -136,13 +136,6 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $db = \OMV\Config\Database::getInstance();
         // Delete the configuration object.
         $object = $db->get("conf.service.wireguard.tunnel", $params["uuid"]);
-        $tunnelnum = $object->get("tunnelnum");
-        $conf = sprintf("/etc/wireguard/wgnet_client%d.conf", $tunnelnum);
-        if (file_exists($conf)) {
-            $msg1 = gettext("Please disable client and apply changes before deleting!");
-            $msg2 = sprintf("Client '%s' - %s", $object->get("name"), $msg1);
-            throw new \OMV\Exception($msg2);
-        }
         $db->delete($object);
         // Return the deleted configuration object.
         return $object->getAssoc();
@@ -276,13 +269,6 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $db = \OMV\Config\Database::getInstance();
         // Delete the configuration object.
         $object = $db->get("conf.service.wireguard.client", $params["uuid"]);
-        $clientnum = $object->get("clientnum");
-        $conf = sprintf("/etc/wireguard/wgnet_client%d.conf", $clientnum);
-        if (file_exists($conf)) {
-            $msg1 = gettext("Please disable client and apply changes before deleting!");
-            $msg2 = sprintf("Client '%s' - %s", $object->get("clientname"), $msg1);
-            throw new \OMV\Exception($msg2);
-        }
         $db->delete($object);
         // Return the deleted configuration object.
         return $object->getAssoc();

@@ -31,6 +31,8 @@ remove_wireguard_conf_file{{ tnum }}:
   file.absent:
     - name: "{{ scfg }}"
 
+{% if tl.enable | to_bool %}
+
 configure_wireguard_wgnet{{ tnum }}_{{ tname }}_perms:
   file.managed:
     - name: "{{ scfg }}"
@@ -50,6 +52,8 @@ configure_wireguard_wgnet{{ tnum }}_{{ tname }}:
         PostDown = iptables -D FORWARD -i wgnet{{ tnum }} -j ACCEPT; iptables -D FORWARD -o wgnet{{ tnum }} -j ACCEPT; iptables -t nat -D POSTROUTING -o {{ tl.nic }} -j MASQUERADE
         PrivateKey = {{ tl.privatekeyserver }}
 
+{% endif %}
+
 {% for ct in config.clients.client | selectattr("tunnelnum", "equalto", tnum) %}
 {% set cnum = ct.clientnum %}
 {% set cname = ct.clientname %}
@@ -61,6 +65,8 @@ remove_wireguard_conf_files{{ cnum }}:
     - names:
       - "{{ qr }}"
       - "{{ ccfg }}"
+
+{% if ct.enable | to_bool and tl.enable | to_bool %}
 
 configure_wireguard_client_wgnet{{ cnum }}_perms:
   file.managed:
@@ -94,8 +100,6 @@ create_wireguard_qr_code_wgnet{{ cnum }}:
     - onchanges:
       - file: "{{ ccfg }}"
 #      - file: "{{ scfg }}"
-
-{% if ct.enable | to_bool and tl.enable | to_bool %}
 
 configure_wireguard_wgnet{{ tnum }}_{{ cname }}_peer:
   file.append:
