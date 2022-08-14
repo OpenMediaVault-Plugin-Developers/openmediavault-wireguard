@@ -25,10 +25,10 @@ data:
       - type: numberInput
         name: clientnum
         label: _("Client number")
-        value: 2
+        value: 1
         validators:
-          min: 2
-          max: 255
+          min: 1
+          max: 254
           required: true
         modifiers:
           - type: disabled
