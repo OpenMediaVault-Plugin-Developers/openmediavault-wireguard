@@ -57,7 +57,8 @@ configure_wireguard_wgnet{{ tnum }}_{{ tname }}:
 {% for ct in config.clients.client | selectattr("tunnelnum", "equalto", tnum) %}
 {% set cnum = ct.clientnum %}
 {% set cname = ct.clientname %}
-{% set qr = '/var/www/openmediavault/clientqrcode' ~ cnum ~ '.png' %}
+{% set cuuid = ct.uuid %}
+{% set qr = '/var/www/openmediavault/clientqrcode_' ~ cuuid ~ '.png' %}
 {% set ccfg = '/etc/wireguard/wgnet_client' ~ cnum ~ '.conf' %}
 
 remove_wireguard_conf_files{{ cnum }}:
@@ -99,7 +100,6 @@ create_wireguard_qr_code_wgnet{{ cnum }}:
     - name: "qrencode --type=png --output={{ qr }} --read-from={{ ccfg }}"
     - onchanges:
       - file: "{{ ccfg }}"
-#      - file: "{{ scfg }}"
 
 configure_wireguard_wgnet{{ tnum }}_{{ cname }}_peer:
   file.append:

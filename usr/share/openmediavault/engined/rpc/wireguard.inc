@@ -176,10 +176,10 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             // Add the new property 'sharedfoldername'.
             $objectv->add("qrcode", "string", gettext("n/a"));
             if ($objectv->get("enable")) {
-                $clientnum = $objectv->get("clientnum");
-                $image = sprintf("/var/www/openmediavault/clientqrcode%d.png", $clientnum);
+                $clientuuid = $objectv->get("uuid");
+                $image = sprintf("/var/www/openmediavault/clientqrcode_%s.png", $clientuuid);
                 if (file_exists($image)) {
-                    $url = sprintf("<img src='/clientqrcode%d.png'>", $clientnum);
+                    $url = sprintf("<img src='/clientqrcode_%s.png'>", $clientuuid);
                     $objectv->set("qrcode", $url);
                 }
             }
