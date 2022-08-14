@@ -45,7 +45,7 @@ configure_wireguard_wgnet{{ tnum }}_{{ tname }}:
     - name: "{{ scfg }}"
     - text: |
         [Interface]
-        Address = 10.192.{{ tnum }}.1/24
+        Address = 10.192.{{ tnum }}.255/24
         SaveConfig = true
         ListenPort = {{ tl.port }}
         PostUp = iptables -A FORWARD -i wgnet{{ tnum }} -j ACCEPT; iptables -A FORWARD -o wgnet{{ tnum }} -j ACCEPT; iptables -t nat -A POSTROUTING -o {{ tl.nic }} -j MASQUERADE

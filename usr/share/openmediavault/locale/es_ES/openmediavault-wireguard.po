@@ -21,64 +21,64 @@ msgid "Client Config"
 msgstr ""
 
 msgid "Client Number"
-msgstr ""
+msgstr "Número de cliente"
 
 msgid "Client number"
-msgstr ""
+msgstr "Número de cliente"
 
 msgid "Clients"
-msgstr ""
+msgstr "Clientes"
 
 msgid "Create"
-msgstr ""
+msgstr "Crear"
 
 msgid "Created client."
-msgstr ""
+msgstr "Crear cliente"
 
 msgid "Created tunnel."
-msgstr ""
+msgstr "Crear túnel"
 
 msgid "Delete"
-msgstr ""
+msgstr "Eliminar"
 
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 msgid "Edit client."
-msgstr ""
+msgstr "Editar cliente"
 
 msgid "Edit tunnel."
-msgstr ""
+msgstr "Editar túnel"
 
 msgid "Enable"
-msgstr ""
+msgstr "Habilitado"
 
 msgid "Endpoint"
-msgstr ""
+msgstr "Punto final"
 
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 msgid "Network Adapter"
-msgstr ""
+msgstr "Adaptador de red"
 
 msgid "Port"
-msgstr ""
+msgstr "Puerto"
 
 msgid "QR Code"
-msgstr ""
+msgstr "Código QR"
 
 msgid "Tunnel Number"
-msgstr ""
+msgstr "Número de túnel"
 
 msgid "Tunnel number"
-msgstr ""
+msgstr "Número de túnel"
 
 msgid "Tunnels"
-msgstr ""
+msgstr "Túneles"
 
 msgid "Wireguard"
-msgstr ""
+msgstr "Wireguard"
 
 msgid "n/a"
-msgstr ""
+msgstr "n/a"
