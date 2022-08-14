@@ -21,6 +21,16 @@
 {% set tnum = tl.tunnelnum %}
 {% set tname = tl.tunnelname %}
 {% set scfg = '/etc/wireguard/wgnet' ~ tnum ~ '.conf' %}
+
+stop_wireguard_service_wgnet{{ tnum }}:
+  service.dead:
+    - name: wg-quick@wgnet{{ tnum }}
+    - enable: False
+
+remove_wireguard_conf_file{{ tnum }}:
+  file.absent:
+    - name: "{{ scfg }}"
+
 {% if tl.enable | to_bool %}
 
 configure_wireguard_wgnet{{ tnum }}_{{ tname }}_perms:
@@ -42,18 +52,6 @@ configure_wireguard_wgnet{{ tnum }}_{{ tname }}:
         PostDown = iptables -D FORWARD -i wgnet{{ tnum }} -j ACCEPT; iptables -D FORWARD -o wgnet{{ tnum }} -j ACCEPT; iptables -t nat -D POSTROUTING -o {{ tl.nic }} -j MASQUERADE
         PrivateKey = {{ tl.privatekeyserver }}
 
-{% else %}
-
-stop_wireguard_service_wgnet{{ tnum }}:
-  service.dead:
-    - name: wg-quick@wgnet{{ tnum }}
-    - enable: False
-
-remove_wireguard_conf_file{{ tnum }}:
-  file.absent:
-    - names:
-      - "{{ scfg }}"
-
 {% endif %}
 
 {% for ct in config.clients.client | selectattr("tunnelnum", "equalto", tnum) %}
@@ -61,6 +59,13 @@ remove_wireguard_conf_file{{ tnum }}:
 {% set cname = ct.clientname %}
 {% set qr = '/var/www/openmediavault/clientqrcode' ~ cnum ~ '.png' %}
 {% set ccfg = '/etc/wireguard/wgnet_client' ~ cnum ~ '.conf' %}
+
+remove_wireguard_conf_files{{ cnum }}:
+  file.absent:
+    - names:
+      - "{{ qr }}"
+      - "{{ ccfg }}"
+
 {% if ct.enable | to_bool and tl.enable | to_bool %}
 
 configure_wireguard_client_wgnet{{ cnum }}_perms:
@@ -78,49 +83,46 @@ configure_wireguard_client_wgnet{{ cnum }}:
         Address = 10.192.{{ tnum }}.{{ cnum }}/32
         PrivateKey = {{ ct.privatekeyclient }}
 
-configure_wireguard_wgnet{{ tnum }}_{{ cname }}_peer:
-  file.append:
-    - name: "{{ scfg }}"
-    - text: |
-        [Peer]
-        PublicKey = {{ ct.publickeyclient }}
-        AllowedIPs = 10.192.{{ tnum }}.{{ cnum }}/32
-        PresharedKey = {{ ct.presharedkeyclient }}
-
 configure_wireguard_client_wgnet{{ cnum }}_{{ cname }}_peer:
   file.append:
     - name: "{{ ccfg }}"
     - text: |
+        
         [Peer]
         PublicKey = {{ tl.publickeyserver }}
         PresharedKey = {{ ct.presharedkeyclient }}
         Endpoint = {{ tl.endpoint }}:{{ tl.port }}
         AllowedIPs = 0.0.0.0/0
 
-start_wireguard_service_wgnet{{ tnum }}_{{ cname }}:
-  service.running:
-    - name: wg-quick@wgnet{{ tnum }}
-    - enable: True
-    - reload: true
-    - watch:
-      - file: "{{ ccfg }}"
-      - file: "{{ scfg }}"
-
 create_wireguard_qr_code_wgnet{{ cnum }}:
   cmd.run:
     - name: "qrencode --type=png --output={{ qr }} --read-from={{ ccfg }}"
     - onchanges:
       - file: "{{ ccfg }}"
-      - file: "{{ scfg }}"
+#      - file: "{{ scfg }}"
 
-{% else %}
-
-remove_wireguard_conf_files{{ cnum }}:
-  file.absent:
-    - names:
-      - "{{ qr }}"
-      - "{{ ccfg }}"
+configure_wireguard_wgnet{{ tnum }}_{{ cname }}_peer:
+  file.append:
+    - name: "{{ scfg }}"
+    - text: |
+        
+        [Peer]
+        PublicKey = {{ ct.publickeyclient }}
+        AllowedIPs = 10.192.{{ tnum }}.{{ cnum }}/32
+        PresharedKey = {{ ct.presharedkeyclient }}
 
 {% endif %}
 {% endfor %}
+
+{% if tl.enable | to_bool %}
+
+start_wireguard_service_wgnet{{ tnum }}:
+  service.running:
+    - name: wg-quick@wgnet{{ tnum }}
+    - enable: True
+    - reload: true
+    - watch:
+      - file: "{{ scfg }}"
+
+{% endif %}
 {% endfor %}
