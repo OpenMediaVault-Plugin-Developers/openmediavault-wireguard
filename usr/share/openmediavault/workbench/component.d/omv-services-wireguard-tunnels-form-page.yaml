@@ -25,9 +25,9 @@ data:
       - type: numberInput
         name: tunnelnum
         label: _("Tunnel number")
-        value: 0
+        value: 1
         validators:
-          min: 0
+          min: 1
           max: 255
           required: true
         modifiers:

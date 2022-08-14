@@ -10,12 +10,12 @@
         },
         "clientnum": {
           "type": "integer",
-          "minimum": 2,
-          "maximum": 255
+          "minimum": 1,
+          "maximum": 254
         },
         "tunnelnum": {
           "type": "integer",
-          "minimum": 0,
+          "minimum": 1,
           "maximum": 255
         },
         "name": {
@@ -44,7 +44,7 @@
         },
         "tunnelnum": {
           "type": "integer",
-          "minimum": 0,
+          "minimum": 1,
           "maximum": 255
         },
         "tunnelname": {
