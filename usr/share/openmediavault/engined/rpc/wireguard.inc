@@ -186,7 +186,7 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
                 $clientuuid = $objectv->get("uuid");
                 $image = sprintf("/var/www/openmediavault/clientqrcode_%s.png", $clientuuid);
                 if (file_exists($image)) {
-                    $url = sprintf("<img src='/clientqrcode_%s.png'>", $clientuuid);
+                    $url = sprintf("<img src='/clientqrcode_%s.png?%d'>", $clientuuid, time());
                     $objectv->set("qrcode", $url);
                 }
             }
