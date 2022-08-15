@@ -63,6 +63,10 @@ data:
           max: 65535
           patternType: port
           required: true
+      - type: checkbox
+        name: iptables
+        label: _("Configure iptables")
+        value: true
       - type: hidden
         name: privatekeyserver
         value: ""

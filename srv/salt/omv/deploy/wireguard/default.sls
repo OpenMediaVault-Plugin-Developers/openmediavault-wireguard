@@ -21,6 +21,7 @@
 {% set tnum = tl.tunnelnum %}
 {% set tname = tl.tunnelname %}
 {% set scfg = '/etc/wireguard/wgnet' ~ tnum ~ '.conf' %}
+{% set iptab = tl.iptables %}
 
 stop_wireguard_service_wgnet{{ tnum }}:
   service.dead:
@@ -48,10 +49,18 @@ configure_wireguard_wgnet{{ tnum }}_{{ tname }}:
         Address = 10.192.{{ tnum }}.255/24
         SaveConfig = true
         ListenPort = {{ tl.port }}
-        PostUp = iptables -A FORWARD -i wgnet{{ tnum }} -j ACCEPT; iptables -A FORWARD -o wgnet{{ tnum }} -j ACCEPT; iptables -t nat -A POSTROUTING -o {{ tl.nic }} -j MASQUERADE
-        PostDown = iptables -D FORWARD -i wgnet{{ tnum }} -j ACCEPT; iptables -D FORWARD -o wgnet{{ tnum }} -j ACCEPT; iptables -t nat -D POSTROUTING -o {{ tl.nic }} -j MASQUERADE
         PrivateKey = {{ tl.privatekeyserver }}
 
+{% if ct.iptab | to_bool %}
+
+configure_wireguard_wgnet{{ tnum }}_{{ tname }}_iptables:
+  file.append:
+    - name: "{{ scfg }}"
+    - text: |
+        PostUp = iptables -A FORWARD -i wgnet{{ tnum }} -j ACCEPT; iptables -A FORWARD -o wgnet{{ tnum }} -j ACCEPT; iptables -t nat -A POSTROUTING -o {{ tl.nic }} -j MASQUERADE
+        PostDown = iptables -D FORWARD -i wgnet{{ tnum }} -j ACCEPT; iptables -D FORWARD -o wgnet{{ tnum }} -j ACCEPT; iptables -t nat -D POSTROUTING -o {{ tl.nic }} -j MASQUERADE
+
+{% endif %}
 {% endif %}
 
 {% for ct in config.clients.client | selectattr("tunnelnum", "equalto", tnum) %}
