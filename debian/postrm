@@ -5,11 +5,11 @@ set -e
 . /etc/default/openmediavault
 . /usr/share/openmediavault/scripts/helper-functions
 
-qrCodePng="/var/www/openmediavault/clientqrcode.png"
-
 remove_action() {
     find /var/www/openmediavault/ -type f -name "clientqrcode*.png" -print -delete
-    find /etc/wireguard/ -type f -name "wgnet*.conf" -print -delete
+    if [ -d "/etc/wireguard" ]; then
+        find /etc/wireguard/ -type f -name "wgnet*.conf" -print -delete
+    fi
     dpkg-trigger update-workbench
 }
 
