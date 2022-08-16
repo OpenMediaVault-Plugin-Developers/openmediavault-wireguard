@@ -51,7 +51,7 @@ configure_wireguard_wgnet{{ tnum }}_{{ tname }}:
         ListenPort = {{ tl.port }}
         PrivateKey = {{ tl.privatekeyserver }}
 
-{% if ct.iptab | to_bool %}
+{% if iptab | to_bool %}
 
 configure_wireguard_wgnet{{ tnum }}_{{ tname }}_iptables:
   file.append:
