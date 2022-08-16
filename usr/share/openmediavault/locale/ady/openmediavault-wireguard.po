@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-14 08:05-0500\n"
+"POT-Creation-Date: 2022-08-15 19:44-0500\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
 "Language-Team: Adyghe (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/ady/)\n"
 "MIME-Version: 1.0\n"
@@ -27,6 +27,9 @@ msgid "Client number"
 msgstr ""
 
 msgid "Clients"
+msgstr ""
+
+msgid "Configure iptables"
 msgstr ""
 
 msgid "Create"
@@ -60,6 +63,12 @@ msgid "Name"
 msgstr ""
 
 msgid "Network Adapter"
+msgstr ""
+
+msgid "Please disable client and apply changes before deleting!"
+msgstr ""
+
+msgid "Please disable tunnel and apply changes before deleting!"
 msgstr ""
 
 msgid "Port"
