@@ -36,6 +36,10 @@
       "maximum": 65535,
       "default": 51820
     },
+    "iptables": {
+      "type": "boolean",
+      "default": 1
+    },
     "privatekeyserver": {
       "type": "string"
     },
