@@ -1,8 +1,8 @@
-openmediavault-wireguard (6.0) UNRELEASED; urgency=medium
+openmediavault-wireguard (6.0) stable; urgency=low
 
   * Update for OMV 6.x
 
- -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Mon, 18 Jul 2022 09:17:52 -0500
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Mon, 15 Aug 2022 19:42:32 -0500
 
 openmediavault-wireguard (5.0.2) stable; urgency=low
 
