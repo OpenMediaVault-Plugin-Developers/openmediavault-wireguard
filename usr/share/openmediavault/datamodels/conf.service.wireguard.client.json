@@ -19,7 +19,7 @@
     "clientnum": {
       "type": "integer",
       "minimum": 1,
-      "maximum": 254
+      "maximum": 253
     },
     "tunnelnum": {
       "type": "integer",
