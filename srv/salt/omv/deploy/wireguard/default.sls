@@ -46,7 +46,7 @@ configure_wireguard_wgnet{{ tnum }}_{{ tname }}:
     - name: "{{ scfg }}"
     - text: |
         [Interface]
-        Address = 10.192.{{ tnum }}.255/24
+        Address = 10.192.{{ tnum }}.254/24
         SaveConfig = true
         ListenPort = {{ tl.port }}
         PrivateKey = {{ tl.privatekeyserver }}
