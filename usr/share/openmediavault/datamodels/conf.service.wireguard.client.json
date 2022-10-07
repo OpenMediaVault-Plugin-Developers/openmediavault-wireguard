@@ -14,7 +14,7 @@
     },
     "enable": {
       "type": "boolean",
-      "default": 0
+      "default": false
     },
     "clientnum": {
       "type": "integer",
@@ -28,6 +28,14 @@
     },
     "clientname": {
       "type": "string"
+    },
+    "restrict": {
+      "type": "boolean"
+    },
+    "persistent": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 3600
     },
     "privatekeyclient": {
       "type": "string"

@@ -102,7 +102,9 @@ configure_wireguard_client_wgnet{{ cnum }}_{{ cname }}_peer:
         PublicKey = {{ tl.publickeyserver }}
         PresharedKey = {{ ct.presharedkeyclient }}
         Endpoint = {{ tl.endpoint }}:{{ tl.port }}
-        AllowedIPs = 0.0.0.0/0
+        AllowedIPs = {{ "10.192." ~ tnum ~ ".0/24" if ct.restrict | to_bool else "0.0.0.0/0" }}
+        {% if ct.persistent > 0 %}PersistentKeepAlive = {{ ct.persistent }}{% endif %}
+
 
 create_wireguard_qr_code_wgnet{{ cnum }}:
   cmd.run:

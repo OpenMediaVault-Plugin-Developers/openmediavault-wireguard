@@ -56,6 +56,20 @@ data:
         name: clientname
         label: _("Name")
         value: ""
+      - type: checkbox
+        name: restrict
+        label: _("Restrict")
+        value: false
+        hint: _("Restrict routing to VPN subnet only")
+      - type: numberInput
+        name: persistent
+        label: _("Persistent keepalive")
+        value: 0
+        validators:
+          min: 0
+          max: 3600
+          required: true
+        hint: _("Set to 0 to disable")
       - type: hidden
         name: privatekeyclient
         value: ""

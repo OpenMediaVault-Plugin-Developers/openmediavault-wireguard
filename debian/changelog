@@ -1,3 +1,10 @@
+openmediavault-wireguard (6.1) stable; urgency=low
+
+  * Add option to restrict AllowedIPs to VPN subnet only
+  * Add option to set PersistentKeepAlive
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 07 Oct 2022 07:47:12 -0500
+
 openmediavault-wireguard (6.0.1) stable; urgency=low
 
   * Fix uninstall
