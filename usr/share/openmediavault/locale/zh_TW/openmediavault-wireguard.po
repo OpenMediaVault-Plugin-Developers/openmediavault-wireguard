@@ -3,13 +3,17 @@
 # This file is distributed under the same license as the openmediavault-wireguard package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# kochin <kochinc@outlook.com>, 2022
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-15 19:44-0500\n"
+"POT-Creation-Date: 2022-11-02 19:51-0500\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
+"Last-Translator: kochin <kochinc@outlook.com>, 2022\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,76 +22,91 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Client Config"
-msgstr ""
+msgstr "客戶端設置"
 
 msgid "Client Number"
-msgstr ""
+msgstr "客戶號碼"
 
 msgid "Client number"
-msgstr ""
+msgstr "客戶號碼"
 
 msgid "Clients"
-msgstr ""
+msgstr "客戶"
 
 msgid "Configure iptables"
-msgstr ""
+msgstr "設置 iptables"
 
 msgid "Create"
-msgstr ""
+msgstr "新建"
 
 msgid "Created client."
-msgstr ""
+msgstr "已建立客戶。"
 
 msgid "Created tunnel."
+msgstr "已建立隧道。"
+
+msgid "DNS"
 msgstr ""
 
 msgid "Delete"
-msgstr ""
+msgstr "刪除"
 
 msgid "Edit"
-msgstr ""
+msgstr "編輯"
 
 msgid "Edit client."
-msgstr ""
+msgstr "編輯客戶。"
 
 msgid "Edit tunnel."
-msgstr ""
+msgstr "編輯隧道。"
 
 msgid "Enable"
-msgstr ""
+msgstr "啟用"
 
 msgid "Endpoint"
-msgstr ""
+msgstr "端點"
 
 msgid "Name"
-msgstr ""
+msgstr "名稱"
 
 msgid "Network Adapter"
-msgstr ""
+msgstr "網路配接器"
+
+msgid "Persistent keepalive"
+msgstr "持續保活間隔"
 
 msgid "Please disable client and apply changes before deleting!"
-msgstr ""
+msgstr "刪除之前請先停用客戶並套用變更！"
 
 msgid "Please disable tunnel and apply changes before deleting!"
-msgstr ""
+msgstr "刪除之前請先停用隧道並套用變更！"
 
 msgid "Port"
-msgstr ""
+msgstr "連接埠"
 
 msgid "QR Code"
-msgstr ""
+msgstr "QR 碼"
+
+msgid "Restrict"
+msgstr "限制"
+
+msgid "Restrict routing to VPN subnet only"
+msgstr "限制只能選路到 VPN 子網路"
+
+msgid "Set to 0 to disable"
+msgstr "設定成 0 來停用"
 
 msgid "Tunnel Number"
-msgstr ""
+msgstr "隧道號碼"
 
 msgid "Tunnel number"
-msgstr ""
+msgstr "隧道號碼"
 
 msgid "Tunnels"
-msgstr ""
+msgstr "隧道"
 
 msgid "Wireguard"
-msgstr ""
+msgstr "Wireguard"
 
 msgid "n/a"
-msgstr ""
+msgstr "n/a"

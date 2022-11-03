@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-15 19:44-0500\n"
+"POT-Creation-Date: 2022-11-02 19:51-0500\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
 "Language-Team: Turkish (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -41,6 +41,9 @@ msgstr ""
 msgid "Created tunnel."
 msgstr ""
 
+msgid "DNS"
+msgstr ""
+
 msgid "Delete"
 msgstr ""
 
@@ -65,6 +68,9 @@ msgstr ""
 msgid "Network Adapter"
 msgstr ""
 
+msgid "Persistent keepalive"
+msgstr ""
+
 msgid "Please disable client and apply changes before deleting!"
 msgstr ""
 
@@ -75,6 +81,15 @@ msgid "Port"
 msgstr ""
 
 msgid "QR Code"
+msgstr ""
+
+msgid "Restrict"
+msgstr ""
+
+msgid "Restrict routing to VPN subnet only"
+msgstr ""
+
+msgid "Set to 0 to disable"
 msgstr ""
 
 msgid "Tunnel Number"

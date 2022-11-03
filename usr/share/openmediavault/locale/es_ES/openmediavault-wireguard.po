@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-15 19:44-0500\n"
+"POT-Creation-Date: 2022-11-02 19:51-0500\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
 "Last-Translator: Raul Fernandez Garcia <raulfg3@gmail.com>, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/es/)\n"
@@ -34,7 +34,7 @@ msgid "Clients"
 msgstr "Clientes"
 
 msgid "Configure iptables"
-msgstr ""
+msgstr "Configurar iptables"
 
 msgid "Create"
 msgstr "Crear"
@@ -44,6 +44,9 @@ msgstr "Cliente creado."
 
 msgid "Created tunnel."
 msgstr "Túnel creado."
+
+msgid "DNS"
+msgstr ""
 
 msgid "Delete"
 msgstr "Borrar"
@@ -69,17 +72,29 @@ msgstr "Nombre"
 msgid "Network Adapter"
 msgstr "Adaptador de red"
 
+msgid "Persistent keepalive"
+msgstr "Señal de vida persistente"
+
 msgid "Please disable client and apply changes before deleting!"
-msgstr ""
+msgstr "¡Deshabilitar el cliente y aplicar cambios antes de borrar!"
 
 msgid "Please disable tunnel and apply changes before deleting!"
-msgstr ""
+msgstr "¡Deshabilitar túnel y aplicar cambios antes de borrar!"
 
 msgid "Port"
 msgstr "Puerto"
 
 msgid "QR Code"
 msgstr "Código QR"
+
+msgid "Restrict"
+msgstr "Restringir"
+
+msgid "Restrict routing to VPN subnet only"
+msgstr "Restringir el enrutado a la VPN exclusivamente."
+
+msgid "Set to 0 to disable"
+msgstr "0 para deshabilitar"
 
 msgid "Tunnel Number"
 msgstr "Número de túnel"
