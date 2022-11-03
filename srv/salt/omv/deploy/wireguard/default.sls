@@ -92,6 +92,7 @@ configure_wireguard_client_wgnet{{ cnum }}:
         [Interface]
         Address = 10.192.{{ tnum }}.{{ cnum }}/24
         PrivateKey = {{ ct.privatekeyclient }}
+        {% if ct.dns | length > 0 and not ct.dns == "disable" %}DNS = {{ ct.dns }}{% endif %}
 
 configure_wireguard_client_wgnet{{ cnum }}_{{ cname }}_peer:
   file.append:

@@ -36,6 +36,7 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod("setClient");
         $this->registerMethod("deleteClient");
         $this->registerMethod("getClientConfig");
+        $this->registerMethod("enumerateDns");
     }
 
     public function getTunnelList($params, $context)
@@ -211,6 +212,14 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             $ro = true;
         }
         $object->add("numro", "boolean", $ro);
+        $object->add("dns2", "string", "disable");
+print_r($object);
+        if (strlen($object->get("dns")) > 7) {
+            $object->set("dns2", "custom");
+        } else {
+            $object->set("dns", "");
+            $object->set("dns2", "disable");
+        }
         return ($object->getAssoc());
     }
 
@@ -249,6 +258,26 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             $cmd->execute($output);
             $params["presharedkeyclient"] = $output[0];
         }
+        // sort and deduplicate dns servers
+        if ($params['dns2'] == 'disable') {
+            $params['dns'] = '';
+        } else {
+            $dns = str_replace([':',' '], ',', $params['dns']);
+            if ($params['dns2'] !== 'custom') {
+                $dns .= ',' . $params['dns2'];
+            }
+            $dnsa = explode(',', $dns);
+            // remove bad lines in paths
+            foreach ($dnsa as $dnsk => &$dnsv) {
+                if ((strlen($dnsv) < 7) || (substr(0, 3, $dnsv) == 127)) {
+                    unset($dnsv[$dnsk]);
+                }
+            }
+            $dnsu = array_unique($dnsa);
+            asort($dnsu);
+            $params['dns'] = implode(',', $dnsu);
+        }
+        unset($params['dns2']);
         // Verify that shared folder is set
         $db = \OMV\Config\Database::getInstance();
         // Prepare the configuration object.
@@ -307,4 +336,17 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             }
         );
 	}
+
+    public function enumerateDns($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Get configuration data.
+        $dns = [];
+        $dns[] = [ 'dns' => 'disable' ];
+        $dns[] = [ 'dns' => 'custom' ];
+        $dns[] = [ 'dns' => '192.168.1.1' ];
+        $dns[] = [ 'dns' => '192.168.1.1,192.168.1.2' ];
+        return ($dns);
+    }
 }

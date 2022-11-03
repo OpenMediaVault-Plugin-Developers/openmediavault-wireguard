@@ -37,6 +37,12 @@
         },
         "presharedkeyclient": {
           "type": "string"
+        },
+        "dns": {
+          "type": "string"
+        },
+        "dns2": {
+          "type": "string"
         }
       }
     }

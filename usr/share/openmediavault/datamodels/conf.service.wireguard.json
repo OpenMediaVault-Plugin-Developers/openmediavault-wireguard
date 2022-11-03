@@ -104,6 +104,9 @@
               },
               "presharedkeyclient": {
                 "type": "string"
+              },
+              "dns": {
+                "type": "string"
               }
             }
           }
