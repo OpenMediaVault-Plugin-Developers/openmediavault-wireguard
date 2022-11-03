@@ -1,3 +1,9 @@
+openmediavault-wireguard (6.1.1) stable; urgency=low
+
+  * Add optional dns field to client
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 02 Nov 2022 19:48:37 -0500
+
 openmediavault-wireguard (6.1) stable; urgency=low
 
   * Add option to restrict AllowedIPs to VPN subnet only
