@@ -344,8 +344,20 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $dns = [];
         $dns[] = [ 'dns' => 'disable' ];
         $dns[] = [ 'dns' => 'custom' ];
-        $dns[] = [ 'dns' => '192.168.1.1' ];
-        $dns[] = [ 'dns' => '192.168.1.1,192.168.1.2' ];
+        $ips = [];
+        $resolv = file("/etc/resolv.conf");
+        foreach ($resolv as $line) {
+            if (substr(trim($line), 0,10) == "nameserver") {
+                $ip = trim(str_replace("nameserver", "", $line));
+                $dns[] = [ 'dns' => $ip ];
+                $ips[] = $ip;
+            }
+        }
+        $ipsu = array_unique($ips);
+        if (count($ipsu) > 1) {
+            asort($ipsu);
+            $dns[] = [ 'dns' => implode(",", $ipsu) ];
+        }
         return ($dns);
     }
 }
