@@ -122,6 +122,7 @@ configure_wireguard_wgnet{{ tnum }}_{{ cname }}_peer:
         PublicKey = {{ ct.publickeyclient }}
         AllowedIPs = 10.192.{{ tnum }}.{{ cnum }}/32
         PresharedKey = {{ ct.presharedkeyclient }}
+        {% if tl.persistent > 0 %}PersistentKeepAlive = {{ tl.persistent }}{% endif %}
 
 {% endif %}
 {% endfor %}

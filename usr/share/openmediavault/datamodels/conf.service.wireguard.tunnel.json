@@ -40,6 +40,11 @@
       "type": "boolean",
       "default": true
     },
+    "persistent": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 3600
+    },
     "privatekeyserver": {
       "type": "string"
     },

@@ -43,6 +43,11 @@
                 "maximum": 65535,
                 "default": 51820
               },
+              "persistent": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 3600
+              },
               "iptables": {
                 "type": "boolean",
                 "default": true

@@ -67,6 +67,15 @@ data:
         name: iptables
         label: _("Configure iptables")
         value: true
+      - type: numberInput
+        name: persistent
+        label: _("Persistent keepalive")
+        value: 0
+        validators:
+          min: 0
+          max: 3600
+          required: true
+        hint: _("Set to 0 to disable")
       - type: hidden
         name: privatekeyserver
         value: ""

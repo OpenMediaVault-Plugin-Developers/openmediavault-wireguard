@@ -1,3 +1,9 @@
+openmediavault-wireguard (6.2) UNRELEASED; urgency=medium
+
+  * Add optional PersistentKeepAlive parameter to tunnel config
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 09 Dec 2022 06:31:03 -0600
+
 openmediavault-wireguard (6.1.1) stable; urgency=low
 
   * Add optional dns field to client
