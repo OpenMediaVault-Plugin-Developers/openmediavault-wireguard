@@ -1,3 +1,9 @@
+openmediavault-wireguard (6.2.1) stable; urgency=low
+
+  * Fix case of parameter
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 09 Apr 2023 08:34:29 -0500
+
 openmediavault-wireguard (6.2) stable; urgency=low
 
   * Add optional PersistentKeepAlive parameter to tunnel config
