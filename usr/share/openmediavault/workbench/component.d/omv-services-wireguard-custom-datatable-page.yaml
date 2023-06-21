@@ -1,0 +1,47 @@
+version: "1.0"
+type: component
+data:
+  name: omv-services-wireguard-custom-datatable-page
+  type: datatablePage
+  config:
+    autoReload: false
+    hasSearchField: true
+    stateId: 758c8514-0fd3-11ee-ab93-4f7c86e183ef
+    sorters:
+      - dir: asc
+        prop: name
+    store:
+      proxy:
+        service: Wireguard
+        get:
+          method: getCustomList
+    columns:
+      - name: _("Enabled")
+        prop: enable
+        sortable: true
+        flexGrow: 1
+        cellTemplateName: checkIcon
+      - name: _("Name")
+        prop: name
+        flexGrow: 3
+        sortable: true
+    actions:
+      - template: create
+        execute:
+          type: url
+          url: "/services/wireguard/custom/create"
+      - template: edit
+        execute:
+          type: url
+          url: "/services/wireguard/custom/edit/{{ _selected[0].uuid }}"
+      - template: delete
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+        execute:
+          type: request
+          request:
+            service: Wireguard
+            method: deleteCustom
+            params:
+              uuid: "{{ _selected[0].uuid }}"

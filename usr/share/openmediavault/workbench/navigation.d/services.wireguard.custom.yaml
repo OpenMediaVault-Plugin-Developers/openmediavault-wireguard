@@ -1,0 +1,8 @@
+version: "1.0"
+type: navigation-item
+data:
+  path: "services.wireguard.custom"
+  text: _("Custom Config")
+  position: 30
+  icon: "mdi:card-bulleted-settings-outline"
+  url: "/services/wireguard/custom"

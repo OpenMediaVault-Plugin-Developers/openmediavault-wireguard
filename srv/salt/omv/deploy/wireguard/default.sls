@@ -39,7 +39,7 @@ configure_wireguard_wgnet{{ tnum }}_{{ tname }}_perms:
     - name: "{{ scfg }}"
     - user: root
     - group: root
-    - mode: 644
+    - mode: "0644"
 
 configure_wireguard_wgnet{{ tnum }}_{{ tname }}:
   file.append:
@@ -83,7 +83,7 @@ configure_wireguard_client_wgnet{{ cnum }}_perms:
     - name: "{{ ccfg }}"
     - user: root
     - group: root
-    - mode: 644
+    - mode: "0644"
 
 configure_wireguard_client_wgnet{{ cnum }}:
   file.append:
@@ -139,3 +139,42 @@ start_wireguard_service_wgnet{{ tnum }}:
 
 {% endif %}
 {% endfor %}
+
+
+{% for cc in config.custom.custom %}
+{% set ccname = cc.name %}
+{% set ccfg = '/etc/wireguard/wgnet_custom' ~ ccname ~ '.conf' %}
+
+stop_wireguard_service_wgnet{{ ccname }}:
+  service.dead:
+    - name: wg-quick@wgnet{{ ccname }}
+    - enable: False
+
+remove_wireguard_custom_files{{ ccname }}:
+  file.absent:
+    - names:
+      - "{{ ccfg }}"
+
+{% if cc.enable | to_bool %}
+
+configure_wireguard_custom_wgnet{{ ccname }}:
+  file.managed:
+    - name: "{{ ccfg }}"
+    - user: root
+    - group: root
+    - mode: "0644"
+    - content: |
+        {{ cc.customcfg }}
+
+
+start_wireguard_service_wgnet{{ ccname }}:
+  service.running:
+    - name: wg-quick@wgnet{{ ccname }}
+    - enable: True
+    - reload: true
+    - watch:
+      - file: "{{ ccfg }}"
+
+{% endif %}
+{% endfor %}
+

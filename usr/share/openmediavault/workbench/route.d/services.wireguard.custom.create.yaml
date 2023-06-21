@@ -1,0 +1,7 @@
+version: "1.0"
+type: route
+data:
+  url: "/services/wireguard/custom/create"
+  title: _("Create")
+  notificationTitle: _("Created custom config.")
+  component: omv-services-wireguard-custom-form-page

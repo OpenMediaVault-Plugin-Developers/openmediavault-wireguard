@@ -37,6 +37,11 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod("deleteClient");
         $this->registerMethod("getClientConfig");
         $this->registerMethod("enumerateDns");
+
+        $this->registerMethod("getCustomList");
+        $this->registerMethod("getCustom");
+        $this->registerMethod("setCustom");
+        $this->registerMethod("deleteCustom");
     }
 
     public function getTunnelList($params, $context)
@@ -63,7 +68,7 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         }
         // Filter the result.
         return $this->applyFilter($objectsAssoc, $params['start'], $params['limit'],
-            $params['sortfield'], $params['sortdir']);
+            $params['sortfield'], $params['sortdir'], $params['search']);
     }
 
     public function getTunnel($params, $context)
@@ -195,7 +200,7 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         }
         // Filter the result.
         return $this->applyFilter($objectsAssoc, $params['start'], $params['limit'],
-            $params['sortfield'], $params['sortdir']);
+            $params['sortfield'], $params['sortdir'], $params['search']);
     }
 
     public function getClient($params, $context)
@@ -359,5 +364,68 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             $dns[] = [ 'dns' => implode(",", $ipsu) ];
         }
         return ($dns);
+    }
+
+    public function getCustomList($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, "rpc.common.getlist");
+        // Get configuration data.
+        $db = \OMV\Config\Database::getInstance();
+        $objects = $db->getAssoc("conf.service.wireguard.custom");
+        // Filter the result.
+        return $this->applyFilter($objects, $params['start'], $params['limit'],
+            $params['sortfield'], $params['sortdir'], $params['search']);
+    }
+
+    public function getCustom($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, "rpc.common.objectuuid");
+        // Get the configuration object.
+        $db = \OMV\Config\Database::getInstance();
+        $object = $db->get("conf.service.wireguard.custom", $params["uuid"]);
+        return ($object->getAssoc());
+    }
+
+    public function setCustom($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, "rpc.wireguard.setcustom");
+        // Verify that shared folder is set
+        $db = \OMV\Config\Database::getInstance();
+        // Prepare the configuration object.
+        $object = new \OMV\Config\ConfigObject("conf.service.wireguard.custom");
+        $object->setAssoc($params);
+        // Set the configuration object.
+        $isNew = $object->isNew();
+        if (TRUE === $isNew) {
+            // Check uniqueness - name
+            $db->assertIsUnique($object, "name");
+        }
+        $db->set($object);
+        // Return the configuration object.
+        return $object->getAssoc();
+    }
+
+    public function deleteCustom($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, "rpc.common.objectuuid");
+        // Verify that shared folder is set
+        $db = \OMV\Config\Database::getInstance();
+        // Delete the configuration object.
+        $object = $db->get("conf.service.wireguard.custom", $params["uuid"]);
+        $db->delete($object);
+        // Return the deleted configuration object.
+        return $object->getAssoc();
     }
 }

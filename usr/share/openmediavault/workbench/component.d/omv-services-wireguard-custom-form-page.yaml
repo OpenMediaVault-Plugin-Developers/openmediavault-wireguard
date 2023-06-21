@@ -1,0 +1,42 @@
+version: "1.0"
+type: component
+data:
+  name: omv-services-wireguard-custom-form-page
+  type: formPage
+  config:
+    request:
+      service: Wireguard
+      get:
+        method: getCustom
+        params:
+          uuid: "{{ _routeParams.uuid }}"
+      post:
+        method: setCustom
+    fields:
+      - type: confObjUuid
+      - type: checkbox
+        name: enable
+        label: _("Enable")
+        value: false
+      - type: textInput
+        name: name
+        label: _("Name")
+        value: ""
+        disabled: '{{ _routeConfig.data.editing | toboolean }}'
+        validators:
+          required: true
+          patternType: wordChars
+      - type: codeEditor
+        name: customcfg
+        label: _("Config")
+        value: ""
+        language: "shell"
+    buttons:
+      - template: submit
+        execute:
+          type: url
+          url: "/services/wireguard/custom"
+      - template: cancel
+        execute:
+          type: url
+          url: "/services/wireguard/custom"

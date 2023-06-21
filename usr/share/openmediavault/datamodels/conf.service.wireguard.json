@@ -117,6 +117,33 @@
           }
         }
       }
+    },
+    "custom": {
+      "type": "object",
+      "properties": {
+        "custom": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "uuid": {
+                "type": "string",
+                "format": "uuidv4"
+              },
+              "enable": {
+                "type": "boolean",
+                "default": false
+              },
+              "name": {
+                "type": "string"
+              },
+              "customcfg": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

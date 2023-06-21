@@ -92,5 +92,23 @@
         }
       }
     }
+  },
+  {
+    "type": "rpc",
+    "id": "rpc.wireguard.setcustom",
+    "params": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "customcfg": {
+          "type": "string"
+        }
+      }
+    }
   }
 ]
