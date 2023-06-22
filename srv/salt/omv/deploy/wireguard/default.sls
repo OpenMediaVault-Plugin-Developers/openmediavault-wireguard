@@ -143,35 +143,38 @@ start_wireguard_service_wgnet{{ tnum }}:
 
 {% for cc in config.customs.custom %}
 {% set ccname = cc.name %}
-{% set ccfg = '/etc/wireguard/wgnet_custom' ~ ccname ~ '.conf' %}
+{% set sname = 'wgnet_custom' ~ cc.name %}
+{% set ccfg = '/etc/wireguard/' ~ sname ~ '.conf' %}
 
-stop_wireguard_service_wgnet{{ ccname }}:
+stop_wireguard_service_{{ sname }}:
   service.dead:
-    - name: wg-quick@wgnet{{ ccname }}
+    - name: wg-quick@{{ sname }}
     - enable: False
 
-remove_wireguard_custom_files{{ ccname }}:
+remove_wireguard_custom_files{{ sname }}:
   file.absent:
     - names:
       - "{{ ccfg }}"
 
 {% if cc.enable | to_bool %}
 
-configure_wireguard_custom_wgnet{{ ccname }}:
+configure_wireguard_{{ sname }}:
   file.managed:
     - name: "{{ ccfg }}"
+    - source:
+      - salt://{{ tpldir }}/files/etc-wireguard-wgnet_custom_conf.j2
+    - template: jinja
+    - context:
+      config: {{ cc | json }}
     - user: root
     - group: root
     - mode: "0644"
-    - content: |
-        {{ cc.customcfg }}
 
-
-start_wireguard_service_wgnet{{ ccname }}:
+start_wireguard_service_{{ sname }}:
   service.running:
-    - name: wg-quick@wgnet{{ ccname }}
+    - name: wg-quick@{{ sname }}
     - enable: True
-    - reload: true
+    - reload: True
     - watch:
       - file: "{{ ccfg }}"
 
