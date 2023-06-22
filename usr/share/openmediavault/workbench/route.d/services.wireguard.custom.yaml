@@ -2,5 +2,5 @@ version: "1.0"
 type: route
 data:
   url: "/services/wireguard/custom"
-  title: _("Custom")
+  title: _("Custom Config")
   component: omv-services-wireguard-custom-datatable-page
