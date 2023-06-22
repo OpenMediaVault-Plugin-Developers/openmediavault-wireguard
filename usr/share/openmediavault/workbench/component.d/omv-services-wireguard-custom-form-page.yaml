@@ -31,6 +31,8 @@ data:
         label: _("Config")
         value: ""
         language: "shell"
+      - type: hint
+        text: _("Default networks in the plugin are created in the 10.192.x.x range")
     buttons:
       - template: submit
         execute:
