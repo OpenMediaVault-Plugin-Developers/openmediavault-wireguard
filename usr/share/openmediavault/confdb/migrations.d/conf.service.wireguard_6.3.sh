@@ -21,8 +21,8 @@ set -e
 
 . /usr/share/openmediavault/scripts/helper-functions
 
-if ! omv_config_exists "/config/services/wireguard/custom"; then
-    omv_config_add_node "/config/services/wireguard" "custom"
+if ! omv_config_exists "/config/services/wireguard/customs"; then
+    omv_config_add_node "/config/services/wireguard" "customs"
 fi
 
 exit 0

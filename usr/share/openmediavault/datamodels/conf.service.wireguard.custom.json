@@ -3,7 +3,7 @@
   "id": "conf.service.wireguard.custom",
   "title": "wireguard custom config",
   "queryinfo": {
-    "xpath": "//services/wireguard/custom/custom",
+    "xpath": "//services/wireguard/customs/custom",
     "iterable": true,
     "idproperty": "uuid"
   },
