@@ -78,7 +78,7 @@ data:
             method: deleteTunnel
             params:
               uuid: "{{ _selected[0].uuid }}"
-     - type: menu
+      - type: menu
         icon: mdi:link
         tooltip: _("Docs")
         actions:
@@ -87,4 +87,3 @@ data:
             execute:
               type: url
               url: '/externalRedirect/https%3A%2F%2Fwiki.omv-extras.org%2Fdoku.php%3Fid%3Domv6%3Aomv6_plugins%3Awireguard'
-
