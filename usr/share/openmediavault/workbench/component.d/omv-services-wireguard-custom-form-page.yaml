@@ -26,13 +26,14 @@ data:
         validators:
           required: true
           patternType: wordChars
+          maxLength: 9
       - type: codeEditor
         name: customcfg
         label: _("Config")
         value: ""
         language: "shell"
       - type: hint
-        text: _("Default networks in the plugin are created in the 10.192.x.x range")
+        text: _("Default networks in the plugin are created in the 10.192.x.x range. Choose a different range to avoid conflicts.")
     buttons:
       - template: submit
         execute:

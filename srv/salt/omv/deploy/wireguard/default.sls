@@ -143,7 +143,7 @@ start_wireguard_service_wgnet{{ tnum }}:
 
 {% for cc in config.customs.custom %}
 {% set ccname = cc.name %}
-{% set sname = 'wgnet_custom' ~ cc.name %}
+{% set sname = 'wgnet_' ~ cc.name %}
 {% set ccfg = '/etc/wireguard/' ~ sname ~ '.conf' %}
 
 stop_wireguard_service_{{ sname }}:
