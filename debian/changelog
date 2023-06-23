@@ -1,8 +1,9 @@
-openmediavault-wireguard (6.3) UNRELEASED; urgency=medium
+openmediavault-wireguard (6.3) stable; urgency=low
 
   * Add custom config tab
+  * Add link to omv-extras wiki
 
- -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 21 Jun 2023 17:12:21 -0500
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 23 Jun 2023 09:37:57 -0500
 
 openmediavault-wireguard (6.2.1) stable; urgency=low
 
