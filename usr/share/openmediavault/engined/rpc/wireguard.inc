@@ -424,6 +424,13 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $db = \OMV\Config\Database::getInstance();
         // Delete the configuration object.
         $object = $db->get("conf.service.wireguard.custom", $params["uuid"]);
+        $customname = $object->get("name");
+        $conf = sprintf("/etc/wireguard/wgnet_%s.conf", $customname);
+        if (file_exists($conf)) {
+            $msg1 = gettext("Please disable custom config and apply changes before deleting!");
+            $msg2 = sprintf("Custom config '%s' - %s", $customname, $msg1);
+            throw new \OMV\Exception($msg2);
+        }
         $db->delete($object);
         // Return the deleted configuration object.
         return $object->getAssoc();
