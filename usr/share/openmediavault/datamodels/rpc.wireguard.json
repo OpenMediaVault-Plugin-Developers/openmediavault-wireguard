@@ -84,6 +84,12 @@
           "minimum": 0,
           "maximum": 3600
         },
+        "mtu": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9999,
+          "default": 0
+        },
         "privatekeyserver": {
           "type": "string"
         },

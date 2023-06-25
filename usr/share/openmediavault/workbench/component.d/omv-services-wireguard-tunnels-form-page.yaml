@@ -76,6 +76,15 @@ data:
           max: 3600
           required: true
         hint: _("Set to 0 to disable")
+      - type: numberInput
+        name: mtu
+        label: _("MTU")
+        value: 0
+        validators:
+          min: 0
+          max: 9999
+          required: true
+        hint: _("Set to 0 to disable. Wireguard will use 1420 when disabled.")
       - type: hidden
         name: privatekeyserver
         value: ""

@@ -47,6 +47,7 @@ configure_wireguard_wgnet{{ tnum }}_{{ tname }}:
     - text: |
         [Interface]
         Address = 10.192.{{ tnum }}.254/24
+        {% if tl.mtu > 0 %}MTU = {{ tl.mtu }}{% endif %}
         SaveConfig = true
         ListenPort = {{ tl.port }}
         PrivateKey = {{ tl.privatekeyserver }}
