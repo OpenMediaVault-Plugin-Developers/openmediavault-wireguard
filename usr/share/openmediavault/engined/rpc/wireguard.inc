@@ -29,6 +29,7 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod("getTunnel");
         $this->registerMethod("setTunnel");
         $this->registerMethod("deleteTunnel");
+        $this->registerMethod("getTunnelConfig");
         $this->registerMethod("enumerateTunnels");
 
         $this->registerMethod("getClientList");
@@ -153,6 +154,31 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         // Return the deleted configuration object.
         return $object->getAssoc();
     }
+
+    public function getTunnelConfig($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        $db = \OMV\Config\Database::getInstance();
+        $object = $db->get("conf.service.wireguard.tunnel", $params["uuid"]);
+        // Create the background process.
+        return $this->execBgProc(function($bgStatusFilename, $bgOutputFilename)
+            use ($object) {
+                $clientnum = $object->get("tunnelnum");
+                $conf = sprintf("/etc/wireguard/wgnet%d.conf", $clientnum);
+                if (file_exists($conf)) {
+                    $cmd = new \OMV\System\Process("cat", $conf);
+                    $cmdLine = $cmd->getCommandLine();
+                    if (0 !== $this->exec($cmdLine, $output, $bgOutputFilename))
+                        throw new \OMV\ExecException($cmdLine, $output);
+                } else {
+                    $msg = gettext("Tunnel config file does not exist.  Please apply changes.");
+                    throw new \OMV\Exception($msg);
+                }
+                return $output;
+            }
+        );
+	}
 
     public function enumerateTunnels($params, $context)
     {
@@ -332,10 +358,15 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             use ($object) {
                 $clientnum = $object->get("clientnum");
                 $conf = sprintf("/etc/wireguard/wgnet_client%d.conf", $clientnum);
-                $cmd = new \OMV\System\Process("cat", $conf);
-                $cmdLine = $cmd->getCommandLine();
-                if (0 !== $this->exec($cmdLine, $output, $bgOutputFilename))
-                    throw new \OMV\ExecException($cmdLine, $output);
+                if (file_exists($conf)) {
+                    $cmd = new \OMV\System\Process("cat", $conf);
+                    $cmdLine = $cmd->getCommandLine();
+                    if (0 !== $this->exec($cmdLine, $output, $bgOutputFilename))
+                        throw new \OMV\ExecException($cmdLine, $output);
+                } else {
+                    $msg = gettext("Client config file does not exist.  Please apply changes.");
+                    throw new \OMV\Exception($msg);
+                }
                 return $output;
             }
         );

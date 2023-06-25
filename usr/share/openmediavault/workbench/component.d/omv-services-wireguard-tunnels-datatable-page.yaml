@@ -78,6 +78,33 @@ data:
             method: deleteTunnel
             params:
               uuid: "{{ _selected[0].uuid }}"
+      - type: iconButton
+        icon: mdi:text
+        tooltip: _("Tunnel Config")
+        enabledConstraints:
+          minSelected: 1
+          maxSelected: 1
+          constraint:
+            - operator: truthy
+              arg0:
+                prop: enable
+        execute:
+          type: taskDialog
+          taskDialog:
+            config:
+              title: _("Tunnel Config")
+              autoScroll: false
+              showCompletion: false
+              startOnInit: true
+              width: "50%"
+              request:
+                service: Wireguard
+                method: getTunnelConfig
+                params:
+                  uuid: "{{ _selected[0].uuid }}"
+              buttons:
+                stop:
+                  hidden: true
       - type: menu
         icon: mdi:link
         tooltip: _("Docs")
