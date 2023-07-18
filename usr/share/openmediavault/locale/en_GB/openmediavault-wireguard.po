@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-02 19:51-0500\n"
+"POT-Creation-Date: 2023-07-18 16:16-0500\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2023\n"
 "Language-Team: English (United Kingdom) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/en_GB/)\n"
@@ -27,11 +27,17 @@ msgstr "Client Config"
 msgid "Client Number"
 msgstr "Client Number"
 
+msgid "Client config file does not exist.  Please apply changes."
+msgstr ""
+
 msgid "Client number"
 msgstr "Client number"
 
 msgid "Clients"
 msgstr "Clients"
+
+msgid "Config"
+msgstr ""
 
 msgid "Configure iptables"
 msgstr "Configure iptables"
@@ -42,14 +48,28 @@ msgstr "Create"
 msgid "Created client."
 msgstr "Created client."
 
+msgid "Created custom config."
+msgstr ""
+
 msgid "Created tunnel."
 msgstr "Created tunnel."
+
+msgid "Custom Config"
+msgstr ""
 
 msgid "DNS"
 msgstr "DNS"
 
+msgid ""
+"Default networks in the plugin are created in the 10.192.x.x range. Choose a"
+" different range to avoid conflicts."
+msgstr ""
+
 msgid "Delete"
 msgstr "Delete"
+
+msgid "Docs"
+msgstr ""
 
 msgid "Edit"
 msgstr "Edit"
@@ -57,14 +77,23 @@ msgstr "Edit"
 msgid "Edit client."
 msgstr "Edit client."
 
+msgid "Edit custom config."
+msgstr ""
+
 msgid "Edit tunnel."
 msgstr "Edit tunnel."
 
 msgid "Enable"
 msgstr "Enable"
 
+msgid "Enabled"
+msgstr ""
+
 msgid "Endpoint"
 msgstr "Endpoint"
+
+msgid "MTU"
+msgstr ""
 
 msgid "Name"
 msgstr "Name"
@@ -77,6 +106,9 @@ msgstr "Persistent keepalive"
 
 msgid "Please disable client and apply changes before deleting!"
 msgstr "Please disable client and apply changes before deleting!"
+
+msgid "Please disable custom config and apply changes before deleting!"
+msgstr ""
 
 msgid "Please disable tunnel and apply changes before deleting!"
 msgstr "Please disable tunnel and apply changes before deleting!"
@@ -96,8 +128,17 @@ msgstr "Restrict routing to VPN subnet only"
 msgid "Set to 0 to disable"
 msgstr "Set to 0 to disable"
 
+msgid "Set to 0 to disable. Wireguard will use 1420 when disabled."
+msgstr ""
+
+msgid "Tunnel Config"
+msgstr ""
+
 msgid "Tunnel Number"
 msgstr "Tunnel Number"
+
+msgid "Tunnel config file does not exist.  Please apply changes."
+msgstr ""
 
 msgid "Tunnel number"
 msgstr "Tunnel number"
@@ -110,3 +151,6 @@ msgstr "Wireguard"
 
 msgid "n/a"
 msgstr "n/a"
+
+msgid "omv-extras wiki"
+msgstr ""

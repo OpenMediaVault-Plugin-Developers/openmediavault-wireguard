@@ -4,22 +4,21 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Ettore Atalan <atalanttore@googlemail.com>, 2022
-# Dampflok_HD, 2023
+# Ettore Atalan <atalanttore@googlemail.com>, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-02 19:51-0500\n"
+"POT-Creation-Date: 2023-07-18 16:16-0500\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
-"Last-Translator: Dampflok_HD, 2023\n"
-"Language-Team: German (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/de/)\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2023\n"
+"Language-Team: German (Germany) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/de_DE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
+"Language: de_DE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Client Config"
@@ -28,14 +27,20 @@ msgstr ""
 msgid "Client Number"
 msgstr ""
 
+msgid "Client config file does not exist.  Please apply changes."
+msgstr ""
+
 msgid "Client number"
 msgstr ""
 
 msgid "Clients"
 msgstr "Clients"
 
-msgid "Configure iptables"
+msgid "Config"
 msgstr ""
+
+msgid "Configure iptables"
+msgstr "iptables konfigurieren"
 
 msgid "Create"
 msgstr "Erstellen"
@@ -43,14 +48,28 @@ msgstr "Erstellen"
 msgid "Created client."
 msgstr "Client erstellt."
 
+msgid "Created custom config."
+msgstr ""
+
 msgid "Created tunnel."
 msgstr "Tunnel erstellt."
+
+msgid "Custom Config"
+msgstr ""
 
 msgid "DNS"
 msgstr "DNS"
 
+msgid ""
+"Default networks in the plugin are created in the 10.192.x.x range. Choose a"
+" different range to avoid conflicts."
+msgstr ""
+
 msgid "Delete"
 msgstr "Löschen"
+
+msgid "Docs"
+msgstr ""
 
 msgid "Edit"
 msgstr "Bearbeiten"
@@ -58,14 +77,23 @@ msgstr "Bearbeiten"
 msgid "Edit client."
 msgstr "Client bearbeiten."
 
+msgid "Edit custom config."
+msgstr ""
+
 msgid "Edit tunnel."
 msgstr "Tunnel bearbeiten."
 
 msgid "Enable"
 msgstr "Aktivieren"
 
+msgid "Enabled"
+msgstr ""
+
 msgid "Endpoint"
 msgstr "Endpunkt"
+
+msgid "MTU"
+msgstr ""
 
 msgid "Name"
 msgstr "Name"
@@ -77,6 +105,9 @@ msgid "Persistent keepalive"
 msgstr ""
 
 msgid "Please disable client and apply changes before deleting!"
+msgstr ""
+
+msgid "Please disable custom config and apply changes before deleting!"
 msgstr ""
 
 msgid "Please disable tunnel and apply changes before deleting!"
@@ -97,17 +128,29 @@ msgstr ""
 msgid "Set to 0 to disable"
 msgstr ""
 
+msgid "Set to 0 to disable. Wireguard will use 1420 when disabled."
+msgstr ""
+
+msgid "Tunnel Config"
+msgstr ""
+
 msgid "Tunnel Number"
+msgstr ""
+
+msgid "Tunnel config file does not exist.  Please apply changes."
 msgstr ""
 
 msgid "Tunnel number"
 msgstr ""
 
 msgid "Tunnels"
-msgstr "Tunnel"
+msgstr ""
 
 msgid "Wireguard"
 msgstr "Wireguard"
 
 msgid "n/a"
 msgstr "n/v"
+
+msgid "omv-extras wiki"
+msgstr ""

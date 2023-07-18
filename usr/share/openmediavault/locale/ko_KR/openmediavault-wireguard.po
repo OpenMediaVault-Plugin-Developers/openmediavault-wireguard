@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-02 19:51-0500\n"
+"POT-Creation-Date: 2023-07-18 16:16-0500\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
 "Last-Translator: Brandon Han, 2023\n"
 "Language-Team: Korean (Korea) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/ko_KR/)\n"
@@ -27,10 +27,16 @@ msgstr "클라이언트 설정"
 msgid "Client Number"
 msgstr ""
 
+msgid "Client config file does not exist.  Please apply changes."
+msgstr ""
+
 msgid "Client number"
 msgstr ""
 
 msgid "Clients"
+msgstr ""
+
+msgid "Config"
 msgstr ""
 
 msgid "Configure iptables"
@@ -42,14 +48,28 @@ msgstr "생성"
 msgid "Created client."
 msgstr "클라이언트를 생성했습니다"
 
+msgid "Created custom config."
+msgstr ""
+
 msgid "Created tunnel."
 msgstr "터널을 생성했습니다"
+
+msgid "Custom Config"
+msgstr ""
 
 msgid "DNS"
 msgstr ""
 
+msgid ""
+"Default networks in the plugin are created in the 10.192.x.x range. Choose a"
+" different range to avoid conflicts."
+msgstr ""
+
 msgid "Delete"
 msgstr "제거"
+
+msgid "Docs"
+msgstr ""
 
 msgid "Edit"
 msgstr "수정"
@@ -57,13 +77,22 @@ msgstr "수정"
 msgid "Edit client."
 msgstr "클라이언트 수정"
 
+msgid "Edit custom config."
+msgstr ""
+
 msgid "Edit tunnel."
 msgstr "터널 수정"
 
 msgid "Enable"
 msgstr ""
 
+msgid "Enabled"
+msgstr ""
+
 msgid "Endpoint"
+msgstr ""
+
+msgid "MTU"
 msgstr ""
 
 msgid "Name"
@@ -77,6 +106,9 @@ msgstr ""
 
 msgid "Please disable client and apply changes before deleting!"
 msgstr "삭제 전 클라이언트를 비활성화하고 변경사항을 적용하십시오"
+
+msgid "Please disable custom config and apply changes before deleting!"
+msgstr ""
 
 msgid "Please disable tunnel and apply changes before deleting!"
 msgstr "삭제 전 터널을 비활성화하고 변경사항을 적용하십시오"
@@ -96,7 +128,16 @@ msgstr ""
 msgid "Set to 0 to disable"
 msgstr ""
 
+msgid "Set to 0 to disable. Wireguard will use 1420 when disabled."
+msgstr ""
+
+msgid "Tunnel Config"
+msgstr ""
+
 msgid "Tunnel Number"
+msgstr ""
+
+msgid "Tunnel config file does not exist.  Please apply changes."
 msgstr ""
 
 msgid "Tunnel number"
@@ -109,4 +150,7 @@ msgid "Wireguard"
 msgstr "Wireguard"
 
 msgid "n/a"
+msgstr ""
+
+msgid "omv-extras wiki"
 msgstr ""

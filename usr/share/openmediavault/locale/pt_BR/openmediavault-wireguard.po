@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-02 19:51-0500\n"
+"POT-Creation-Date: 2023-07-18 16:16-0500\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
 "Last-Translator: Marcelo Esteves <marcelopge@gmail.com>, 2022\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/pt_BR/)\n"
@@ -27,11 +27,17 @@ msgstr "Configuração do Usuário"
 msgid "Client Number"
 msgstr "Número do Usuário"
 
+msgid "Client config file does not exist.  Please apply changes."
+msgstr ""
+
 msgid "Client number"
 msgstr "Número do usuário"
 
 msgid "Clients"
 msgstr "Usuários"
+
+msgid "Config"
+msgstr ""
 
 msgid "Configure iptables"
 msgstr ""
@@ -42,14 +48,28 @@ msgstr "Criado"
 msgid "Created client."
 msgstr "Usuário criado."
 
+msgid "Created custom config."
+msgstr ""
+
 msgid "Created tunnel."
 msgstr "Túnel criado."
+
+msgid "Custom Config"
+msgstr ""
 
 msgid "DNS"
 msgstr ""
 
+msgid ""
+"Default networks in the plugin are created in the 10.192.x.x range. Choose a"
+" different range to avoid conflicts."
+msgstr ""
+
 msgid "Delete"
 msgstr "Excluir"
+
+msgid "Docs"
+msgstr ""
 
 msgid "Edit"
 msgstr "Editar"
@@ -57,14 +77,23 @@ msgstr "Editar"
 msgid "Edit client."
 msgstr "Editar usuário"
 
+msgid "Edit custom config."
+msgstr ""
+
 msgid "Edit tunnel."
 msgstr "Editar túnel."
 
 msgid "Enable"
 msgstr "Ativar"
 
+msgid "Enabled"
+msgstr ""
+
 msgid "Endpoint"
 msgstr "Endpoint"
+
+msgid "MTU"
+msgstr ""
 
 msgid "Name"
 msgstr "Nome"
@@ -76,6 +105,9 @@ msgid "Persistent keepalive"
 msgstr ""
 
 msgid "Please disable client and apply changes before deleting!"
+msgstr ""
+
+msgid "Please disable custom config and apply changes before deleting!"
 msgstr ""
 
 msgid "Please disable tunnel and apply changes before deleting!"
@@ -96,8 +128,17 @@ msgstr ""
 msgid "Set to 0 to disable"
 msgstr ""
 
+msgid "Set to 0 to disable. Wireguard will use 1420 when disabled."
+msgstr ""
+
+msgid "Tunnel Config"
+msgstr ""
+
 msgid "Tunnel Number"
 msgstr "Número do Túnel"
+
+msgid "Tunnel config file does not exist.  Please apply changes."
+msgstr ""
 
 msgid "Tunnel number"
 msgstr "Número do túnel"
@@ -110,3 +151,6 @@ msgstr "Wireguard"
 
 msgid "n/a"
 msgstr "n/a"
+
+msgid "omv-extras wiki"
+msgstr ""
