@@ -3,6 +3,9 @@
 # This file is distributed under the same license as the openmediavault-wireguard package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Andi Chandler <andi@gowling.com>, 2023
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,7 +13,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-02 19:51-0500\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
-"Language-Team: English (United Kingdom) (https://www.transifex.com/openmediavault-plugin-developers/teams/1854/en_GB/)\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>, 2023\n"
+"Language-Team: English (United Kingdom) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,91 +22,91 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Client Config"
-msgstr ""
+msgstr "Client Config"
 
 msgid "Client Number"
-msgstr ""
+msgstr "Client Number"
 
 msgid "Client number"
-msgstr ""
+msgstr "Client number"
 
 msgid "Clients"
-msgstr ""
+msgstr "Clients"
 
 msgid "Configure iptables"
-msgstr ""
+msgstr "Configure iptables"
 
 msgid "Create"
-msgstr ""
+msgstr "Create"
 
 msgid "Created client."
-msgstr ""
+msgstr "Created client."
 
 msgid "Created tunnel."
-msgstr ""
+msgstr "Created tunnel."
 
 msgid "DNS"
-msgstr ""
+msgstr "DNS"
 
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 msgid "Edit"
-msgstr ""
+msgstr "Edit"
 
 msgid "Edit client."
-msgstr ""
+msgstr "Edit client."
 
 msgid "Edit tunnel."
-msgstr ""
+msgstr "Edit tunnel."
 
 msgid "Enable"
-msgstr ""
+msgstr "Enable"
 
 msgid "Endpoint"
-msgstr ""
+msgstr "Endpoint"
 
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 msgid "Network Adapter"
-msgstr ""
+msgstr "Network Adapter"
 
 msgid "Persistent keepalive"
-msgstr ""
+msgstr "Persistent keepalive"
 
 msgid "Please disable client and apply changes before deleting!"
-msgstr ""
+msgstr "Please disable client and apply changes before deleting!"
 
 msgid "Please disable tunnel and apply changes before deleting!"
-msgstr ""
+msgstr "Please disable tunnel and apply changes before deleting!"
 
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 msgid "QR Code"
-msgstr ""
+msgstr "QR Code"
 
 msgid "Restrict"
-msgstr ""
+msgstr "Restrict"
 
 msgid "Restrict routing to VPN subnet only"
-msgstr ""
+msgstr "Restrict routing to VPN subnet only"
 
 msgid "Set to 0 to disable"
-msgstr ""
+msgstr "Set to 0 to disable"
 
 msgid "Tunnel Number"
-msgstr ""
+msgstr "Tunnel Number"
 
 msgid "Tunnel number"
-msgstr ""
+msgstr "Tunnel number"
 
 msgid "Tunnels"
-msgstr ""
+msgstr "Tunnels"
 
 msgid "Wireguard"
-msgstr ""
+msgstr "Wireguard"
 
 msgid "n/a"
-msgstr ""
+msgstr "n/a"

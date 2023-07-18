@@ -182,3 +182,7 @@ start_wireguard_service_{{ sname }}:
 {% endif %}
 {% endfor %}
 
+remove_wireguard_dummy_file:
+  file.absent:
+    - names:
+      - /etc/wireguard_dummy_file
