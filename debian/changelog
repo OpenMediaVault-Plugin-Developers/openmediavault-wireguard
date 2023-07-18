@@ -1,3 +1,9 @@
+openmediavault-wireguard (6.3.4) stable; urgency=low
+
+  * Add dummy config for when database is empty
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 18 Jul 2023 16:15:05 -0500
+
 openmediavault-wireguard (6.3.3) stable; urgency=low
 
   * Add tunnel config viewer button
