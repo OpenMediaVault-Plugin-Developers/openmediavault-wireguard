@@ -125,6 +125,12 @@ msgstr "Restringir"
 msgid "Restrict routing to VPN subnet only"
 msgstr "Restringir el enrutado a la VPN exclusivamente."
 
+msgid "localip"
+msgstr "localip"
+
+msgid "Restrict routing to local subnet only"
+msgstr "Restringir el enrutado a la local exclusivamente."
+
 msgid "Set to 0 to disable"
 msgstr "0 para deshabilitar"
 

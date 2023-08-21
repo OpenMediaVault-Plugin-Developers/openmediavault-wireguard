@@ -1,3 +1,12 @@
+openmediavault-wireguard (6.3.5) stable; urgency=low
+
+  * Add possibility to use local ip without the need to use custom config
+  * Add local ip colonn to client tab
+  * Add restrict colonn to client tab
+  * Add persistent keepalive colonn to client tab
+
+ -- Elenedeath <Elenedeath@github.com>  Tue, 21 Aug 2023 15:15:05 -0500
+
 openmediavault-wireguard (6.3.4) stable; urgency=low
 
   * Add dummy config for when database is empty

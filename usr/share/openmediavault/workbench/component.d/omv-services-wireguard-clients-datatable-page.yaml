@@ -33,6 +33,18 @@ data:
         prop: tunnelnum
         flexGrow: 1
         sortable: true
+      - name: _("Local IP")
+        prop: localip
+        flexGrow: 1
+        sortable: true
+      - name: _("Restrict")
+        prop: restrict
+        flexGrow: 1
+        sortable: true
+      - name: _("Persistent keepalive")
+        prop: persistent
+        flexGrow: 1
+        sortable: true
       - name: _("QR Code")
         prop: qrcode
         flexGrow: 3

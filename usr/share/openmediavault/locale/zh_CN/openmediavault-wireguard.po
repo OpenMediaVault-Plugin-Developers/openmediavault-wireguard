@@ -125,6 +125,12 @@ msgstr "限制"
 msgid "Restrict routing to VPN subnet only"
 msgstr "仅限 VPN 子网路由"
 
+msgid "localip"
+msgstr "当地的"
+
+msgid "Restrict routing to local subnet only"
+msgstr "仅限本地子网路由"
+
 msgid "Set to 0 to disable"
 msgstr "设置 0 以停用"
 

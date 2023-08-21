@@ -20,6 +20,7 @@
 {% for tl in config.tunnels.tunnel %}
 {% set tnum = tl.tunnelnum %}
 {% set tname = tl.tunnelname %}
+{% set tip = tl.localserver %}
 {% set scfg = '/etc/wireguard/wgnet' ~ tnum ~ '.conf' %}
 {% set iptab = tl.iptables %}
 
@@ -104,7 +105,11 @@ configure_wireguard_client_wgnet{{ cnum }}_{{ cname }}_peer:
         PublicKey = {{ tl.publickeyserver }}
         PresharedKey = {{ ct.presharedkeyclient }}
         Endpoint = {{ tl.endpoint }}:{{ tl.port }}
-        AllowedIPs = {{ "10.192." ~ tnum ~ ".0/24" if ct.restrict | to_bool else "0.0.0.0/0" }}
+    {% if ct.localip %}
+        AllowedIPs = {{"10.192." ~ tnum ~ ".0/24, " ~ tip ~ ""if ct.restrict | to_bool else "0.0.0.0/0"}}
+    {% else %}
+        AllowedIPs = {{"10.192." ~ tnum ~ ".0/24"if ct.restrict | to_bool else "0.0.0.0/0"}}
+    {% endif %}
         {% if ct.persistent > 0 %}PersistentKeepalive = {{ ct.persistent }}{% endif %}
 
 

@@ -32,6 +32,9 @@
     "restrict": {
       "type": "boolean"
     },
+    "localip": {
+      "type": "boolean"
+    },
     "persistent": {
       "type": "integer",
       "minimum": 0,
