@@ -92,6 +92,9 @@ msgstr ""
 msgid "Endpoint"
 msgstr "端點"
 
+msgid "Local Server"
+msgstr ""
+
 msgid "MTU"
 msgstr ""
 
@@ -124,6 +127,12 @@ msgstr "限制"
 
 msgid "Restrict routing to VPN subnet only"
 msgstr "限制只能選路到 VPN 子網路"
+
+msgid "localip"
+msgstr "当地的"
+
+msgid "Restrict routing to local subnet only"
+msgstr "限制只能選路到 local 子網路"
 
 msgid "Set to 0 to disable"
 msgstr "設定成 0 來停用"

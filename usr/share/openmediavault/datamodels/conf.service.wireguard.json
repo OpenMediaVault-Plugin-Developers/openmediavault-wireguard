@@ -37,6 +37,9 @@
               "endpoint": {
                 "type": "string"
               },
+              "localserver": {
+                "type": "string"
+              },
               "port": {
                 "type": "integer",
                 "minimum": 1,
@@ -98,6 +101,10 @@
                 "type": "string"
               },
               "restrict": {
+                "type": "boolean",
+                "default": false
+              },
+              "localip": {
                 "type": "boolean",
                 "default": false
               },

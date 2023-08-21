@@ -92,6 +92,9 @@ msgstr ""
 msgid "Endpoint"
 msgstr "Endpoint"
 
+msgid "Local Server"
+msgstr ""
+
 msgid "MTU"
 msgstr ""
 
@@ -124,6 +127,12 @@ msgstr "Restrict"
 
 msgid "Restrict routing to VPN subnet only"
 msgstr "Restrict routing to VPN subnet only"
+
+msgid "localip"
+msgstr ""
+
+msgid "Restrict routing to local subnet only"
+msgstr ""
 
 msgid "Set to 0 to disable"
 msgstr "Set to 0 to disable"

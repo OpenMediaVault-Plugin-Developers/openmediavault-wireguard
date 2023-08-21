@@ -54,6 +54,10 @@ data:
         name: endpoint
         label: _("Endpoint")
         value: ""
+      - type: textInput
+        name: localserver
+        label: _("Local Server")
+        value: ""
       - type: numberInput
         name: port
         label: _("Port")

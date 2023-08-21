@@ -61,6 +61,11 @@ data:
         label: _("Restrict")
         value: false
         hint: _("Restrict routing to VPN subnet only")
+      - type: checkbox
+        name: localip
+        label: _("Local IP")
+        value: false
+        hint: _("Restrict routing to local subnet only")
       - type: numberInput
         name: persistent
         label: _("Persistent keepalive")

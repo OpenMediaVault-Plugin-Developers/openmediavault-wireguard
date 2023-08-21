@@ -37,6 +37,10 @@ data:
         prop: endpoint
         flexGrow: 1
         sortable: true
+      - name: _("Local Server")
+        prop: localserver
+        flexGrow: 1
+        sortable: true
       - name: _("Port")
         prop: port
         flexGrow: 1

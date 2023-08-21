@@ -30,6 +30,9 @@
     "endpoint": {
       "type": "string"
     },
+    "localserver": {
+      "type": "string"
+    },
     "port": {
       "type": "integer",
       "minimum": 1,
