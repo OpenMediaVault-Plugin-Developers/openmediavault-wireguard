@@ -92,6 +92,9 @@ msgstr ""
 msgid "Endpoint"
 msgstr "端點"
 
+msgid "Local Server"
+msgstr ""
+
 msgid "MTU"
 msgstr ""
 

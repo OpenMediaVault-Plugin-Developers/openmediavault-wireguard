@@ -92,6 +92,9 @@ msgstr ""
 msgid "Endpoint"
 msgstr "Endpoint"
 
+msgid "Local Server"
+msgstr ""
+
 msgid "MTU"
 msgstr ""
 
