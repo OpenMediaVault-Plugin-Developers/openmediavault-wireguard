@@ -244,7 +244,7 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         }
         $object->add("numro", "boolean", $ro);
         $object->add("dns2", "string", "disable");
-        if (strlen($object->get("dns")) > 7) {
+        if (strlen($object->get("dns")) >= 7) {
             $object->set("dns2", "custom");
         } else {
             $object->set("dns", "");
