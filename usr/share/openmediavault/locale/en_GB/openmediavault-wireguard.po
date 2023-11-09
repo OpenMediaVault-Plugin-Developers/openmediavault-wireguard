@@ -28,7 +28,7 @@ msgid "Client Number"
 msgstr "Client Number"
 
 msgid "Client config file does not exist.  Please apply changes."
-msgstr ""
+msgstr "Client config file does not exist.  Please apply changes."
 
 msgid "Client number"
 msgstr "Client number"
@@ -37,7 +37,7 @@ msgid "Clients"
 msgstr "Clients"
 
 msgid "Config"
-msgstr ""
+msgstr "Config"
 
 msgid "Configure iptables"
 msgstr "Configure iptables"
@@ -49,13 +49,13 @@ msgid "Created client."
 msgstr "Created client."
 
 msgid "Created custom config."
-msgstr ""
+msgstr "Created custom config."
 
 msgid "Created tunnel."
 msgstr "Created tunnel."
 
 msgid "Custom Config"
-msgstr ""
+msgstr "Custom Config"
 
 msgid "DNS"
 msgstr "DNS"
@@ -64,12 +64,14 @@ msgid ""
 "Default networks in the plugin are created in the 10.192.x.x range. Choose a"
 " different range to avoid conflicts."
 msgstr ""
+"Default networks in the plugin are created in the 10.192.x.x range. Choose a"
+" different range to avoid conflicts."
 
 msgid "Delete"
 msgstr "Delete"
 
 msgid "Docs"
-msgstr ""
+msgstr "Docs"
 
 msgid "Edit"
 msgstr "Edit"
@@ -78,7 +80,7 @@ msgid "Edit client."
 msgstr "Edit client."
 
 msgid "Edit custom config."
-msgstr ""
+msgstr "Edit custom config."
 
 msgid "Edit tunnel."
 msgstr "Edit tunnel."
@@ -87,16 +89,13 @@ msgid "Enable"
 msgstr "Enable"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Enabled"
 
 msgid "Endpoint"
 msgstr "Endpoint"
 
-msgid "Local Server"
-msgstr ""
-
 msgid "MTU"
-msgstr ""
+msgstr "MTU"
 
 msgid "Name"
 msgstr "Name"
@@ -111,7 +110,7 @@ msgid "Please disable client and apply changes before deleting!"
 msgstr "Please disable client and apply changes before deleting!"
 
 msgid "Please disable custom config and apply changes before deleting!"
-msgstr ""
+msgstr "Please disable custom config and apply changes before deleting!"
 
 msgid "Please disable tunnel and apply changes before deleting!"
 msgstr "Please disable tunnel and apply changes before deleting!"
@@ -128,26 +127,20 @@ msgstr "Restrict"
 msgid "Restrict routing to VPN subnet only"
 msgstr "Restrict routing to VPN subnet only"
 
-msgid "localip"
-msgstr ""
-
-msgid "Restrict routing to local subnet only"
-msgstr ""
-
 msgid "Set to 0 to disable"
 msgstr "Set to 0 to disable"
 
 msgid "Set to 0 to disable. Wireguard will use 1420 when disabled."
-msgstr ""
+msgstr "Set to 0 to disable. Wireguard will use 1420 when disabled."
 
 msgid "Tunnel Config"
-msgstr ""
+msgstr "Tunnel Config"
 
 msgid "Tunnel Number"
 msgstr "Tunnel Number"
 
 msgid "Tunnel config file does not exist.  Please apply changes."
-msgstr ""
+msgstr "Tunnel config file does not exist.  Please apply changes."
 
 msgid "Tunnel number"
 msgstr "Tunnel number"
@@ -162,4 +155,4 @@ msgid "n/a"
 msgstr "n/a"
 
 msgid "omv-extras wiki"
-msgstr ""
+msgstr "omv-extras wiki"
