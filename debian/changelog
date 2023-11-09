@@ -1,3 +1,9 @@
+openmediavault-wireguard (6.3.6) stable; urgency=low
+
+  * Allow 7 digit dns ip address
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 09 Nov 2023 02:28:07 -0600
+
 openmediavault-wireguard (6.3.5) stable; urgency=low
 
   * Add possibility to use local ip without the need to use custom config
