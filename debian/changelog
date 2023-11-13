@@ -1,3 +1,9 @@
+openmediavault-wireguard (6.3.7) stable; urgency=low
+
+  * Add migration script for local server and local ip fields
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Mon, 13 Nov 2023 11:45:34 -0600
+
 openmediavault-wireguard (6.3.6) stable; urgency=low
 
   * Allow 7 digit dns ip address
