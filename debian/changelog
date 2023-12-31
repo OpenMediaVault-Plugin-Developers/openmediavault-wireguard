@@ -1,3 +1,9 @@
+openmediavault-wireguard (7.0.2) stable; urgency=low
+
+  * Fix bad substr call
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 30 Dec 2023 18:05:17 -0600
+
 openmediavault-wireguard (7.0.1) stable; urgency=low
 
   * Add migration script for local server and local ip fields
