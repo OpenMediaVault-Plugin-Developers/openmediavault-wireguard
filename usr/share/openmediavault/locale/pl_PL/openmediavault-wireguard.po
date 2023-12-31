@@ -3,6 +3,9 @@
 # This file is distributed under the same license as the openmediavault-wireguard package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Cyryl Sochacki <cyrylsochacki@gmail.com>, 2023
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,6 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-18 16:16-0500\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
+"Last-Translator: Cyryl Sochacki <cyrylsochacki@gmail.com>, 2023\n"
 "Language-Team: Polish (Poland) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/pl_PL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,144 +22,138 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 msgid "Client Config"
-msgstr ""
+msgstr "Konfiguracja klienta"
 
 msgid "Client Number"
-msgstr ""
+msgstr "Liczba klientów"
 
 msgid "Client config file does not exist.  Please apply changes."
-msgstr ""
+msgstr "Konfiguracja klienta nie istnieje. Proszę zatwierdzić zmiany."
 
 msgid "Client number"
-msgstr ""
+msgstr "Liczba klientów"
 
 msgid "Clients"
-msgstr ""
+msgstr "Klienci"
 
 msgid "Config"
-msgstr ""
+msgstr "Konfiguracja"
 
 msgid "Configure iptables"
-msgstr ""
+msgstr "Konfiguruj iptables"
 
 msgid "Create"
-msgstr ""
+msgstr "Stwórz"
 
 msgid "Created client."
-msgstr ""
+msgstr "Dodaj klienta"
 
 msgid "Created custom config."
-msgstr ""
+msgstr "Stwórz własną konfigurację."
 
 msgid "Created tunnel."
-msgstr ""
+msgstr "Stwórz tunel."
 
 msgid "Custom Config"
-msgstr ""
+msgstr "Własna konfiguracja"
 
 msgid "DNS"
-msgstr ""
+msgstr "DNS"
 
 msgid ""
 "Default networks in the plugin are created in the 10.192.x.x range. Choose a"
 " different range to avoid conflicts."
 msgstr ""
+"Domyślnie tworzone są sieci z zakresu 10.192.x.x. Wybierz inny zakres aby "
+"nie dopuścić do konfliktu."
 
 msgid "Delete"
-msgstr ""
+msgstr "Usuń"
 
 msgid "Docs"
-msgstr ""
+msgstr "Dokumentacja"
 
 msgid "Edit"
-msgstr ""
+msgstr "Edytuj"
 
 msgid "Edit client."
-msgstr ""
+msgstr "Edytuj klienta."
 
 msgid "Edit custom config."
-msgstr ""
+msgstr "Edytuj własną konfigurację."
 
 msgid "Edit tunnel."
-msgstr ""
+msgstr "Edytuj tunel."
 
 msgid "Enable"
-msgstr ""
+msgstr "Włącz"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Włączony"
 
 msgid "Endpoint"
-msgstr ""
-
-msgid "Local Server"
-msgstr ""
+msgstr "Punkt końcowy"
 
 msgid "MTU"
-msgstr ""
+msgstr "MTU"
 
 msgid "Name"
-msgstr ""
+msgstr "Nazwa"
 
 msgid "Network Adapter"
-msgstr ""
+msgstr "Karta sieciowa"
 
 msgid "Persistent keepalive"
-msgstr ""
+msgstr "Stałe utrzymanie aktywności  - keepalive"
 
 msgid "Please disable client and apply changes before deleting!"
-msgstr ""
+msgstr "Przed usunięciem wyłącz klienta i zastosuj zmiany!"
 
 msgid "Please disable custom config and apply changes before deleting!"
 msgstr ""
+"Proszę wyłączyć własną konfigurację i zatwierdzić zmiany przed usunięciem."
 
 msgid "Please disable tunnel and apply changes before deleting!"
-msgstr ""
+msgstr "Proszę wyłączyć  tunel i zatwierdzić zmiany przed usunięciem."
 
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 msgid "QR Code"
-msgstr ""
+msgstr "Kod QR"
 
 msgid "Restrict"
-msgstr ""
+msgstr "Ograniczenia"
 
 msgid "Restrict routing to VPN subnet only"
-msgstr ""
-
-msgid "localip"
-msgstr ""
-
-msgid "Restrict routing to local subnet only"
-msgstr ""
+msgstr "Ogranicz routing tylko do podsieci VPN"
 
 msgid "Set to 0 to disable"
-msgstr ""
+msgstr "Ustaw 0 dla wyłączenia"
 
 msgid "Set to 0 to disable. Wireguard will use 1420 when disabled."
-msgstr ""
+msgstr "Ustaw 0 aby wyłączyć. Wireguard użyje domyślnie 1420 kiedy wyłączone."
 
 msgid "Tunnel Config"
-msgstr ""
+msgstr "Konfiguracja tunelu"
 
 msgid "Tunnel Number"
-msgstr ""
+msgstr "Numer tunelu"
 
 msgid "Tunnel config file does not exist.  Please apply changes."
-msgstr ""
+msgstr "Konfiguracja tunelu nie istnieje. Proszę zatwierdź zmiany."
 
 msgid "Tunnel number"
-msgstr ""
+msgstr "Numer tunelu"
 
 msgid "Tunnels"
-msgstr ""
+msgstr "Tunele"
 
 msgid "Wireguard"
-msgstr ""
+msgstr "Wireguard"
 
 msgid "n/a"
-msgstr ""
+msgstr "nie dotyczy"
 
 msgid "omv-extras wiki"
-msgstr ""
+msgstr "omv-extras wiki"

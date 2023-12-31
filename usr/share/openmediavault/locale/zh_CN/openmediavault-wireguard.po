@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# songming <by@songming.me>, 2022
+# songming <by@songming.me>, 2023
 # 
 #, fuzzy
 msgid ""
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-18 16:16-0500\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
-"Last-Translator: songming <by@songming.me>, 2022\n"
+"Last-Translator: songming <by@songming.me>, 2023\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +28,7 @@ msgid "Client Number"
 msgstr "客户端号"
 
 msgid "Client config file does not exist.  Please apply changes."
-msgstr ""
+msgstr "客户端配置文件不存在，请应用更改以生效。"
 
 msgid "Client number"
 msgstr "客户端号"
@@ -37,7 +37,7 @@ msgid "Clients"
 msgstr "客户端"
 
 msgid "Config"
-msgstr ""
+msgstr "配置"
 
 msgid "Configure iptables"
 msgstr "iptables 配置"
@@ -49,13 +49,13 @@ msgid "Created client."
 msgstr "已创建客户端。"
 
 msgid "Created custom config."
-msgstr ""
+msgstr "创建用户自定义配置。"
 
 msgid "Created tunnel."
 msgstr "已创建隧道。"
 
 msgid "Custom Config"
-msgstr ""
+msgstr "用户自定义"
 
 msgid "DNS"
 msgstr "DNS"
@@ -63,13 +63,13 @@ msgstr "DNS"
 msgid ""
 "Default networks in the plugin are created in the 10.192.x.x range. Choose a"
 " different range to avoid conflicts."
-msgstr ""
+msgstr "插件中的网络设置是 10.192.x.x 范围，请选择其它范围避免冲突。"
 
 msgid "Delete"
 msgstr "删除"
 
 msgid "Docs"
-msgstr ""
+msgstr "文档"
 
 msgid "Edit"
 msgstr "编辑"
@@ -78,7 +78,7 @@ msgid "Edit client."
 msgstr "编辑客户端。"
 
 msgid "Edit custom config."
-msgstr ""
+msgstr "编辑用户自定义配置。"
 
 msgid "Edit tunnel."
 msgstr "编辑隧道。"
@@ -87,16 +87,13 @@ msgid "Enable"
 msgstr "启用"
 
 msgid "Enabled"
-msgstr ""
+msgstr "已启用"
 
 msgid "Endpoint"
 msgstr "对端"
 
-msgid "Local Server"
-msgstr ""
-
 msgid "MTU"
-msgstr ""
+msgstr "MTU"
 
 msgid "Name"
 msgstr "名称"
@@ -108,13 +105,13 @@ msgid "Persistent keepalive"
 msgstr "链接保活间隔"
 
 msgid "Please disable client and apply changes before deleting!"
-msgstr "请关闭客户端并在删除后应用变更。"
+msgstr "请停用客户端并应用变更生效后再删除！"
 
 msgid "Please disable custom config and apply changes before deleting!"
-msgstr ""
+msgstr "请停用用户自定义配置并应用生效后再删除！"
 
 msgid "Please disable tunnel and apply changes before deleting!"
-msgstr "请关闭隧道并在删除后应用变更。"
+msgstr "请关闭隧道并应用变更生效后再删除！"
 
 msgid "Port"
 msgstr "端口"
@@ -128,26 +125,20 @@ msgstr "限制"
 msgid "Restrict routing to VPN subnet only"
 msgstr "仅限 VPN 子网路由"
 
-msgid "localip"
-msgstr "当地的"
-
-msgid "Restrict routing to local subnet only"
-msgstr "仅限本地子网路由"
-
 msgid "Set to 0 to disable"
 msgstr "设置 0 以停用"
 
 msgid "Set to 0 to disable. Wireguard will use 1420 when disabled."
-msgstr ""
+msgstr "设置为 0 表示禁用，禁用时 Wireguard 将使用1420。"
 
 msgid "Tunnel Config"
-msgstr ""
+msgstr "隧道配置"
 
 msgid "Tunnel Number"
 msgstr "隧道号"
 
 msgid "Tunnel config file does not exist.  Please apply changes."
-msgstr ""
+msgstr "隧道配置文件不存在，请应用变更以生效。"
 
 msgid "Tunnel number"
 msgstr "隧道号"
@@ -162,4 +153,4 @@ msgid "n/a"
 msgstr "n/a"
 
 msgid "omv-extras wiki"
-msgstr ""
+msgstr "omv-extras wiki"
