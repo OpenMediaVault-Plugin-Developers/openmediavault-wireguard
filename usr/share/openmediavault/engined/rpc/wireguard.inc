@@ -299,7 +299,7 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             $dnsa = explode(',', $dns);
             // remove bad lines in paths
             foreach ($dnsa as $dnsk => &$dnsv) {
-                if ((strlen($dnsv) < 7) || (substr(0, 3, $dnsv) == 127)) {
+                if ((strlen($dnsv) < 7) || (substr($dnsv, 0, 3) == 127)) {
                     unset($dnsa[$dnsk]);
                 }
             }
