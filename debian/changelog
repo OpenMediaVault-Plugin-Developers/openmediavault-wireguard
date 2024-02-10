@@ -1,3 +1,10 @@
+openmediavault-wireguard (7.0.3) UNRELEASED; urgency=medium
+
+  * Create advanced settings section for tunnel and client
+  * Add field to specify additional subnets when restrict is enabled
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 10 Feb 2024 09:52:34 -0600
+
 openmediavault-wireguard (7.0.2) stable; urgency=low
 
   * Fix bad substr call
