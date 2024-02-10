@@ -308,6 +308,10 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             $params['dns'] = implode(',', $dnsu);
         }
         unset($params['dns2']);
+        // set localip to false if restrict is false
+        if ($params['restrict'] == false) {
+            $params['localip'] = false;
+        }
         // Verify that shared folder is set
         $db = \OMV\Config\Database::getInstance();
         // Prepare the configuration object.

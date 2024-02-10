@@ -46,6 +46,9 @@
         },
         "dns2": {
           "type": "string"
+        },
+        "subnets": {
+          "type": "string"
         }
       }
     }

@@ -56,16 +56,8 @@ data:
         name: clientname
         label: _("Name")
         value: ""
-      - type: checkbox
-        name: restrict
-        label: _("Restrict")
-        value: false
-        hint: _("Restrict routing to VPN subnet only")
-      - type: checkbox
-        name: localip
-        label: _("Local IP")
-        value: false
-        hint: _("Restrict routing to local subnet only")
+      - type: divider
+        title: _("Advanced")
       - type: numberInput
         name: persistent
         label: _("Persistent keepalive")
@@ -116,6 +108,33 @@ data:
                   arg0:
                     prop: dns2
                   arg1: "disable"
+      - type: checkbox
+        name: restrict
+        label: _("Restrict")
+        value: false
+        hint: _("Restrict routing to VPN subnet")
+      - type: checkbox
+        name: localip
+        label: _("Local IP")
+        value: false
+        hint: _("Restrict routing to local subnet")
+        modifiers:
+          - type: disabled
+            constraint:
+              operator: falsy
+              arg0:
+                prop: restrict
+      - type: textInput
+        name: subnets
+        label: _("Additional subnet(s)")
+        value: ""
+        modifiers:
+          - type: disabled
+            constraint:
+              operator: falsy
+              arg0:
+                prop: restrict
+        hint: _("Restrict routing to these additional subnet(s)")
     buttons:
       - template: submit
         execute:

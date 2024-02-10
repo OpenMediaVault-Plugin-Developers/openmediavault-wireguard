@@ -54,10 +54,6 @@ data:
         name: endpoint
         label: _("Endpoint")
         value: ""
-      - type: textInput
-        name: localserver
-        label: _("Local Server")
-        value: ""
       - type: numberInput
         name: port
         label: _("Port")
@@ -67,6 +63,8 @@ data:
           max: 65535
           patternType: port
           required: true
+      - type: divider
+        title: _("Advanced")
       - type: checkbox
         name: iptables
         label: _("Configure iptables")
@@ -80,6 +78,10 @@ data:
           max: 3600
           required: true
         hint: _("Set to 0 to disable")
+      - type: textInput
+        name: localserver
+        label: _("Local Server")
+        value: ""
       - type: numberInput
         name: mtu
         label: _("MTU")

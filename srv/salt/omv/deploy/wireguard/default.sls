@@ -68,9 +68,14 @@ configure_wireguard_wgnet{{ tnum }}_{{ tname }}_iptables:
 {% for ct in config.clients.client | selectattr("tunnelnum", "equalto", tnum) %}
 {% set cnum = ct.clientnum %}
 {% set cname = ct.clientname %}
+{% set cnets = '' %}
 {% set cuuid = ct.uuid %}
 {% set qr = '/var/www/openmediavault/clientqrcode_' ~ cuuid ~ '.png' %}
 {% set ccfg = '/etc/wireguard/wgnet_client' ~ cnum ~ '.conf' %}
+
+{% if ct.restrict | to_bool and ct.subnets | length > 0 %}
+{% set cnets = "," ~ ct.subnets %}
+{% endif %}
 
 remove_wireguard_conf_files{{ cnum }}:
   file.absent:
@@ -106,9 +111,9 @@ configure_wireguard_client_wgnet{{ cnum }}_{{ cname }}_peer:
         PresharedKey = {{ ct.presharedkeyclient }}
         Endpoint = {{ tl.endpoint }}:{{ tl.port }}
     {% if ct.localip %}
-        AllowedIPs = {{"10.192." ~ tnum ~ ".0/24, " ~ tip ~ ""if ct.restrict | to_bool else "0.0.0.0/0"}}
+        AllowedIPs = {{"10.192." ~ tnum ~ ".0/24, " ~ tip ~ "" ~ cnets if ct.restrict | to_bool else "0.0.0.0/0"}}
     {% else %}
-        AllowedIPs = {{"10.192." ~ tnum ~ ".0/24"if ct.restrict | to_bool else "0.0.0.0/0"}}
+        AllowedIPs = {{"10.192." ~ tnum ~ ".0/24" ~ cnets if ct.restrict | to_bool else "0.0.0.0/0"}}
     {% endif %}
         {% if ct.persistent > 0 %}PersistentKeepalive = {{ ct.persistent }}{% endif %}
 

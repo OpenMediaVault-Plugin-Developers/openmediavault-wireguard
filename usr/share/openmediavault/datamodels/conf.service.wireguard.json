@@ -124,6 +124,9 @@
               },
               "dns": {
                 "type": "string"
+              },
+              "subnets": {
+                "type": "string"
               }
             }
           }
