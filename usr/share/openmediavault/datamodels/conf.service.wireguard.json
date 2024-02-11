@@ -104,6 +104,10 @@
                 "type": "boolean",
                 "default": false
               },
+              "vpn": {
+                "type": "boolean",
+                "default": false
+              },
               "localip": {
                 "type": "boolean",
                 "default": false

@@ -33,12 +33,8 @@ data:
         prop: tunnelnum
         flexGrow: 1
         sortable: true
-      - name: _("Local IP")
-        prop: localip
-        flexGrow: 1
-        sortable: true
-      - name: _("Restrict")
-        prop: restrict
+      - name: _("Allowed IPs")
+        prop: allowedips
         flexGrow: 1
         sortable: true
       - name: _("Persistent keepalive")
@@ -49,6 +45,12 @@ data:
         prop: qrcode
         flexGrow: 3
         sortable: true
+      - name: _("Tunnel enable")
+        prop: tunnelenable
+        flexGrow: 1
+        sortable: true
+        cellTemplateName: checkIcon
+        hidden: true
     actions:
       - template: create
         execute:
@@ -85,6 +87,9 @@ data:
             - operator: truthy
               arg0:
                 prop: enable
+            - operator: truthy
+              arg0:
+                prop: tunnelenable
         execute:
           type: taskDialog
           taskDialog:

@@ -24,6 +24,9 @@
         "restrict": {
           "type": "boolean"
         },
+        "vpn": {
+          "type": "boolean"
+        },
         "localip": {
           "type": "boolean"
         },

@@ -68,14 +68,10 @@ configure_wireguard_wgnet{{ tnum }}_{{ tname }}_iptables:
 {% for ct in config.clients.client | selectattr("tunnelnum", "equalto", tnum) %}
 {% set cnum = ct.clientnum %}
 {% set cname = ct.clientname %}
-{% set cnets = '' %}
 {% set cuuid = ct.uuid %}
 {% set qr = '/var/www/openmediavault/clientqrcode_' ~ cuuid ~ '.png' %}
 {% set ccfg = '/etc/wireguard/wgnet_client' ~ cnum ~ '.conf' %}
 
-{% if ct.restrict | to_bool and ct.subnets | length > 0 %}
-{% set cnets = "," ~ ct.subnets %}
-{% endif %}
 
 remove_wireguard_conf_files{{ cnum }}:
   file.absent:
@@ -101,6 +97,27 @@ configure_wireguard_client_wgnet{{ cnum }}:
         PrivateKey = {{ ct.privatekeyclient }}
         {% if ct.dns | length > 0 and not ct.dns == "disable" %}DNS = {{ ct.dns }}{% endif %}
 
+
+{% set restrict = [] %}
+
+{% if ct.vpn | to_bool %}
+{% set _ = restrict.append("10.192." ~ tnum ~ ".0/24") %}
+{% endif %}
+
+{% if tip | length > 0 %}
+{% set _ = restrict.append(tip) %}
+{% endif %}
+
+{% if ct.subnets | length > 0 %}
+{% set _ = restrict.append(ct.subnets) %}
+{% endif %}
+
+{% if not ct.restrict | to_bool or restrict | length == 1 %}
+{% set _ = restrict.append("0.0.0.0/0") %}
+{% endif %}
+
+{% set restricts = restrict | join(',') %}
+
 configure_wireguard_client_wgnet{{ cnum }}_{{ cname }}_peer:
   file.append:
     - name: "{{ ccfg }}"
@@ -110,11 +127,7 @@ configure_wireguard_client_wgnet{{ cnum }}_{{ cname }}_peer:
         PublicKey = {{ tl.publickeyserver }}
         PresharedKey = {{ ct.presharedkeyclient }}
         Endpoint = {{ tl.endpoint }}:{{ tl.port }}
-    {% if ct.localip %}
-        AllowedIPs = {{"10.192." ~ tnum ~ ".0/24, " ~ tip ~ "" ~ cnets if ct.restrict | to_bool else "0.0.0.0/0"}}
-    {% else %}
-        AllowedIPs = {{"10.192." ~ tnum ~ ".0/24" ~ cnets if ct.restrict | to_bool else "0.0.0.0/0"}}
-    {% endif %}
+        AllowedIPs = {{ restricts }}
         {% if ct.persistent > 0 %}PersistentKeepalive = {{ ct.persistent }}{% endif %}
 
 

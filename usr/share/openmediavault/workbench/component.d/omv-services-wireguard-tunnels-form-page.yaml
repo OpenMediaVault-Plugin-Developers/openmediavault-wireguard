@@ -80,7 +80,7 @@ data:
         hint: _("Set to 0 to disable")
       - type: textInput
         name: localserver
-        label: _("Local Server")
+        label: _("Local IP")
         value: ""
       - type: numberInput
         name: mtu

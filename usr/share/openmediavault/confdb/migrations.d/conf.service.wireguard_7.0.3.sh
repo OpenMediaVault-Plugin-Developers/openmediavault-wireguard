@@ -31,6 +31,10 @@ xmlstarlet sel -t -m "${xpath}" -v "uuid" -n ${OMV_CONFIG_FILE} |
         if ! omv_config_exists "${xpath}[uuid='${uuid}']/subnets"; then
             omv_config_add_key "${xpath}[uuid='${uuid}']" "subnets" ""
         fi
+        if ! omv_config_exists "${xpath}[uuid='${uuid}']/vpn"; then
+            restrict=$(omv_config_get "${xpath}[uuid='${uuid}']/restrict")
+            omv_config_add_key "${xpath}[uuid='${uuid}']" "vpn" "${restrict}"
+        fi
     done;
 
 exit 0

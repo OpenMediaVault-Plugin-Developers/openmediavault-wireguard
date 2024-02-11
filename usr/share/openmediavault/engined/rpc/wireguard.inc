@@ -212,14 +212,33 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         // Add additional share informations.
         $objectsAssoc = [];
         foreach ($objects as $objectk => &$objectv) {
-            // Add the new property 'sharedfoldername'.
+            $tunnelnum = $objectv->get("tunnelnum");
+            $tunnel = $db->getByFilter("conf.service.wireguard.tunnel", [
+                "operator" => "stringEquals",
+                "arg0" => "tunnelnum",
+                "arg1" => $tunnelnum
+            ], 1);
+            $restricts = [];
+            if ($objectv->get("restrict")) {
+                if ($objectv->get("vpn")) $restricts[] = sprintf('10.192.%d.0/24', $objectv->get("tunnelnum"));
+                if ($objectv->get("localip")) $restricts[] = $tunnel->get("localserver");
+                if (strlen($objectv->get("subnets")) >= 7) $restricts[] = $objectv->get("subnets");
+            } else {
+                $restricts[] = "0.0.0.0/0";
+            }
+            $objectv->add("tunnelenable", "boolean", $tunnel->get("enable"));
+            $objectv->add("allowedips", "string", implode('<br />', $restricts));
             $objectv->add("qrcode", "string", gettext("n/a"));
             if ($objectv->get("enable")) {
-                $clientuuid = $objectv->get("uuid");
-                $image = sprintf("/var/www/openmediavault/clientqrcode_%s.png", $clientuuid);
-                if (file_exists($image)) {
-                    $url = sprintf("<img src='/clientqrcode_%s.png?%d'>", $clientuuid, time());
-                    $objectv->set("qrcode", $url);
+                if ($tunnel->get("enable")) {
+                    $clientuuid = $objectv->get("uuid");
+                    $image = sprintf("/var/www/openmediavault/clientqrcode_%s.png", $clientuuid);
+                    if (file_exists($image)) {
+                        $url = sprintf("<img src='/clientqrcode_%s.png?%d'>", $clientuuid, time());
+                        $objectv->set("qrcode", $url);
+                    }
+                } else {
+                    $objectv->set("qrcode", gettext("Tunnel is disabled."));
                 }
             }
             $objectsAssoc[] = $objectv->getAssoc();

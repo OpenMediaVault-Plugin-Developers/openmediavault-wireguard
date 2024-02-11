@@ -37,7 +37,7 @@ data:
         prop: endpoint
         flexGrow: 1
         sortable: true
-      - name: _("Local Server")
+      - name: _("Local IP")
         prop: localserver
         flexGrow: 1
         sortable: true

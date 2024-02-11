@@ -112,7 +112,18 @@ data:
         name: restrict
         label: _("Restrict")
         value: false
+        hint: _("Restrict routing")
+      - type: checkbox
+        name: vpn
+        label: _("VPN")
+        value: false
         hint: _("Restrict routing to VPN subnet")
+        modifiers:
+          - type: disabled
+            constraint:
+              operator: falsy
+              arg0:
+                prop: restrict
       - type: checkbox
         name: localip
         label: _("Local IP")
