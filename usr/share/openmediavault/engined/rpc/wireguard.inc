@@ -220,12 +220,22 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             ], 1);
             $restricts = [];
             if ($objectv->get("restrict")) {
-                if ($objectv->get("vpn")) $restricts[] = sprintf('10.192.%d.0/24', $objectv->get("tunnelnum"));
-                if ($objectv->get("localip")) $restricts[] = $tunnel->get("localserver");
-                if (strlen($objectv->get("subnets")) >= 7) $restricts[] = $objectv->get("subnets");
+                if ($objectv->get("vpn")) {
+                    $restricts[] = sprintf('10.192.%d.0/24', $objectv->get("tunnelnum"));
+                }
+                if ($objectv->get("localip") && strlen($tunnel->get("localserver")) >= 7) {
+                    $restricts[] = $tunnel->get("localserver");
+                }
+                if (strlen($objectv->get("subnets")) >= 7) {
+                    $restricts[] = $objectv->get("subnets");
+                }
+                if (count($restricts) == 0) {
+                    $restricts[] = "0.0.0.0/0";
+                }
             } else {
                 $restricts[] = "0.0.0.0/0";
             }
+            array_filter($restricts);
             $objectv->add("tunnelenable", "boolean", $tunnel->get("enable"));
             $objectv->add("allowedips", "string", implode('<br />', $restricts));
             $objectv->add("qrcode", "string", gettext("n/a"));
@@ -329,7 +339,9 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         unset($params['dns2']);
         // set localip to false if restrict is false
         if ($params['restrict'] == false) {
+            $params['vpn'] = false;
             $params['localip'] = false;
+            $params['subnets'] = '';
         }
         // Verify that shared folder is set
         $db = \OMV\Config\Database::getInstance();

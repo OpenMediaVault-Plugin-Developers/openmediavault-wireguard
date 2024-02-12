@@ -99,20 +99,31 @@ configure_wireguard_client_wgnet{{ cnum }}:
 
 
 {% set restrict = [] %}
+{% set rset = false %}
+
+{% if ct.restrict | to_bool %}
 
 {% if ct.vpn | to_bool %}
+{% set rset = true %}
 {% set _ = restrict.append("10.192." ~ tnum ~ ".0/24") %}
 {% endif %}
 
 {% if tip | length > 0 %}
+{% set rset = true %}
 {% set _ = restrict.append(tip) %}
 {% endif %}
 
 {% if ct.subnets | length > 0 %}
+{% set rset = true %}
 {% set _ = restrict.append(ct.subnets) %}
 {% endif %}
 
-{% if not ct.restrict | to_bool or restrict | length == 1 %}
+{% else %}
+{% set rset = true %}
+{% set _ = restrict.append("0.0.0.0/0") %}
+{% endif %}
+
+{% if not rset | to_bool %}
 {% set _ = restrict.append("0.0.0.0/0") %}
 {% endif %}
 
