@@ -108,7 +108,7 @@ configure_wireguard_client_wgnet{{ cnum }}:
 {% set _ = restrict.append("10.192." ~ tnum ~ ".0/24") %}
 {% endif %}
 
-{% if tip | length > 0 %}
+{% if ct.localip | to_bool and tip | length > 0 %}
 {% set rset = true %}
 {% set _ = restrict.append(tip) %}
 {% endif %}
