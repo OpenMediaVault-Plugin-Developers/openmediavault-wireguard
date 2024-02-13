@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-18 16:16-0500\n"
+"POT-Creation-Date: 2024-02-13 09:44-0600\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
 "Last-Translator: Brandon Han, 2023\n"
 "Language-Team: Korean (Korea) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/ko_KR/)\n"
@@ -20,6 +20,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ko_KR\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Additional subnet(s)"
+msgstr ""
+
+msgid "Advanced"
+msgstr ""
+
+msgid "Allowed IPs"
+msgstr ""
 
 msgid "Client Config"
 msgstr "클라이언트 설정"
@@ -92,6 +101,12 @@ msgstr ""
 msgid "Endpoint"
 msgstr ""
 
+msgid "Local IP"
+msgstr ""
+
+msgid "Local Server"
+msgstr ""
+
 msgid "MTU"
 msgstr ""
 
@@ -122,7 +137,22 @@ msgstr "QR 코드"
 msgid "Restrict"
 msgstr ""
 
+msgid "Restrict routing"
+msgstr ""
+
+msgid "Restrict routing to VPN subnet"
+msgstr ""
+
 msgid "Restrict routing to VPN subnet only"
+msgstr ""
+
+msgid "Restrict routing to local subnet"
+msgstr ""
+
+msgid "Restrict routing to local subnet only"
+msgstr ""
+
+msgid "Restrict routing to these additional subnet(s)"
 msgstr ""
 
 msgid "Set to 0 to disable"
@@ -140,14 +170,26 @@ msgstr ""
 msgid "Tunnel config file does not exist.  Please apply changes."
 msgstr ""
 
+msgid "Tunnel enable"
+msgstr ""
+
+msgid "Tunnel is disabled."
+msgstr ""
+
 msgid "Tunnel number"
 msgstr ""
 
 msgid "Tunnels"
 msgstr ""
 
+msgid "VPN"
+msgstr ""
+
 msgid "Wireguard"
 msgstr "Wireguard"
+
+msgid "localip"
+msgstr ""
 
 msgid "n/a"
 msgstr ""

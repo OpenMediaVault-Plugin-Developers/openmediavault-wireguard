@@ -11,15 +11,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-18 16:16-0500\n"
+"POT-Creation-Date: 2024-02-13 09:44-0600\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
 "Last-Translator: Raul Fernandez Garcia <raulfg3@gmail.com>, 2023\n"
-"Language-Team: Spanish (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/es/)\n"
+"Language-Team: Spanish (Spain) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/es_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
+"Language: es_ES\n"
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+msgid "Additional subnet(s)"
+msgstr ""
+
+msgid "Advanced"
+msgstr ""
+
+msgid "Allowed IPs"
+msgstr ""
 
 msgid "Client Config"
 msgstr "Configuración cliente"
@@ -96,6 +105,12 @@ msgstr "Habilitado"
 msgid "Endpoint"
 msgstr "Endpoint"
 
+msgid "Local IP"
+msgstr ""
+
+msgid "Local Server"
+msgstr ""
+
 msgid "MTU"
 msgstr "MTU"
 
@@ -128,8 +143,23 @@ msgstr "Código QR"
 msgid "Restrict"
 msgstr "Restringir"
 
+msgid "Restrict routing"
+msgstr ""
+
+msgid "Restrict routing to VPN subnet"
+msgstr ""
+
 msgid "Restrict routing to VPN subnet only"
 msgstr "Restringir el enrutado a la VPN exclusivamente."
+
+msgid "Restrict routing to local subnet"
+msgstr ""
+
+msgid "Restrict routing to local subnet only"
+msgstr ""
+
+msgid "Restrict routing to these additional subnet(s)"
+msgstr ""
 
 msgid "Set to 0 to disable"
 msgstr "0 para deshabilitar"
@@ -148,14 +178,26 @@ msgstr "Número de túnel"
 msgid "Tunnel config file does not exist.  Please apply changes."
 msgstr "No existe configuración de túnel. Por favor aplique los cambios."
 
+msgid "Tunnel enable"
+msgstr ""
+
+msgid "Tunnel is disabled."
+msgstr ""
+
 msgid "Tunnel number"
 msgstr "número de túnel"
 
 msgid "Tunnels"
 msgstr "Túneles"
 
+msgid "VPN"
+msgstr ""
+
 msgid "Wireguard"
 msgstr "Wireguard"
+
+msgid "localip"
+msgstr ""
 
 msgid "n/a"
 msgstr "n/d"

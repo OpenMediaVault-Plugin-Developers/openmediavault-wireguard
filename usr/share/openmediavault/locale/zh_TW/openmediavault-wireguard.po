@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-18 16:16-0500\n"
+"POT-Creation-Date: 2024-02-13 09:44-0600\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
 "Last-Translator: kochin <kochinc@outlook.com>, 2023\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_TW/)\n"
@@ -20,6 +20,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Additional subnet(s)"
+msgstr ""
+
+msgid "Advanced"
+msgstr ""
+
+msgid "Allowed IPs"
+msgstr ""
 
 msgid "Client Config"
 msgstr "客戶端設置"
@@ -92,6 +101,12 @@ msgstr "已啟用"
 msgid "Endpoint"
 msgstr "端點"
 
+msgid "Local IP"
+msgstr ""
+
+msgid "Local Server"
+msgstr ""
+
 msgid "MTU"
 msgstr "MTU"
 
@@ -122,8 +137,23 @@ msgstr "QR 碼"
 msgid "Restrict"
 msgstr "限制"
 
+msgid "Restrict routing"
+msgstr ""
+
+msgid "Restrict routing to VPN subnet"
+msgstr ""
+
 msgid "Restrict routing to VPN subnet only"
 msgstr "限制只能選路到 VPN 子網路"
+
+msgid "Restrict routing to local subnet"
+msgstr ""
+
+msgid "Restrict routing to local subnet only"
+msgstr ""
+
+msgid "Restrict routing to these additional subnet(s)"
+msgstr ""
 
 msgid "Set to 0 to disable"
 msgstr "設定成 0 來停用"
@@ -140,14 +170,26 @@ msgstr "隧道號碼"
 msgid "Tunnel config file does not exist.  Please apply changes."
 msgstr "穿隧設置檔案不存在。請套用變更。"
 
+msgid "Tunnel enable"
+msgstr ""
+
+msgid "Tunnel is disabled."
+msgstr ""
+
 msgid "Tunnel number"
 msgstr "隧道號碼"
 
 msgid "Tunnels"
 msgstr "隧道"
 
+msgid "VPN"
+msgstr ""
+
 msgid "Wireguard"
 msgstr "Wireguard"
+
+msgid "localip"
+msgstr ""
 
 msgid "n/a"
 msgstr "n/a"
