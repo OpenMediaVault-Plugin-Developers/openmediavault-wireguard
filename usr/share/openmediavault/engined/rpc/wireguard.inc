@@ -421,13 +421,29 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         foreach ($resolv as $line) {
             if (substr(trim($line), 0,10) == "nameserver") {
                 $ip = trim(str_replace("nameserver", "", $line));
-                $dns[] = [ 'dns' => $ip ];
-                $ips[] = $ip;
+                if (filter_var($ip, FILTER_VALIDATE_IP)) {
+                    $ips[] = $ip;
+		}
+            }
+        }
+        $output = [];
+        $cmdArgs = [];
+        $cmdArgs[] = "resolvectl";
+        $cmdArgs[] = "status";
+        $cmdArgs[] = "| grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b'";
+        $cmd = new \OMV\System\Process($cmdArgs);
+        $cmd->execute($output);
+        foreach ($output as $record) {
+            if (filter_var($record, FILTER_VALIDATE_IP)) {
+                $ips[] = $record;
             }
         }
         $ipsu = array_unique($ips);
         if (count($ipsu) > 1) {
             asort($ipsu);
+	    foreach ($ipsu as $ip) {
+                $dns[] = [ 'dns' => $ip ];
+            }
             $dns[] = [ 'dns' => implode(",", $ipsu) ];
         }
         return ($dns);
