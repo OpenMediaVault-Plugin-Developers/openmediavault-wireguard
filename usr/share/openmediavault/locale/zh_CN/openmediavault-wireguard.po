@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# songming <by@songming.me>, 2023
+# songming <by@songming.me>, 2024
 # 
 #, fuzzy
 msgid ""
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-13 09:44-0600\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
-"Last-Translator: songming <by@songming.me>, 2023\n"
+"Last-Translator: songming <by@songming.me>, 2024\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,13 +22,13 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Additional subnet(s)"
-msgstr ""
+msgstr "其它子网"
 
 msgid "Advanced"
-msgstr ""
+msgstr "高级"
 
 msgid "Allowed IPs"
-msgstr ""
+msgstr "允许的 IP"
 
 msgid "Client Config"
 msgstr "客户端配置"
@@ -102,10 +102,10 @@ msgid "Endpoint"
 msgstr "对端"
 
 msgid "Local IP"
-msgstr ""
+msgstr "本地 IP"
 
 msgid "Local Server"
-msgstr ""
+msgstr "本地服务器"
 
 msgid "MTU"
 msgstr "MTU"
@@ -138,22 +138,22 @@ msgid "Restrict"
 msgstr "限制"
 
 msgid "Restrict routing"
-msgstr ""
+msgstr "限制路由"
 
 msgid "Restrict routing to VPN subnet"
-msgstr ""
+msgstr "限制路由到 VPN 的子网"
 
 msgid "Restrict routing to VPN subnet only"
 msgstr "仅限 VPN 子网路由"
 
 msgid "Restrict routing to local subnet"
-msgstr ""
+msgstr "限制路由到本地的子网"
 
 msgid "Restrict routing to local subnet only"
-msgstr ""
+msgstr "仅限路由到本地的子网"
 
 msgid "Restrict routing to these additional subnet(s)"
-msgstr ""
+msgstr "限制路由到其它子网"
 
 msgid "Set to 0 to disable"
 msgstr "设置 0 以停用"
@@ -171,10 +171,10 @@ msgid "Tunnel config file does not exist.  Please apply changes."
 msgstr "隧道配置文件不存在，请应用变更以生效。"
 
 msgid "Tunnel enable"
-msgstr ""
+msgstr "启用隧道"
 
 msgid "Tunnel is disabled."
-msgstr ""
+msgstr "隧道关闭"
 
 msgid "Tunnel number"
 msgstr "隧道号"
@@ -183,13 +183,13 @@ msgid "Tunnels"
 msgstr "隧道"
 
 msgid "VPN"
-msgstr ""
+msgstr "VPN"
 
 msgid "Wireguard"
 msgstr "Wireguard"
 
 msgid "localip"
-msgstr ""
+msgstr "本地ip"
 
 msgid "n/a"
 msgstr "n/a"
