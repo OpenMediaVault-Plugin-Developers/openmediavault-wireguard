@@ -37,6 +37,8 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod("setClient");
         $this->registerMethod("deleteClient");
         $this->registerMethod("getClientConfig");
+        $this->registerMethod("downloadClientConfig");
+        $this->registerMethod("downloadQrCode");
         $this->registerMethod("enumerateDns");
 
         $this->registerMethod("getCustomList");
@@ -238,19 +240,6 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             array_filter($restricts);
             $objectv->add("tunnelenable", "boolean", $tunnel->get("enable"));
             $objectv->add("allowedips", "string", implode('<br />', $restricts));
-            $objectv->add("qrcode", "string", gettext("n/a"));
-            if ($objectv->get("enable")) {
-                if ($tunnel->get("enable")) {
-                    $clientuuid = $objectv->get("uuid");
-                    $image = sprintf("/var/www/openmediavault/clientqrcode_%s.png", $clientuuid);
-                    if (file_exists($image)) {
-                        $url = sprintf("<img src='/clientqrcode_%s.png?%d'>", $clientuuid, time());
-                        $objectv->set("qrcode", $url);
-                    }
-                } else {
-                    $objectv->set("qrcode", gettext("Tunnel is disabled."));
-                }
-            }
             $objectsAssoc[] = $objectv->getAssoc();
         }
         // Filter the result.
@@ -387,6 +376,8 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
     {
         // Validate the RPC caller context.
         $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, "rpc.common.objectuuid");
         $db = \OMV\Config\Database::getInstance();
         $object = $db->get("conf.service.wireguard.client", $params["uuid"]);
         // Create the background process.
@@ -406,7 +397,80 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
                 return $output;
             }
         );
-	}
+    }
+    public function downloadClientConfig($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, "rpc.common.objectuuid");
+        // get client info
+        $db = \OMV\Config\Database::getInstance();
+        $object = $db->get("conf.service.wireguard.client", $params["uuid"]);
+        $clientnum = $object->get("clientnum");
+        $conf = sprintf("/etc/wireguard/wgnet_client%d.conf", $clientnum);
+        if (!file_exists($conf)) {
+            $msg = gettext("Client config file does not exist.  Please apply changes.");
+            throw new \OMV\Exception($msg);
+        }
+        // create temp config file
+        $pfx = sprintf('wireguard_client%d_conf_', $clientnum);
+        $cc = tempnam(sys_get_temp_dir(), $pfx) . '.conf';
+        copy($conf, $cc);
+        // adjust permissions on temp file
+        chown($cc, $GLOBALS['OMV_WEBGUI_FILE_OWNERGROUP_NAME']);
+        chgrp($cc, $GLOBALS['OMV_WEBGUI_FILE_OWNERGROUP_NAME']);
+        chmod($cc, 0600);
+        // Return values required by generic download RPC implementation.
+        return [
+            'filename' => basename($cc),
+            'filepath' => $cc,
+            'contenttype' => 'text/plain',
+            'unlink' => true
+        ];
+    }
+
+    public function downloadQrCode($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, "rpc.common.objectuuid");
+        // get client info
+        $db = \OMV\Config\Database::getInstance();
+        $object = $db->get("conf.service.wireguard.client", $params["uuid"]);
+        $clientnum = $object->get("clientnum");
+        $conf = sprintf("/etc/wireguard/wgnet_client%d.conf", $clientnum);
+        // create QR code image
+        $pfx = sprintf('wireguard_client%d_qr_', $clientnum);
+        $qr = tempnam(sys_get_temp_dir(), $pfx);
+        if (file_exists($conf)) {
+            $cmdArgs = [];
+            $cmdArgs[] = 'qrencode';
+            $cmdArgs[] = '--type=png';
+            $cmdArgs[] = sprintf('--output=%s', $qr);
+            $cmdArgs[] = sprintf('--read-from=%s', $conf);
+            $cmd = new \OMV\System\Process($cmdArgs);
+            $cmdLine = $cmd->getCommandLine();
+            if (0 !== $this->exec($cmdLine, $output, $bgOutputFilename)) {
+                throw new \OMV\ExecException($cmdLine, $output);
+            }
+        } else {
+            $msg = gettext("Client config file does not exist.  Please apply changes.");
+            throw new \OMV\Exception($msg);
+        }
+        // adjust permissions on temp file
+        chown($qr, $GLOBALS['OMV_WEBGUI_FILE_OWNERGROUP_NAME']);
+        chgrp($qr, $GLOBALS['OMV_WEBGUI_FILE_OWNERGROUP_NAME']);
+        chmod($qr, 0600);
+        // Return values required by generic download RPC implementation.
+        return [
+            'filename' => basename($qr),
+            'filepath' => $qr,
+            'contenttype' => 'image/png',
+            'unlink' => true
+        ];
+    }
 
     public function enumerateDns($params, $context)
     {

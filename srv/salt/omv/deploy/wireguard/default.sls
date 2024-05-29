@@ -41,6 +41,7 @@ configure_wireguard_wgnet{{ tnum }}_{{ tname }}_perms:
     - user: root
     - group: root
     - mode: "0644"
+    - replace: False
 
 configure_wireguard_wgnet{{ tnum }}_{{ tname }}:
   file.append:
@@ -87,6 +88,7 @@ configure_wireguard_client_wgnet{{ cnum }}_perms:
     - user: root
     - group: root
     - mode: "0644"
+    - replace: False
 
 configure_wireguard_client_wgnet{{ cnum }}:
   file.append:
@@ -141,12 +143,6 @@ configure_wireguard_client_wgnet{{ cnum }}_{{ cname }}_peer:
         AllowedIPs = {{ restricts }}
         {% if ct.persistent > 0 %}PersistentKeepalive = {{ ct.persistent }}{% endif %}
 
-
-create_wireguard_qr_code_wgnet{{ cnum }}:
-  cmd.run:
-    - name: "qrencode --type=png --output={{ qr }} --read-from={{ ccfg }}"
-    - onchanges:
-      - file: "{{ ccfg }}"
 
 configure_wireguard_wgnet{{ tnum }}_{{ cname }}_peer:
   file.append:
