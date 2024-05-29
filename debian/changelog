@@ -1,3 +1,11 @@
+openmediavault-wireguard (7.0.5) stable; urgency=low
+
+  * Allow downloading QR code png image
+  * Allow downloading client config text file
+  * Remove QR code column on client datatable
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 29 May 2024 15:31:26 -0500
+
 openmediavault-wireguard (7.0.4) stable; urgency=low
 
   * Enumerate additional system dns servers in client dns server
