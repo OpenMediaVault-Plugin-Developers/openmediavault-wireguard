@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-13 09:44-0600\n"
+"POT-Creation-Date: 2024-05-29 13:20-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,6 +72,12 @@ msgid "Delete"
 msgstr ""
 
 msgid "Docs"
+msgstr ""
+
+msgid "Download QR code"
+msgstr ""
+
+msgid "Download client config"
 msgstr ""
 
 msgid "Edit"

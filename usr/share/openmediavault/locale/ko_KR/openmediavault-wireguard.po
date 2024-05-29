@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-13 09:44-0600\n"
+"POT-Creation-Date: 2024-05-29 13:20-0500\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
 "Last-Translator: Brandon Han, 2023\n"
 "Language-Team: Korean (Korea) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/ko_KR/)\n"
@@ -78,6 +78,12 @@ msgid "Delete"
 msgstr "제거"
 
 msgid "Docs"
+msgstr ""
+
+msgid "Download QR code"
+msgstr ""
+
+msgid "Download client config"
 msgstr ""
 
 msgid "Edit"
