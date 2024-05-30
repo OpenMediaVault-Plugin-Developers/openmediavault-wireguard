@@ -50,6 +50,8 @@ data:
             service: Network
             get:
               method: enumerateDevices
+        validators:
+          required: true
       - type: textInput
         name: endpoint
         label: _("Endpoint")
