@@ -11,6 +11,7 @@ Package: openmediavault-wireguard
 Architecture: all
 Depends: qrencode,
          wireguard,
+         php-zip,
          openmediavault (>= 7.2),
          ${misc:Depends}
 Description: openmediavault WireGuard plugin
