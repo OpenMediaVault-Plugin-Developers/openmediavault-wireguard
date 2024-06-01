@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-29 13:20-0500\n"
+"POT-Creation-Date: 2024-06-01 12:18-0500\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
 "Last-Translator: songming <by@songming.me>, 2024\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_CN/)\n"
@@ -27,14 +27,29 @@ msgstr "其它子网"
 msgid "Advanced"
 msgstr "高级"
 
+msgid "All QR codes"
+msgstr ""
+
+msgid "All client configs"
+msgstr ""
+
+msgid "All tunnel configs"
+msgstr ""
+
 msgid "Allowed IPs"
 msgstr "允许的 IP"
+
+msgid "Cannot open zip file."
+msgstr ""
 
 msgid "Client Config"
 msgstr "客户端配置"
 
 msgid "Client Number"
 msgstr "客户端号"
+
+msgid "Client config"
+msgstr ""
 
 msgid "Client config file does not exist.  Please apply changes."
 msgstr "客户端配置文件不存在，请应用更改以生效。"
@@ -80,6 +95,9 @@ msgstr "删除"
 msgid "Docs"
 msgstr "文档"
 
+msgid "Download"
+msgstr ""
+
 msgid "Download QR code"
 msgstr ""
 
@@ -106,6 +124,12 @@ msgstr "已启用"
 
 msgid "Endpoint"
 msgstr "对端"
+
+msgid "Generate QR Codes"
+msgstr ""
+
+msgid "Generating QR codes ..."
+msgstr ""
 
 msgid "Local IP"
 msgstr "本地 IP"
@@ -140,6 +164,12 @@ msgstr "端口"
 msgid "QR Code"
 msgstr "二维码"
 
+msgid "QR code"
+msgstr ""
+
+msgid "QR codes have been created."
+msgstr ""
+
 msgid "Restrict"
 msgstr "限制"
 
@@ -172,6 +202,9 @@ msgstr "隧道配置"
 
 msgid "Tunnel Number"
 msgstr "隧道号"
+
+msgid "Tunnel config"
+msgstr ""
 
 msgid "Tunnel config file does not exist.  Please apply changes."
 msgstr "隧道配置文件不存在，请应用变更以生效。"

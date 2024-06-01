@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-29 13:20-0500\n"
+"POT-Creation-Date: 2024-06-01 12:18-0500\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
 "Last-Translator: Cyryl Sochacki <cyrylsochacki@gmail.com>, 2023\n"
 "Language-Team: Polish (Poland) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/pl_PL/)\n"
@@ -27,7 +27,19 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
+msgid "All QR codes"
+msgstr ""
+
+msgid "All client configs"
+msgstr ""
+
+msgid "All tunnel configs"
+msgstr ""
+
 msgid "Allowed IPs"
+msgstr ""
+
+msgid "Cannot open zip file."
 msgstr ""
 
 msgid "Client Config"
@@ -35,6 +47,9 @@ msgstr "Konfiguracja klienta"
 
 msgid "Client Number"
 msgstr "Liczba klientów"
+
+msgid "Client config"
+msgstr ""
 
 msgid "Client config file does not exist.  Please apply changes."
 msgstr "Konfiguracja klienta nie istnieje. Proszę zatwierdzić zmiany."
@@ -82,6 +97,9 @@ msgstr "Usuń"
 msgid "Docs"
 msgstr "Dokumentacja"
 
+msgid "Download"
+msgstr ""
+
 msgid "Download QR code"
 msgstr ""
 
@@ -108,6 +126,12 @@ msgstr "Włączony"
 
 msgid "Endpoint"
 msgstr "Punkt końcowy"
+
+msgid "Generate QR Codes"
+msgstr ""
+
+msgid "Generating QR codes ..."
+msgstr ""
 
 msgid "Local IP"
 msgstr ""
@@ -143,6 +167,12 @@ msgstr "Port"
 msgid "QR Code"
 msgstr "Kod QR"
 
+msgid "QR code"
+msgstr ""
+
+msgid "QR codes have been created."
+msgstr ""
+
 msgid "Restrict"
 msgstr "Ograniczenia"
 
@@ -175,6 +205,9 @@ msgstr "Konfiguracja tunelu"
 
 msgid "Tunnel Number"
 msgstr "Numer tunelu"
+
+msgid "Tunnel config"
+msgstr ""
 
 msgid "Tunnel config file does not exist.  Please apply changes."
 msgstr "Konfiguracja tunelu nie istnieje. Proszę zatwierdź zmiany."

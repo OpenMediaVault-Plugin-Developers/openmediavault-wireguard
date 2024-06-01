@@ -4,30 +4,42 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Raul Fernandez Garcia <raulfg3@gmail.com>, 2023
+# Raul Fernandez Garcia <raulfg3@gmail.com>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-29 13:20-0500\n"
+"POT-Creation-Date: 2024-06-01 12:18-0500\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
-"Last-Translator: Raul Fernandez Garcia <raulfg3@gmail.com>, 2023\n"
-"Language-Team: Spanish (Spain) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/es_ES/)\n"
+"Last-Translator: Raul Fernandez Garcia <raulfg3@gmail.com>, 2024\n"
+"Language-Team: Spanish (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es_ES\n"
+"Language: es\n"
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "Additional subnet(s)"
-msgstr ""
+msgstr "SubRed(es) adicionales"
 
 msgid "Advanced"
+msgstr "Avanzado"
+
+msgid "All QR codes"
+msgstr ""
+
+msgid "All client configs"
+msgstr ""
+
+msgid "All tunnel configs"
 msgstr ""
 
 msgid "Allowed IPs"
+msgstr "IPs Permitidas"
+
+msgid "Cannot open zip file."
 msgstr ""
 
 msgid "Client Config"
@@ -35,6 +47,9 @@ msgstr "Configuración cliente"
 
 msgid "Client Number"
 msgstr "Número cliente"
+
+msgid "Client config"
+msgstr ""
 
 msgid "Client config file does not exist.  Please apply changes."
 msgstr ""
@@ -84,6 +99,9 @@ msgstr "Borrar"
 msgid "Docs"
 msgstr "Documentación"
 
+msgid "Download"
+msgstr ""
+
 msgid "Download QR code"
 msgstr ""
 
@@ -111,11 +129,17 @@ msgstr "Habilitado"
 msgid "Endpoint"
 msgstr "Endpoint"
 
-msgid "Local IP"
+msgid "Generate QR Codes"
 msgstr ""
 
-msgid "Local Server"
+msgid "Generating QR codes ..."
 msgstr ""
+
+msgid "Local IP"
+msgstr "IP Local"
+
+msgid "Local Server"
+msgstr "Servidor Local"
 
 msgid "MTU"
 msgstr "MTU"
@@ -146,26 +170,32 @@ msgstr "Puerto"
 msgid "QR Code"
 msgstr "Código QR"
 
+msgid "QR code"
+msgstr ""
+
+msgid "QR codes have been created."
+msgstr ""
+
 msgid "Restrict"
 msgstr "Restringir"
 
 msgid "Restrict routing"
-msgstr ""
+msgstr "Ruta restringida"
 
 msgid "Restrict routing to VPN subnet"
-msgstr ""
+msgstr "Restringir la ruta a una subred VPN"
 
 msgid "Restrict routing to VPN subnet only"
 msgstr "Restringir el enrutado a la VPN exclusivamente."
 
 msgid "Restrict routing to local subnet"
-msgstr ""
+msgstr "Restringir ruta a una subred local"
 
 msgid "Restrict routing to local subnet only"
-msgstr ""
+msgstr "Restringir ruta Solo a la subred local"
 
 msgid "Restrict routing to these additional subnet(s)"
-msgstr ""
+msgstr "Restringir rutas a estas subred(es) adicionales"
 
 msgid "Set to 0 to disable"
 msgstr "0 para deshabilitar"
@@ -181,14 +211,17 @@ msgstr "Configuración de túnel"
 msgid "Tunnel Number"
 msgstr "Número de túnel"
 
+msgid "Tunnel config"
+msgstr ""
+
 msgid "Tunnel config file does not exist.  Please apply changes."
 msgstr "No existe configuración de túnel. Por favor aplique los cambios."
 
 msgid "Tunnel enable"
-msgstr ""
+msgstr "Habilitar túnel"
 
 msgid "Tunnel is disabled."
-msgstr ""
+msgstr "Túnel deshabilitado."
 
 msgid "Tunnel number"
 msgstr "número de túnel"
@@ -197,13 +230,13 @@ msgid "Tunnels"
 msgstr "Túneles"
 
 msgid "VPN"
-msgstr ""
+msgstr "VPN"
 
 msgid "Wireguard"
 msgstr "Wireguard"
 
 msgid "localip"
-msgstr ""
+msgstr "IpLocal"
 
 msgid "n/a"
 msgstr "n/d"
