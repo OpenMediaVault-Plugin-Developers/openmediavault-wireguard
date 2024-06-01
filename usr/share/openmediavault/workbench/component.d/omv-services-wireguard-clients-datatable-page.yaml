@@ -145,6 +145,8 @@ data:
           request:
             service: Wireguard
             method: generateQrCodes
+            progressMessage: _("Generating QR codes ...")
+            successNotification: _("QR codes have been created.")
       - type: menu
         icon: mdi:link
         tooltip: _("Docs")
