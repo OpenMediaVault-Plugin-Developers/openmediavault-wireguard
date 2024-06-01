@@ -39,6 +39,7 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod("getClientConfig");
         $this->registerMethod("downloadClientConfig");
         $this->registerMethod("downloadQrCode");
+        $this->registerMethod("generateQrCodes");
         $this->registerMethod("enumerateDns");
 
         $this->registerMethod("getCustomList");
@@ -470,6 +471,48 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             'contenttype' => 'image/png',
             'unlink' => true
         ];
+    }
+
+    public function generateQrCodes($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Get configuration data.
+        $db = \OMV\Config\Database::getInstance();
+        $objects = $db->get('conf.service.wireguard.client');
+        $qr = 'data:image/png;base64,';
+        // 1x1 transparent base64 png
+        $tiny = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAgEBAYXMlpUAAAAASUVORK5CYII=';
+        // Add additional share informations.
+        $objectsAssoc = [];
+        foreach ($objects as $objectk => &$objectv) {
+            $clientnum = $objectv->get('clientnum');
+            $conf = sprintf('/etc/wireguard/wgnet_client%d.conf', $clientnum);
+            if (file_exists($conf)) {
+                $output = [];
+                // generate qr code png and base64 encode
+                $cmdArgs = [];
+                $cmdArgs[] = 'qrencode';
+                $cmdArgs[] = '--type=png';
+                $cmdArgs[] = '--output=-';
+                $cmdArgs[] = sprintf('--read-from=%s', $conf);
+                $cmdArgs[] = ' | base64';
+                $cmd = new \OMV\System\Process($cmdArgs);
+                $cmd->execute($output);
+                $img = trim(implode(PHP_EOL, $output));
+            } else {
+                $img = $tiny;
+            }
+            // put base64 string in database
+            $client = $db->get('conf.service.wireguard.client', $objectv->get('uuid'));
+            $client->set('qr', $qr . $img);
+            $db->set($client);
+        }
+        // Apply changes immmediately
+        \OMV\Rpc\Rpc::call('Config', 'applyChanges', [
+            'modules' => [ 'wireguard' ],
+            'force' => TRUE
+        ], $context);
     }
 
     public function enumerateDns($params, $context)

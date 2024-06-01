@@ -100,6 +100,9 @@
               "clientname": {
                 "type": "string"
               },
+              "qr": {
+                "type": "string"
+              },
               "restrict": {
                 "type": "boolean",
                 "default": false

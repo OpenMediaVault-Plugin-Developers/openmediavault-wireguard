@@ -47,6 +47,10 @@ data:
         sortable: true
         cellTemplateName: checkIcon
         hidden: true
+      - name: _("QR Code")
+        prop: qr
+        flexGrow: 1
+        cellTemplateName: image
     actions:
       - template: create
         execute:
@@ -121,6 +125,14 @@ data:
         execute:
           type: url
           url: '/download?service=Wireguard&method=downloadQrCode&params={"uuid":"{{ _selected[0].uuid }}"}'
+      - type: iconButton
+        icon: mdi:cog-outline
+        tooltip: _("Generate QR Codes")
+        execute:
+          type: request
+          request:
+            service: Wireguard
+            method: generateQrCodes
       - type: menu
         icon: mdi:link
         tooltip: _("Docs")

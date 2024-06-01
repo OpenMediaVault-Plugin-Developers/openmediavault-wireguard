@@ -29,6 +29,10 @@
     "clientname": {
       "type": "string"
     },
+    "qr": {
+      "type": "string",
+      "default": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAgEBAYXMlpUAAAAASUVORK5CYII="
+    },
     "restrict": {
       "type": "boolean"
     },
