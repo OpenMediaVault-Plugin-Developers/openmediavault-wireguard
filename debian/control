@@ -11,7 +11,7 @@ Package: openmediavault-wireguard
 Architecture: all
 Depends: qrencode,
          wireguard,
-         openmediavault (>= 7),
+         openmediavault (>= 7.2),
          ${misc:Depends}
 Description: openmediavault WireGuard plugin
  WireGuard is an extremely simple yet fast and modern VPN
