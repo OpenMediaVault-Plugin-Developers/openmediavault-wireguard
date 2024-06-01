@@ -107,24 +107,36 @@ data:
               buttons:
                 stop:
                   hidden: true
-      - type: iconButton
-        icon: mdi:file-download-outline
-        tooltip: _("Download client config")
-        enabledConstraints:
-          minSelected: 1
-          maxSelected: 1
-        execute:
-          type: url
-          url: '/download?service=Wireguard&method=downloadClientConfig&params={"uuid":"{{ _selected[0].uuid }}"}'
-      - type: iconButton
-        icon: mdi:download-box-outline
-        tooltip: _("Download QR code")
-        enabledConstraints:
-          minSelected: 1
-          maxSelected: 1
-        execute:
-          type: url
-          url: '/download?service=Wireguard&method=downloadQrCode&params={"uuid":"{{ _selected[0].uuid }}"}'
+      - type: menu
+        icon: mdi:download
+        tooltip: _("Download")
+        actions:
+          - text: _("Client config")
+            icon: mdi:file-download-outline
+            enabledConstraints:
+              minSelected: 1
+              maxSelected: 1
+            execute:
+              type: url
+              url: '/download?service=Wireguard&method=downloadClientConfig&params={"uuid":"{{ _selected[0].uuid }}"}'
+          - text: _("All client configs")
+            icon: mdi:download-multiple
+            execute:
+              type: url
+              url: '/download?service=Wireguard&method=downloadAllClientConfigs&params={}'
+          - text: _("QR code")
+            icon: mdi:download-box-outline
+            enabledConstraints:
+              minSelected: 1
+              maxSelected: 1
+            execute:
+              type: url
+              url: '/download?service=Wireguard&method=downloadQrCode&params={"uuid":"{{ _selected[0].uuid }}"}'
+          - text: _("All QR codes")
+            icon: mdi:download-multiple
+            execute:
+              type: url
+              url: '/download?service=Wireguard&method=downloadAllQrCodes&params={}'
       - type: iconButton
         icon: mdi:cog-outline
         tooltip: _("Generate QR Codes")

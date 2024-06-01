@@ -110,6 +110,23 @@ data:
                 stop:
                   hidden: true
       - type: menu
+        icon: mdi:download
+        tooltip: _("Download")
+        actions:
+          - text: _("Tunnel config")
+            icon: mdi:file-download-outline
+            enabledConstraints:
+              minSelected: 1
+              maxSelected: 1
+            execute:
+              type: url
+              url: '/download?service=Wireguard&method=downloadTunnelConfig&params={"uuid":"{{ _selected[0].uuid }}"}'
+          - text: _("All tunnel configs")
+            icon: mdi:download-multiple
+            execute:
+              type: url
+              url: '/download?service=Wireguard&method=downloadAllTunnelConfigs&params={}'
+      - type: menu
         icon: mdi:link
         tooltip: _("Docs")
         actions:

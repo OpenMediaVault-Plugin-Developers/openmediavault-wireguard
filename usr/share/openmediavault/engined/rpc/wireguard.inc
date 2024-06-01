@@ -30,6 +30,8 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod("setTunnel");
         $this->registerMethod("deleteTunnel");
         $this->registerMethod("getTunnelConfig");
+        $this->registerMethod("downloadTunnelConfig");
+        $this->registerMethod("downloadAllTunnelConfigs");
         $this->registerMethod("enumerateTunnels");
 
         $this->registerMethod("getClientList");
@@ -39,6 +41,8 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod("getClientConfig");
         $this->registerMethod("downloadClientConfig");
         $this->registerMethod("downloadQrCode");
+        $this->registerMethod("downloadAllClientConfigs");
+        $this->registerMethod("downloadAllQrCodes");
         $this->registerMethod("generateQrCodes");
         $this->registerMethod("enumerateDns");
 
@@ -181,7 +185,75 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
                 return $output;
             }
         );
-	}
+    }
+
+    public function downloadTunnelConfig($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, "rpc.common.objectuuid");
+        // get client info
+        $db = \OMV\Config\Database::getInstance();
+        $object = $db->get("conf.service.wireguard.tunnel", $params["uuid"]);
+        $tunnelnum = $object->get("tunnelnum");
+        $conf = sprintf("/etc/wireguard/wgnet%d.conf", $tunnelnum);
+        if (!file_exists($conf)) {
+            $msg = gettext("Tunnel config file does not exist.  Please apply changes.");
+            throw new \OMV\Exception($msg);
+        }
+        // create temp config file
+        $ts = date('Ymd_His');
+        $tc = sprintf('%s/wireguard_tunnel%d_%s.conf', sys_get_temp_dir(), $tunnelnum, $ts);
+        copy($conf, $tc);
+        // adjust permissions on temp file
+        chown($tc, $GLOBALS['OMV_WEBGUI_FILE_OWNERGROUP_NAME']);
+        chgrp($tc, $GLOBALS['OMV_WEBGUI_FILE_OWNERGROUP_NAME']);
+        chmod($tc, 0600);
+        // Return values required by generic download RPC implementation.
+        return [
+            'filename' => basename($tc),
+            'filepath' => $tc,
+            'contenttype' => 'text/plain',
+            'unlink' => true
+        ];
+    }
+
+    public function downloadAllTunnelConfigs($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        // Create a new zip archive
+        $zip = new ZipArchive();
+        $ts = date('Ymd_His');
+        $zipfn = sprintf('%s/allTunnelConfigs_%s.zip', sys_get_temp_dir(), $ts);
+        if ($zip->open($zipfn, ZipArchive::CREATE) !== true) {
+            $msg = gettext("Cannot open zip file.");
+            throw new \OMV\Exception($msg);
+        }
+        // Get configuration data
+        $db = \OMV\Config\Database::getInstance();
+        $objects = $db->get('conf.service.wireguard.tunnel');
+        foreach ($objects as $objectk => &$objectv) {
+            $tunnelnum = $objectv->get("tunnelnum");
+            $conf = sprintf("/etc/wireguard/wgnet%d.conf", $tunnelnum);
+            if (file_exists($conf)) {
+                $zip->addFromString(basename($conf), file_get_contents($conf));
+            }
+        }
+        $zip->close();
+        // adjust permissions on temp file
+        chown($zipfn, $GLOBALS['OMV_WEBGUI_FILE_OWNERGROUP_NAME']);
+        chgrp($zipfn, $GLOBALS['OMV_WEBGUI_FILE_OWNERGROUP_NAME']);
+        chmod($zipfn, 0600);
+        // Return values required by generic download RPC implementation.
+        return [
+            'filename' => basename($zipfn),
+            'filepath' => $zipfn,
+            'contenttype' => 'application/zip',
+            'unlink' => true
+        ];
+    }
 
     public function enumerateTunnels($params, $context)
     {
@@ -399,6 +471,7 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             }
         );
     }
+
     public function downloadClientConfig($params, $context)
     {
         // Validate the RPC caller context.
@@ -415,8 +488,8 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             throw new \OMV\Exception($msg);
         }
         // create temp config file
-        $pfx = sprintf('wireguard_client%d_conf_', $clientnum);
-        $cc = tempnam(sys_get_temp_dir(), $pfx) . '.conf';
+        $ts = date('Ymd_His');
+        $cc = sprintf('%s/wireguard_client%d_%s.conf', sys_get_temp_dir(), $clientnum, $ts);
         copy($conf, $cc);
         // adjust permissions on temp file
         chown($cc, $GLOBALS['OMV_WEBGUI_FILE_OWNERGROUP_NAME']);
@@ -443,8 +516,8 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $clientnum = $object->get("clientnum");
         $conf = sprintf("/etc/wireguard/wgnet_client%d.conf", $clientnum);
         // create QR code image
-        $pfx = sprintf('wireguard_client%d_qr_', $clientnum);
-        $qr = tempnam(sys_get_temp_dir(), $pfx);
+        $ts = date('Ymd_His');
+        $qr = sprintf('%s/wireguard_client%d_qr_%s.png', sys_get_temp_dir(), $clientnum, $ts);
         if (file_exists($conf)) {
             $cmdArgs = [];
             $cmdArgs[] = 'qrencode';
@@ -469,6 +542,77 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             'filename' => basename($qr),
             'filepath' => $qr,
             'contenttype' => 'image/png',
+            'unlink' => true
+        ];
+    }
+
+    public function downloadAllClientConfigs($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        // Create a new zip archive
+        $zip = new ZipArchive();
+        $ts = date('Ymd_His');
+        $zipfn = sprintf('%s/allClientConfigs_%s.zip', sys_get_temp_dir(), $ts);
+        if ($zip->open($zipfn, ZipArchive::CREATE) !== true) {
+            $msg = gettext("Cannot open zip file.");
+            throw new \OMV\Exception($msg);
+        }
+        $files = glob('/etc/wireguard/wgnet_client*.conf');
+        foreach ($files as $file) {
+            if (file_exists($file)) {
+                $zip->addFromString(basename($file), file_get_contents($file));
+            }
+        }
+        $zip->close();
+        // adjust permissions on temp file
+        chown($zipfn, $GLOBALS['OMV_WEBGUI_FILE_OWNERGROUP_NAME']);
+        chgrp($zipfn, $GLOBALS['OMV_WEBGUI_FILE_OWNERGROUP_NAME']);
+        chmod($zipfn, 0600);
+        // Return values required by generic download RPC implementation.
+        return [
+            'filename' => basename($zipfn),
+            'filepath' => $zipfn,
+            'contenttype' => 'application/zip',
+            'unlink' => true
+        ];
+    }
+
+    public function downloadAllQrCodes($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        // Make sure all QR codes are up to date
+        $this->generateQrCodes($params, $context);
+        // Create a new zip archive
+        $zip = new ZipArchive();
+        $ts = date('Ymd_His');
+        $zipfn = sprintf('%s/allQRcodes_%s.zip', sys_get_temp_dir(), $ts);
+        if ($zip->open($zipfn, ZipArchive::CREATE) !== true) {
+            $msg = gettext("Cannot open zip file.");
+            throw new \OMV\Exception($msg);
+        }
+        // Get configuration data
+        $db = \OMV\Config\Database::getInstance();
+        $objects = $db->get('conf.service.wireguard.client');
+        // add each image to zip
+        foreach ($objects as $objectk => &$objectv) {
+            $clientnum = $objectv->get('clientnum');
+            $filename = sprintf('wireguard_client%d_qr.png', $clientnum);
+            $img64 = $objectv->get('qr');
+            $img = base64_decode(explode(',', $img64)[1]);
+            $zip->addFromString($filename, $img);
+        }
+        $zip->close();
+        // adjust permissions on temp file
+        chown($zipfn, $GLOBALS['OMV_WEBGUI_FILE_OWNERGROUP_NAME']);
+        chgrp($zipfn, $GLOBALS['OMV_WEBGUI_FILE_OWNERGROUP_NAME']);
+        chmod($zipfn, 0600);
+        // Return values required by generic download RPC implementation.
+        return [
+            'filename' => basename($zipfn),
+            'filepath' => $zipfn,
+            'contenttype' => 'application/zip',
             'unlink' => true
         ];
     }
