@@ -1,8 +1,12 @@
-openmediavault-wireguard (7.0.6) UNRELEASED; urgency=medium
+openmediavault-wireguard (7.0.6) stable; urgency=low
 
   * Add QR code column
+  * Allow downloading tunnel config text file
+  * Allow downloading all tunnel configs in a zip file
+  * Allow downloading all client configs in a zip file
+  * Allow downloading all client QR codes in a zip file
 
- -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 01 Jun 2024 08:44:43 -0500
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 01 Jun 2024 11:35:12 -0500
 
 openmediavault-wireguard (7.0.5) stable; urgency=low
 
