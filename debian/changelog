@@ -1,3 +1,9 @@
+openmediavault-wireguard (7.0.6) UNRELEASED; urgency=medium
+
+  * Add QR code column
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 01 Jun 2024 08:44:43 -0500
+
 openmediavault-wireguard (7.0.5) stable; urgency=low
 
   * Allow downloading QR code png image
