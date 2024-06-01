@@ -582,8 +582,6 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
     {
         // Validate the RPC caller context.
         $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
-        // Make sure all QR codes are up to date
-        $this->generateQrCodes($params, $context);
         // Create a new zip archive
         $zip = new ZipArchive();
         $ts = date('Ymd_His');
