@@ -29,13 +29,13 @@ msgid "Advanced"
 msgstr "Erweitert"
 
 msgid "All QR codes"
-msgstr ""
+msgstr "Alel QR-Codes"
 
 msgid "All client configs"
-msgstr ""
+msgstr "Alle Client-Konfigurationen"
 
 msgid "All tunnel configs"
-msgstr ""
+msgstr "Alle Tunnel-Konfigurationen"
 
 msgid "Allowed IPs"
 msgstr "Erlaubte IPs"
@@ -44,13 +44,13 @@ msgid "Cannot open zip file."
 msgstr ""
 
 msgid "Client Config"
-msgstr ""
+msgstr "Client-Konfiguration"
 
 msgid "Client Number"
 msgstr ""
 
 msgid "Client config"
-msgstr ""
+msgstr "Client-Konfiguration"
 
 msgid "Client config file does not exist.  Please apply changes."
 msgstr ""
@@ -62,10 +62,10 @@ msgid "Clients"
 msgstr "Clients"
 
 msgid "Config"
-msgstr ""
+msgstr "Konfiguration"
 
 msgid "Configure iptables"
-msgstr ""
+msgstr "iptables konfigurieren"
 
 msgid "Create"
 msgstr "Erstellen"
@@ -100,10 +100,10 @@ msgid "Download"
 msgstr ""
 
 msgid "Download QR code"
-msgstr ""
+msgstr "QR-Code herunterladen"
 
 msgid "Download client config"
-msgstr ""
+msgstr "Client-Konfiguration herunterladen"
 
 msgid "Edit"
 msgstr "Bearbeiten"
@@ -127,10 +127,10 @@ msgid "Endpoint"
 msgstr "Endpunkt"
 
 msgid "Generate QR Codes"
-msgstr ""
+msgstr "QR-Codes generieren"
 
 msgid "Generating QR codes ..."
-msgstr ""
+msgstr "QR-Codes werden generiert ..."
 
 msgid "Local IP"
 msgstr "Lokale IP"
@@ -166,10 +166,10 @@ msgid "QR Code"
 msgstr "QR-Code"
 
 msgid "QR code"
-msgstr ""
+msgstr "QR-Code"
 
 msgid "QR codes have been created."
-msgstr ""
+msgstr "QR-Codes wurden erstellt."
 
 msgid "Restrict"
 msgstr "Beschränken"
@@ -199,13 +199,13 @@ msgid "Set to 0 to disable. Wireguard will use 1420 when disabled."
 msgstr ""
 
 msgid "Tunnel Config"
-msgstr ""
+msgstr "Tunnel-Konfiguration"
 
 msgid "Tunnel Number"
 msgstr ""
 
 msgid "Tunnel config"
-msgstr ""
+msgstr "Tunnel-Konfiguration"
 
 msgid "Tunnel config file does not exist.  Please apply changes."
 msgstr ""

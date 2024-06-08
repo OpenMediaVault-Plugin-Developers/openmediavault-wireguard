@@ -28,19 +28,19 @@ msgid "Advanced"
 msgstr "進階"
 
 msgid "All QR codes"
-msgstr ""
+msgstr "全部 QR 圖碼"
 
 msgid "All client configs"
-msgstr ""
+msgstr "全部用戶端配置"
 
 msgid "All tunnel configs"
-msgstr ""
+msgstr "全部穿隧配置"
 
 msgid "Allowed IPs"
 msgstr "允許的 IP 地址"
 
 msgid "Cannot open zip file."
-msgstr ""
+msgstr "無法打開 zip 檔案。"
 
 msgid "Client Config"
 msgstr "客戶端設置"
@@ -49,7 +49,7 @@ msgid "Client Number"
 msgstr "客戶號碼"
 
 msgid "Client config"
-msgstr ""
+msgstr "客戶端設置"
 
 msgid "Client config file does not exist.  Please apply changes."
 msgstr "客戶端設置檔案不存在。請套用變更。"
@@ -96,7 +96,7 @@ msgid "Docs"
 msgstr "文件"
 
 msgid "Download"
-msgstr ""
+msgstr "下載"
 
 msgid "Download QR code"
 msgstr "下載 QR 圖碼"
@@ -126,10 +126,10 @@ msgid "Endpoint"
 msgstr "端點"
 
 msgid "Generate QR Codes"
-msgstr ""
+msgstr "產生 QR 圖碼"
 
 msgid "Generating QR codes ..."
-msgstr ""
+msgstr "產生 QR 圖碼中 ..."
 
 msgid "Local IP"
 msgstr "本地 IP"
@@ -165,10 +165,10 @@ msgid "QR Code"
 msgstr "QR 碼"
 
 msgid "QR code"
-msgstr ""
+msgstr "QR 圖碼"
 
 msgid "QR codes have been created."
-msgstr ""
+msgstr "QR 圖碼已被創建。"
 
 msgid "Restrict"
 msgstr "限制"
@@ -198,13 +198,13 @@ msgid "Set to 0 to disable. Wireguard will use 1420 when disabled."
 msgstr "設為 0 來停用。當停用時，Wireguard 將使用 1420。"
 
 msgid "Tunnel Config"
-msgstr "穿隧設置"
+msgstr "隧道配置"
 
 msgid "Tunnel Number"
 msgstr "隧道號碼"
 
 msgid "Tunnel config"
-msgstr ""
+msgstr "穿隧配置"
 
 msgid "Tunnel config file does not exist.  Please apply changes."
 msgstr "穿隧設置檔案不存在。請套用變更。"
