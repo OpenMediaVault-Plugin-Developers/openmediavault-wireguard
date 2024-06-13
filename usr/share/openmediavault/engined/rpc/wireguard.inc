@@ -666,31 +666,41 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $dns[] = [ 'dns' => 'disable' ];
         $dns[] = [ 'dns' => 'custom' ];
         $ips = [];
-        $resolv = file("/etc/resolv.conf");
-        foreach ($resolv as $line) {
-            if (substr(trim($line), 0,10) == "nameserver") {
-                $ip = trim(str_replace("nameserver", "", $line));
-                if (filter_var($ip, FILTER_VALIDATE_IP)) {
-                    $ips[] = $ip;
-		}
+        $resolvConf = '/etc/resolv.conf';
+        if (file_exists($resolvConf)) {
+            $resolv = file($resolvConf);
+            foreach ($resolv as $line) {
+                if (substr(trim($line), 0,10) == "nameserver") {
+                    $ip = trim(str_replace("nameserver", "", $line));
+                    if (filter_var($ip, FILTER_VALIDATE_IP)) {
+                        $ips[] = $ip;
+                    }
+                }
             }
         }
         $output = [];
         $cmdArgs = [];
         $cmdArgs[] = "resolvectl";
         $cmdArgs[] = "status";
-        $cmdArgs[] = "| grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b'";
         $cmd = new \OMV\System\Process($cmdArgs);
-        $cmd->execute($output);
-        foreach ($output as $record) {
-            if (filter_var($record, FILTER_VALIDATE_IP)) {
-                $ips[] = $record;
+        $cmd->setQuiet(true);
+        $cmdLine = $cmd->getCommandLine();
+        if (0 === $this->exec($cmdLine, $output)) {
+            $ipPattern = '/\b([0-9]{1,3}\.){3}[0-9]{1,3}\b/';
+            foreach ($output as $record) {
+                if (preg_match_all($ipPattern, $record, $matches)) {
+                    foreach ($matches[0] as $ip) {
+                        if (filter_var($ip, FILTER_VALIDATE_IP)) {
+                            $ips[] = $ip;
+                        }
+                    }
+                }
             }
         }
         $ipsu = array_unique($ips);
         if (count($ipsu) > 1) {
             asort($ipsu);
-	    foreach ($ipsu as $ip) {
+            foreach ($ipsu as $ip) {
                 $dns[] = [ 'dns' => $ip ];
             }
             $dns[] = [ 'dns' => implode(",", $ipsu) ];
