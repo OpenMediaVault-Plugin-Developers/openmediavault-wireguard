@@ -1,3 +1,9 @@
+openmediavault-wireguard (7.0.7) stable; urgency=low
+
+  * Improve handling of dns enumeration on broken systems
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 13 Jun 2024 06:42:49 -0500
+
 openmediavault-wireguard (7.0.6) stable; urgency=low
 
   * Add QR code column
