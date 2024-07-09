@@ -488,8 +488,7 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             throw new \OMV\Exception($msg);
         }
         // create temp config file
-        $ts = date('Ymd_His');
-        $cc = sprintf('%s/wireguard_client%d_%s.conf', sys_get_temp_dir(), $clientnum, $ts);
+        $cc = sprintf('%s/wgnet_client%d.conf', sys_get_temp_dir(), $clientnum);
         copy($conf, $cc);
         // adjust permissions on temp file
         chown($cc, $GLOBALS['OMV_WEBGUI_FILE_OWNERGROUP_NAME']);
