@@ -28,19 +28,19 @@ msgid "Advanced"
 msgstr "Advanced"
 
 msgid "All QR codes"
-msgstr ""
+msgstr "All QR codes"
 
 msgid "All client configs"
-msgstr ""
+msgstr "All client configs"
 
 msgid "All tunnel configs"
-msgstr ""
+msgstr "All tunnel configs"
 
 msgid "Allowed IPs"
 msgstr "Allowed IPs"
 
 msgid "Cannot open zip file."
-msgstr ""
+msgstr "Cannot open zip file."
 
 msgid "Client Config"
 msgstr "Client Config"
@@ -49,7 +49,7 @@ msgid "Client Number"
 msgstr "Client Number"
 
 msgid "Client config"
-msgstr ""
+msgstr "Client config"
 
 msgid "Client config file does not exist.  Please apply changes."
 msgstr "Client config file does not exist.  Please apply changes."
@@ -98,13 +98,13 @@ msgid "Docs"
 msgstr "Docs"
 
 msgid "Download"
-msgstr ""
+msgstr "Download"
 
 msgid "Download QR code"
-msgstr ""
+msgstr "Download QR code"
 
 msgid "Download client config"
-msgstr ""
+msgstr "Download client config"
 
 msgid "Edit"
 msgstr "Edit"
@@ -128,10 +128,10 @@ msgid "Endpoint"
 msgstr "Endpoint"
 
 msgid "Generate QR Codes"
-msgstr ""
+msgstr "Generate QR Codes"
 
 msgid "Generating QR codes ..."
-msgstr ""
+msgstr "Generating QR codes ..."
 
 msgid "Local IP"
 msgstr "Local IP"
@@ -167,10 +167,10 @@ msgid "QR Code"
 msgstr "QR Code"
 
 msgid "QR code"
-msgstr ""
+msgstr "QR code"
 
 msgid "QR codes have been created."
-msgstr ""
+msgstr "QR codes have been created."
 
 msgid "Restrict"
 msgstr "Restrict"
@@ -206,7 +206,7 @@ msgid "Tunnel Number"
 msgstr "Tunnel Number"
 
 msgid "Tunnel config"
-msgstr ""
+msgstr "Tunnel config"
 
 msgid "Tunnel config file does not exist.  Please apply changes."
 msgstr "Tunnel config file does not exist.  Please apply changes."

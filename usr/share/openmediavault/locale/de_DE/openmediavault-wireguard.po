@@ -4,7 +4,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Ettore Atalan <atalanttore@googlemail.com>, 2023
+# Dampflok_HD, 2023
+# Ettore Atalan <atalanttore@googlemail.com>, 2024
 # 
 #, fuzzy
 msgid ""
@@ -13,43 +14,43 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-01 12:18-0500\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2023\n"
-"Language-Team: German (Germany) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/de_DE/)\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2024\n"
+"Language-Team: German (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de_DE\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Additional subnet(s)"
-msgstr ""
+msgstr "Zusätzliche(s) Subnetz(e)"
 
 msgid "Advanced"
-msgstr ""
+msgstr "Erweitert"
 
 msgid "All QR codes"
-msgstr ""
+msgstr "Alel QR-Codes"
 
 msgid "All client configs"
-msgstr ""
+msgstr "Alle Client-Konfigurationen"
 
 msgid "All tunnel configs"
-msgstr ""
+msgstr "Alle Tunnel-Konfigurationen"
 
 msgid "Allowed IPs"
-msgstr ""
+msgstr "Erlaubte IPs"
 
 msgid "Cannot open zip file."
 msgstr ""
 
 msgid "Client Config"
-msgstr ""
+msgstr "Client-Konfiguration"
 
 msgid "Client Number"
 msgstr ""
 
 msgid "Client config"
-msgstr ""
+msgstr "Client-Konfiguration"
 
 msgid "Client config file does not exist.  Please apply changes."
 msgstr ""
@@ -61,7 +62,7 @@ msgid "Clients"
 msgstr "Clients"
 
 msgid "Config"
-msgstr ""
+msgstr "Konfiguration"
 
 msgid "Configure iptables"
 msgstr "iptables konfigurieren"
@@ -93,16 +94,16 @@ msgid "Delete"
 msgstr "Löschen"
 
 msgid "Docs"
-msgstr ""
+msgstr "Doku"
 
 msgid "Download"
 msgstr ""
 
 msgid "Download QR code"
-msgstr ""
+msgstr "QR-Code herunterladen"
 
 msgid "Download client config"
-msgstr ""
+msgstr "Client-Konfiguration herunterladen"
 
 msgid "Edit"
 msgstr "Bearbeiten"
@@ -120,25 +121,25 @@ msgid "Enable"
 msgstr "Aktivieren"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Aktiviert"
 
 msgid "Endpoint"
 msgstr "Endpunkt"
 
 msgid "Generate QR Codes"
-msgstr ""
+msgstr "QR-Codes generieren"
 
 msgid "Generating QR codes ..."
-msgstr ""
+msgstr "QR-Codes werden generiert ..."
 
 msgid "Local IP"
-msgstr ""
+msgstr "Lokale IP"
 
 msgid "Local Server"
-msgstr ""
+msgstr "Lokaler Server"
 
 msgid "MTU"
-msgstr ""
+msgstr "MTU"
 
 msgid "Name"
 msgstr "Name"
@@ -165,31 +166,31 @@ msgid "QR Code"
 msgstr "QR-Code"
 
 msgid "QR code"
-msgstr ""
+msgstr "QR-Code"
 
 msgid "QR codes have been created."
-msgstr ""
+msgstr "QR-Codes wurden erstellt."
 
 msgid "Restrict"
-msgstr ""
+msgstr "Beschränken"
 
 msgid "Restrict routing"
-msgstr ""
+msgstr "Routing beschränken"
 
 msgid "Restrict routing to VPN subnet"
-msgstr ""
+msgstr "Routing auf VPN-Subnetz beschränken"
 
 msgid "Restrict routing to VPN subnet only"
-msgstr ""
+msgstr "Routing nur auf VPN-Subnetz beschränken"
 
 msgid "Restrict routing to local subnet"
-msgstr ""
+msgstr "Routing auf lokales Subnetz beschränken"
 
 msgid "Restrict routing to local subnet only"
-msgstr ""
+msgstr "Routing nur auf lokales Subnetz beschränken"
 
 msgid "Restrict routing to these additional subnet(s)"
-msgstr ""
+msgstr "Routing auf diese(s) zusätzliche(n) Subnetz(e) beschränken"
 
 msgid "Set to 0 to disable"
 msgstr ""
@@ -198,13 +199,13 @@ msgid "Set to 0 to disable. Wireguard will use 1420 when disabled."
 msgstr ""
 
 msgid "Tunnel Config"
-msgstr ""
+msgstr "Tunnel-Konfiguration"
 
 msgid "Tunnel Number"
 msgstr ""
 
 msgid "Tunnel config"
-msgstr ""
+msgstr "Tunnel-Konfiguration"
 
 msgid "Tunnel config file does not exist.  Please apply changes."
 msgstr ""
@@ -213,16 +214,16 @@ msgid "Tunnel enable"
 msgstr ""
 
 msgid "Tunnel is disabled."
-msgstr ""
+msgstr "Tunnel ist deaktiviert."
 
 msgid "Tunnel number"
 msgstr ""
 
 msgid "Tunnels"
-msgstr ""
+msgstr "Tunnel"
 
 msgid "VPN"
-msgstr ""
+msgstr "VPN"
 
 msgid "Wireguard"
 msgstr "Wireguard"
