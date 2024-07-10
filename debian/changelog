@@ -1,6 +1,7 @@
 openmediavault-wireguard (7.0.7) stable; urgency=low
 
   * Improve handling of dns enumeration on broken systems
+  * Shorten filename of client config download
 
  -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 13 Jun 2024 06:42:49 -0500
 
