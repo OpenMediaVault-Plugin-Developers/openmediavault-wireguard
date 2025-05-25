@@ -310,7 +310,7 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             } else {
                 $restricts[] = "0.0.0.0/0";
             }
-            array_filter($restricts);
+            $restricts = array_filter($restricts);
             $objectv->add("tunnelenable", "boolean", $tunnel->get("enable"));
             $objectv->add("allowedips", "string", implode('<br />', $restricts));
             $objectsAssoc[] = $objectv->getAssoc();
