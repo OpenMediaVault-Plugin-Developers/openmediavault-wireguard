@@ -1,8 +1,9 @@
-openmediavault-wireguard (7.0.8) UNRELEASED; urgency=medium
+openmediavault-wireguard (8.0) stable; urgency=low
 
   * Shorten filename of client config download
+  * Update for omv 8.x
 
- -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 09 Jul 2024 19:48:46 -0500
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 04 Oct 2025 19:49:38 +0000
 
 openmediavault-wireguard (7.0.7) stable; urgency=low
 

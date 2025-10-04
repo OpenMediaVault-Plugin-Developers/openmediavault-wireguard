@@ -12,7 +12,7 @@ Architecture: all
 Depends: qrencode,
          wireguard,
          php-zip,
-         openmediavault (>= 7.2),
+         openmediavault (>= 8),
          ${misc:Depends}
 Description: openmediavault WireGuard plugin
  WireGuard is an extremely simple yet fast and modern VPN
