@@ -1,0 +1,33 @@
+version: "1.0"
+type: dashboard-widget
+data:
+  id: 812fcc9b-c709-11f0-9935-525400be629f
+  title: _("Tunnels")
+  description: _("Displays wireguard tunnel status in a table.")
+  type: datatable
+  reloadPeriod: 30000
+  permissions:
+    role:
+    - admin
+    - user
+  datatable:
+    columns:
+    - name: _("Tunnel #")
+      prop: tunnelnum
+      flexGrow: 1
+      sortable: true
+    - name: _("Enabled")
+      prop: enabled
+      flexGrow: 1
+      sortable: true
+      cellTemplateName: checkIcon
+    - name: _("Running")
+      prop: running
+      flexGrow: 1
+      sortable: true
+      cellTemplateName: checkIcon
+    store:
+      proxy:
+        service: Wireguard
+        get:
+          method: enumerateTunnels

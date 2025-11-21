@@ -266,9 +266,17 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         foreach ($objects as $objectk => &$objectv) {
             $tunnelnum = $objectv->get("tunnelnum");
             $tunnelname = $objectv->get("tunnelname");
+            $running = false;
+            if ($objectv->get("enable")) {
+                $svcname = sprintf("wg-quick@wgnet%d", $tunnelnum);
+                $systemCtl = new \OMV\System\SystemCtl($svcname);
+                $running = $systemCtl->isActive();
+            }
             $tunnels[] = [
                 'tunnelnum' => $tunnelnum,
-                'description' => sprintf('%s - %s', $tunnelnum, $tunnelname)
+                'description' => sprintf('%s - %s', $tunnelnum, $tunnelname),
+                'enabled' => $objectv->get("enable"),
+                'running' => $running,
             ];
         }
         // Filter the result.
