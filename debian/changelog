@@ -1,3 +1,9 @@
+openmediavault-wireguard (8.0.2) stable; urgency=low
+
+  * Fix label
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 21 Nov 2025 21:42:36 +0000
+
 openmediavault-wireguard (8.0.1) stable; urgency=low
 
   * Add tunnel status dashboard widget
