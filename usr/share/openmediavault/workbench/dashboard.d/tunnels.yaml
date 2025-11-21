@@ -12,7 +12,7 @@ data:
     - user
   datatable:
     columns:
-    - name: _("Tunnel #")
+    - name: _("Tunnel")
       prop: tunnelnum
       flexGrow: 1
       sortable: true
