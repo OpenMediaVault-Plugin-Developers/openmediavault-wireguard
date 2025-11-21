@@ -3,13 +3,17 @@
 # This file is distributed under the same license as the openmediavault-wireguard package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Asdfgr Wertyu, 2024
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-01 12:18-0500\n"
+"POT-Creation-Date: 2025-11-21 21:34+0000\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
+"Last-Translator: Asdfgr Wertyu, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,216 +22,209 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 msgid "Additional subnet(s)"
-msgstr ""
+msgstr "Дополнительная подсеть(и)"
 
 msgid "Advanced"
-msgstr ""
+msgstr "Расширенный"
 
 msgid "All QR codes"
-msgstr ""
+msgstr "Все QR-коды"
 
 msgid "All client configs"
-msgstr ""
+msgstr "Все конфигурации клиента"
 
 msgid "All tunnel configs"
-msgstr ""
+msgstr "Все конфигурации туннелей"
 
 msgid "Allowed IPs"
-msgstr ""
+msgstr "Разрешенные IP-адреса"
 
 msgid "Cannot open zip file."
-msgstr ""
+msgstr "Невозможно открыть файл zip."
 
 msgid "Client Config"
-msgstr ""
+msgstr "Конфигурация клиента"
 
 msgid "Client Number"
-msgstr ""
+msgstr "Номер клиента"
 
 msgid "Client config"
-msgstr ""
+msgstr "Конфигурация клиента"
 
 msgid "Client config file does not exist.  Please apply changes."
 msgstr ""
+"Файл конфигурации клиента не существует. Пожалуйста, примените изменения."
 
 msgid "Client number"
-msgstr ""
+msgstr "Номер клиента"
 
 msgid "Clients"
-msgstr ""
+msgstr "Клиенты"
 
 msgid "Config"
-msgstr ""
+msgstr "Конфигурация"
 
 msgid "Configure iptables"
-msgstr ""
+msgstr "Настройка iptables"
 
 msgid "Create"
-msgstr ""
+msgstr "Создать"
 
 msgid "Created client."
-msgstr ""
+msgstr "Созданный клиент."
 
 msgid "Created custom config."
-msgstr ""
+msgstr "Создал пользовательский конфиг."
 
 msgid "Created tunnel."
-msgstr ""
+msgstr "Созданный туннель."
 
 msgid "Custom Config"
-msgstr ""
+msgstr "Пользовательская конфигурация"
 
 msgid "DNS"
-msgstr ""
+msgstr "DNS"
 
 msgid ""
 "Default networks in the plugin are created in the 10.192.x.x range. Choose a"
 " different range to avoid conflicts."
 msgstr ""
+"Сети по умолчанию в плагине создаются в диапазоне 10.192.x.x. Выберите "
+"другой диапазон, чтобы избежать конфликтов."
 
 msgid "Delete"
+msgstr "Удалить"
+
+msgid "Displays wireguard tunnel status in a table."
 msgstr ""
 
 msgid "Docs"
-msgstr ""
+msgstr "Документы"
 
 msgid "Download"
-msgstr ""
-
-msgid "Download QR code"
-msgstr ""
-
-msgid "Download client config"
-msgstr ""
+msgstr "Скачать"
 
 msgid "Edit"
-msgstr ""
+msgstr "Редактировать"
 
 msgid "Edit client."
-msgstr ""
+msgstr "Редактировать клиента."
 
 msgid "Edit custom config."
-msgstr ""
+msgstr "Редактирование пользовательской конфигурации."
 
 msgid "Edit tunnel."
-msgstr ""
+msgstr "Редактировать туннель."
 
 msgid "Enable"
-msgstr ""
+msgstr "Включить"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Включено"
 
 msgid "Endpoint"
-msgstr ""
+msgstr "Конечная точка"
 
 msgid "Generate QR Codes"
-msgstr ""
+msgstr "Генерация QR-кодов"
 
 msgid "Generating QR codes ..."
-msgstr ""
+msgstr "Генерация QR-кодов ..."
 
 msgid "Local IP"
-msgstr ""
-
-msgid "Local Server"
-msgstr ""
+msgstr "Локальный IP"
 
 msgid "MTU"
-msgstr ""
+msgstr "MTU"
 
 msgid "Name"
-msgstr ""
+msgstr "Название"
 
 msgid "Network Adapter"
-msgstr ""
+msgstr "Сетевой адаптер"
 
 msgid "Persistent keepalive"
-msgstr ""
+msgstr "Постоянное обновление"
 
 msgid "Please disable client and apply changes before deleting!"
-msgstr ""
+msgstr "Пожалуйста, отключите клиент и примените изменения перед удалением!"
 
 msgid "Please disable custom config and apply changes before deleting!"
 msgstr ""
+"Пожалуйста, отключите пользовательскую конфигурацию и примените изменения "
+"перед удалением!"
 
 msgid "Please disable tunnel and apply changes before deleting!"
-msgstr ""
+msgstr "Пожалуйста, отключите туннель и примените изменения перед удалением!"
 
 msgid "Port"
-msgstr ""
+msgstr "Порт"
 
 msgid "QR Code"
-msgstr ""
+msgstr "QR-код"
 
 msgid "QR code"
-msgstr ""
+msgstr "QR-код"
 
 msgid "QR codes have been created."
-msgstr ""
+msgstr "Были созданы QR-коды."
 
 msgid "Restrict"
-msgstr ""
+msgstr "Ограничить"
 
 msgid "Restrict routing"
-msgstr ""
+msgstr "Ограничение маршрутизации"
 
 msgid "Restrict routing to VPN subnet"
-msgstr ""
-
-msgid "Restrict routing to VPN subnet only"
-msgstr ""
+msgstr "Ограничение маршрутизации в подсеть VPN"
 
 msgid "Restrict routing to local subnet"
-msgstr ""
-
-msgid "Restrict routing to local subnet only"
-msgstr ""
+msgstr "Ограничение маршрутизации в локальной подсети"
 
 msgid "Restrict routing to these additional subnet(s)"
+msgstr "Ограничьте маршрутизацию в эти дополнительные подсети."
+
+msgid "Running"
 msgstr ""
 
 msgid "Set to 0 to disable"
-msgstr ""
+msgstr "Установите значение 0, чтобы отключить"
 
 msgid "Set to 0 to disable. Wireguard will use 1420 when disabled."
 msgstr ""
+"Установите значение 0, чтобы отключить. При отключении Wireguard будет "
+"использовать 1420."
+
+msgid "Tunnel #"
+msgstr ""
 
 msgid "Tunnel Config"
-msgstr ""
+msgstr "Конфигурация туннеля"
 
 msgid "Tunnel Number"
-msgstr ""
+msgstr "Номер туннеля"
 
 msgid "Tunnel config"
-msgstr ""
+msgstr "Конфигурация туннеля"
 
 msgid "Tunnel config file does not exist.  Please apply changes."
 msgstr ""
+"Файл конфигурации туннеля не существует. Пожалуйста, примените изменения."
 
 msgid "Tunnel enable"
-msgstr ""
-
-msgid "Tunnel is disabled."
-msgstr ""
+msgstr "Включить туннель"
 
 msgid "Tunnel number"
-msgstr ""
+msgstr "Номер туннеля"
 
 msgid "Tunnels"
-msgstr ""
+msgstr "Туннели"
 
 msgid "VPN"
-msgstr ""
+msgstr "VPN"
 
 msgid "Wireguard"
-msgstr ""
-
-msgid "localip"
-msgstr ""
-
-msgid "n/a"
-msgstr ""
+msgstr "Wireguard"
 
 msgid "omv-extras wiki"
-msgstr ""
+msgstr "omv-extras вики"

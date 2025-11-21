@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-01 12:18-0500\n"
+"POT-Creation-Date: 2025-11-21 21:34+0000\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
 "Last-Translator: songming <by@songming.me>, 2024\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_CN/)\n"
@@ -92,17 +92,14 @@ msgstr "插件中的网络设置是 10.192.x.x 范围，请选择其它范围避
 msgid "Delete"
 msgstr "删除"
 
+msgid "Displays wireguard tunnel status in a table."
+msgstr ""
+
 msgid "Docs"
 msgstr "文档"
 
 msgid "Download"
 msgstr "下载"
-
-msgid "Download QR code"
-msgstr "下载二维码"
-
-msgid "Download client config"
-msgstr "下载客户端配置"
 
 msgid "Edit"
 msgstr "编辑"
@@ -133,9 +130,6 @@ msgstr "生成二维码中 ..."
 
 msgid "Local IP"
 msgstr "本地 IP"
-
-msgid "Local Server"
-msgstr "本地服务器"
 
 msgid "MTU"
 msgstr "MTU"
@@ -179,23 +173,23 @@ msgstr "限制路由"
 msgid "Restrict routing to VPN subnet"
 msgstr "限制路由到 VPN 的子网"
 
-msgid "Restrict routing to VPN subnet only"
-msgstr "仅限 VPN 子网路由"
-
 msgid "Restrict routing to local subnet"
 msgstr "限制路由到本地的子网"
 
-msgid "Restrict routing to local subnet only"
-msgstr "仅限路由到本地的子网"
-
 msgid "Restrict routing to these additional subnet(s)"
 msgstr "限制路由到其它子网"
+
+msgid "Running"
+msgstr ""
 
 msgid "Set to 0 to disable"
 msgstr "设置 0 以停用"
 
 msgid "Set to 0 to disable. Wireguard will use 1420 when disabled."
 msgstr "设置为 0 表示禁用，禁用时 Wireguard 将使用1420。"
+
+msgid "Tunnel #"
+msgstr ""
 
 msgid "Tunnel Config"
 msgstr "隧道配置"
@@ -212,9 +206,6 @@ msgstr "隧道配置文件不存在，请应用变更以生效。"
 msgid "Tunnel enable"
 msgstr "启用隧道"
 
-msgid "Tunnel is disabled."
-msgstr "隧道关闭"
-
 msgid "Tunnel number"
 msgstr "隧道号"
 
@@ -226,12 +217,6 @@ msgstr "VPN"
 
 msgid "Wireguard"
 msgstr "Wireguard"
-
-msgid "localip"
-msgstr "本地ip"
-
-msgid "n/a"
-msgstr "n/a"
 
 msgid "omv-extras wiki"
 msgstr "omv-extras wiki"

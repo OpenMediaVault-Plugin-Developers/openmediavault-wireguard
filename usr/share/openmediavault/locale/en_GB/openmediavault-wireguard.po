@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-01 12:18-0500\n"
+"POT-Creation-Date: 2025-11-21 21:34+0000\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2024\n"
 "Language-Team: English (United Kingdom) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/en_GB/)\n"
@@ -94,17 +94,14 @@ msgstr ""
 msgid "Delete"
 msgstr "Delete"
 
+msgid "Displays wireguard tunnel status in a table."
+msgstr ""
+
 msgid "Docs"
 msgstr "Docs"
 
 msgid "Download"
 msgstr "Download"
-
-msgid "Download QR code"
-msgstr "Download QR code"
-
-msgid "Download client config"
-msgstr "Download client config"
 
 msgid "Edit"
 msgstr "Edit"
@@ -135,9 +132,6 @@ msgstr "Generating QR codes ..."
 
 msgid "Local IP"
 msgstr "Local IP"
-
-msgid "Local Server"
-msgstr "Local Server"
 
 msgid "MTU"
 msgstr "MTU"
@@ -181,23 +175,23 @@ msgstr "Restrict routing"
 msgid "Restrict routing to VPN subnet"
 msgstr "Restrict routing to VPN subnet"
 
-msgid "Restrict routing to VPN subnet only"
-msgstr "Restrict routing to VPN subnet only"
-
 msgid "Restrict routing to local subnet"
 msgstr "Restrict routing to local subnet"
 
-msgid "Restrict routing to local subnet only"
-msgstr "Restrict routing to local subnet only"
-
 msgid "Restrict routing to these additional subnet(s)"
 msgstr "Restrict routing to these additional subnet(s)"
+
+msgid "Running"
+msgstr ""
 
 msgid "Set to 0 to disable"
 msgstr "Set to 0 to disable"
 
 msgid "Set to 0 to disable. Wireguard will use 1420 when disabled."
 msgstr "Set to 0 to disable. Wireguard will use 1420 when disabled."
+
+msgid "Tunnel #"
+msgstr ""
 
 msgid "Tunnel Config"
 msgstr "Tunnel Config"
@@ -214,9 +208,6 @@ msgstr "Tunnel config file does not exist.  Please apply changes."
 msgid "Tunnel enable"
 msgstr "Tunnel enable"
 
-msgid "Tunnel is disabled."
-msgstr "Tunnel is disabled."
-
 msgid "Tunnel number"
 msgstr "Tunnel number"
 
@@ -228,12 +219,6 @@ msgstr "VPN"
 
 msgid "Wireguard"
 msgstr "Wireguard"
-
-msgid "localip"
-msgstr "localip"
-
-msgid "n/a"
-msgstr "n/a"
 
 msgid "omv-extras wiki"
 msgstr "omv-extras wiki"

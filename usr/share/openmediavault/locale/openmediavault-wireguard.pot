@@ -8,13 +8,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-01 12:18-0500\n"
+"POT-Creation-Date: 2025-11-21 21:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "Additional subnet(s)"
@@ -86,16 +86,13 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+msgid "Displays wireguard tunnel status in a table."
+msgstr ""
+
 msgid "Docs"
 msgstr ""
 
 msgid "Download"
-msgstr ""
-
-msgid "Download QR code"
-msgstr ""
-
-msgid "Download client config"
 msgstr ""
 
 msgid "Edit"
@@ -126,9 +123,6 @@ msgid "Generating QR codes ..."
 msgstr ""
 
 msgid "Local IP"
-msgstr ""
-
-msgid "Local Server"
 msgstr ""
 
 msgid "MTU"
@@ -173,22 +167,22 @@ msgstr ""
 msgid "Restrict routing to VPN subnet"
 msgstr ""
 
-msgid "Restrict routing to VPN subnet only"
-msgstr ""
-
 msgid "Restrict routing to local subnet"
 msgstr ""
 
-msgid "Restrict routing to local subnet only"
+msgid "Restrict routing to these additional subnet(s)"
 msgstr ""
 
-msgid "Restrict routing to these additional subnet(s)"
+msgid "Running"
 msgstr ""
 
 msgid "Set to 0 to disable"
 msgstr ""
 
 msgid "Set to 0 to disable. Wireguard will use 1420 when disabled."
+msgstr ""
+
+msgid "Tunnel #"
 msgstr ""
 
 msgid "Tunnel Config"
@@ -206,9 +200,6 @@ msgstr ""
 msgid "Tunnel enable"
 msgstr ""
 
-msgid "Tunnel is disabled."
-msgstr ""
-
 msgid "Tunnel number"
 msgstr ""
 
@@ -219,12 +210,6 @@ msgid "VPN"
 msgstr ""
 
 msgid "Wireguard"
-msgstr ""
-
-msgid "localip"
-msgstr ""
-
-msgid "n/a"
 msgstr ""
 
 msgid "omv-extras wiki"

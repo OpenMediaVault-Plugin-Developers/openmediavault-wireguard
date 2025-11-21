@@ -11,14 +11,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-01 12:18-0500\n"
+"POT-Creation-Date: 2025-11-21 21:34+0000\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
 "Last-Translator: Raul Fernandez Garcia <raulfg3@gmail.com>, 2024\n"
-"Language-Team: Spanish (Spain) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/es_ES/)\n"
+"Language-Team: Spanish (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es_ES\n"
+"Language: es\n"
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "Additional subnet(s)"
@@ -96,17 +96,14 @@ msgstr ""
 msgid "Delete"
 msgstr "Borrar"
 
+msgid "Displays wireguard tunnel status in a table."
+msgstr ""
+
 msgid "Docs"
 msgstr "Documentación"
 
 msgid "Download"
 msgstr "Descarga"
-
-msgid "Download QR code"
-msgstr "Descargar código QR"
-
-msgid "Download client config"
-msgstr "Descargar configuración cliente"
 
 msgid "Edit"
 msgstr "Editar"
@@ -137,9 +134,6 @@ msgstr "Generando códigos QR ..."
 
 msgid "Local IP"
 msgstr "IP Local"
-
-msgid "Local Server"
-msgstr "Servidor Local"
 
 msgid "MTU"
 msgstr "MTU"
@@ -185,17 +179,14 @@ msgstr "Ruta restringida"
 msgid "Restrict routing to VPN subnet"
 msgstr "Restringir la ruta a una subred VPN"
 
-msgid "Restrict routing to VPN subnet only"
-msgstr "Restringir el enrutado a la VPN exclusivamente."
-
 msgid "Restrict routing to local subnet"
 msgstr "Restringir ruta a una subred local"
 
-msgid "Restrict routing to local subnet only"
-msgstr "Restringir ruta Solo a la subred local"
-
 msgid "Restrict routing to these additional subnet(s)"
 msgstr "Restringir rutas a estas subred(es) adicionales"
+
+msgid "Running"
+msgstr ""
 
 msgid "Set to 0 to disable"
 msgstr "0 para deshabilitar"
@@ -204,6 +195,9 @@ msgid "Set to 0 to disable. Wireguard will use 1420 when disabled."
 msgstr ""
 "Establecer en 0 para deshabilitar. Wireguard usará 1420 cuando esté "
 "deshabilitado."
+
+msgid "Tunnel #"
+msgstr ""
 
 msgid "Tunnel Config"
 msgstr "Configuración de túnel"
@@ -220,9 +214,6 @@ msgstr "No existe configuración de túnel. Por favor aplique los cambios."
 msgid "Tunnel enable"
 msgstr "Habilitar túnel"
 
-msgid "Tunnel is disabled."
-msgstr "Túnel deshabilitado."
-
 msgid "Tunnel number"
 msgstr "número de túnel"
 
@@ -234,12 +225,6 @@ msgstr "VPN"
 
 msgid "Wireguard"
 msgstr "Wireguard"
-
-msgid "localip"
-msgstr "IpLocal"
-
-msgid "n/a"
-msgstr "n/d"
 
 msgid "omv-extras wiki"
 msgstr "omv-extras wiki"
