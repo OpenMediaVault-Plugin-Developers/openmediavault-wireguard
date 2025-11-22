@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-21 21:41+0000\n"
+"POT-Creation-Date: 2025-11-22 14:58+0000\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>, 2025\n"
 "Language-Team: Dutch (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/nl/)\n"
@@ -94,8 +94,11 @@ msgstr ""
 msgid "Delete"
 msgstr "Verwijderen"
 
-msgid "Displays wireguard tunnel status in a table."
+msgid "Displays wireguard custom config status in a table."
 msgstr ""
+
+msgid "Displays wireguard tunnel status in a table."
+msgstr "Geeft de status van de wireguard-tunnel weer in een tabel."
 
 msgid "Docs"
 msgstr "Docs"
@@ -186,7 +189,7 @@ msgid "Restrict routing to these additional subnet(s)"
 msgstr "Routering beperken tot deze aanvullende subnet (en)"
 
 msgid "Running"
-msgstr ""
+msgstr "Actief"
 
 msgid "Set to 0 to disable"
 msgstr "Stel in op 0 om uit te schakelen"
@@ -195,7 +198,7 @@ msgid "Set to 0 to disable. Wireguard will use 1420 when disabled."
 msgstr "Stel in op 0 om uit te schakelen. Wireguard zal dan 1420 gebruiken."
 
 msgid "Tunnel"
-msgstr ""
+msgstr "Tunnel"
 
 msgid "Tunnel Config"
 msgstr "Tunnel-config"
@@ -223,6 +226,15 @@ msgstr "VPN"
 
 msgid "Wireguard"
 msgstr "Wireguard"
+
+msgid "Wireguard custom"
+msgstr ""
+
+msgid "Wireguard tunnels by name"
+msgstr ""
+
+msgid "Wireguard tunnels by number"
+msgstr ""
 
 msgid "omv-extras wiki"
 msgstr "omv-extras wiki"

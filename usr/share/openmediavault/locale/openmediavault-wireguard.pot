@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-21 21:41+0000\n"
+"POT-Creation-Date: 2025-11-22 14:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,6 +84,9 @@ msgid "Default networks in the plugin are created in the 10.192.x.x range. Choos
 msgstr ""
 
 msgid "Delete"
+msgstr ""
+
+msgid "Displays wireguard custom config status in a table."
 msgstr ""
 
 msgid "Displays wireguard tunnel status in a table."
@@ -210,6 +213,15 @@ msgid "VPN"
 msgstr ""
 
 msgid "Wireguard"
+msgstr ""
+
+msgid "Wireguard custom"
+msgstr ""
+
+msgid "Wireguard tunnels by name"
+msgstr ""
+
+msgid "Wireguard tunnels by number"
 msgstr ""
 
 msgid "omv-extras wiki"

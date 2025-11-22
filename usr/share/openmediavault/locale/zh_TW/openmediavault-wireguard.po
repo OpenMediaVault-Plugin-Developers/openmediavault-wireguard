@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-21 21:41+0000\n"
+"POT-Creation-Date: 2025-11-22 14:58+0000\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
 "Last-Translator: kochin <kochinc@outlook.com>, 2024\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/zh_TW/)\n"
@@ -91,6 +91,9 @@ msgstr "插件中預設網路是建立在 10.192.x.x 的範圍。選擇一個不
 
 msgid "Delete"
 msgstr "刪除"
+
+msgid "Displays wireguard custom config status in a table."
+msgstr ""
 
 msgid "Displays wireguard tunnel status in a table."
 msgstr ""
@@ -217,6 +220,15 @@ msgstr "VPN"
 
 msgid "Wireguard"
 msgstr "Wireguard"
+
+msgid "Wireguard custom"
+msgstr ""
+
+msgid "Wireguard tunnels by name"
+msgstr ""
+
+msgid "Wireguard tunnels by number"
+msgstr ""
 
 msgid "omv-extras wiki"
 msgstr "omv-extras wiki"
