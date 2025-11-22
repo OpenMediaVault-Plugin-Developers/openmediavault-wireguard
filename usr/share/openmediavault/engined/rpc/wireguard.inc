@@ -50,6 +50,7 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod("getCustom");
         $this->registerMethod("setCustom");
         $this->registerMethod("deleteCustom");
+        $this->registerMethod("enumerateCustom");
     }
 
     public function getTunnelList($params, $context)
@@ -274,9 +275,10 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             }
             $tunnels[] = [
                 'tunnelnum' => $tunnelnum,
+                'tunnelname' => $tunnelname,
                 'description' => sprintf('%s - %s', $tunnelnum, $tunnelname),
                 'enabled' => $objectv->get("enable"),
-                'running' => $running,
+                'running' => $running
             ];
         }
         // Filter the result.
@@ -783,5 +785,31 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $db->delete($object);
         // Return the deleted configuration object.
         return $object->getAssoc();
+    }
+
+    public function enumerateCustom($params, $context)
+    {
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        // Get configuration data.
+        $db = \OMV\Config\Database::getInstance();
+        $objects = $db->get("conf.service.wireguard.custom");
+        $custom = [];
+        foreach ($objects as $objectk => &$objectv) {
+            $name = $objectv->get("name");
+            $running = false;
+            if ($objectv->get("enable")) {
+                $svcname = sprintf("wg-quick@wgnet_%s", $name);
+                $systemCtl = new \OMV\System\SystemCtl($svcname);
+                $running = $systemCtl->isActive();
+            }
+            $custom[] = [
+                'name' => $name,
+                'enabled' => $objectv->get("enable"),
+                'running' => $running
+            ];
+        }
+        // Filter the result.
+        return ($custom);
     }
 }

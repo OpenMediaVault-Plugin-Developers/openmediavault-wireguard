@@ -1,8 +1,8 @@
 version: "1.0"
 type: dashboard-widget
 data:
-  id: 812fcc9b-c709-11f0-9935-525400be629f
-  title: _("Wireguard tunnels by number")
+  id: cdf26435-c7b2-11f0-96b5-525400be629f
+  title: _("Wireguard tunnels by name")
   description: _("Displays wireguard tunnel status in a table.")
   type: datatable
   reloadPeriod: 30000
@@ -13,7 +13,7 @@ data:
   datatable:
     columns:
     - name: _("Tunnel")
-      prop: tunnelnum
+      prop: tunnelname
       flexGrow: 1
       sortable: true
     - name: _("Enabled")
