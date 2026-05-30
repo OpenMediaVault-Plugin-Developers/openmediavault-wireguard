@@ -40,7 +40,7 @@ configure_wireguard_wgnet{{ tnum }}_{{ tname }}_perms:
     - name: "{{ scfg }}"
     - user: root
     - group: root
-    - mode: "0644"
+    - mode: '0644'
     - replace: False
 
 configure_wireguard_wgnet{{ tnum }}_{{ tname }}:
@@ -87,7 +87,7 @@ configure_wireguard_client_wgnet{{ cnum }}_perms:
     - name: "{{ ccfg }}"
     - user: root
     - group: root
-    - mode: "0644"
+    - mode: '0644'
     - replace: False
 
 configure_wireguard_client_wgnet{{ cnum }}:
@@ -199,7 +199,7 @@ configure_wireguard_{{ sname }}:
       config: {{ cc | json }}
     - user: root
     - group: root
-    - mode: "0644"
+    - mode: '0644'
 
 start_wireguard_service_{{ sname }}:
   service.running:
