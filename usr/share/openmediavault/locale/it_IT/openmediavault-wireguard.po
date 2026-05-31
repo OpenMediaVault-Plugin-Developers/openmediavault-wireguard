@@ -5,15 +5,16 @@
 # 
 # Translators:
 # Oliver Thomas Cervera <cervera93-10@yahoo.it>, 2022
+# Giovanni Scafora <scafora.giovanni@gmail.com>, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-22 14:58+0000\n"
+"POT-Creation-Date: 2026-05-31 01:31+0000\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
-"Last-Translator: Oliver Thomas Cervera <cervera93-10@yahoo.it>, 2022\n"
+"Last-Translator: Giovanni Scafora <scafora.giovanni@gmail.com>, 2026\n"
 "Language-Team: Italian (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,37 +23,37 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "Additional subnet(s)"
-msgstr ""
+msgstr "Subnet aggiuntiva(e)"
 
 msgid "Advanced"
-msgstr ""
+msgstr "Opzioni avanzate"
 
 msgid "All QR codes"
-msgstr ""
+msgstr "Tutti i codici QR"
 
 msgid "All client configs"
-msgstr ""
+msgstr "Tutte le configurazioni client"
 
 msgid "All tunnel configs"
-msgstr ""
+msgstr "Tutte le configurazioni tunnel"
 
 msgid "Allowed IPs"
-msgstr ""
+msgstr "IP autorizzati"
 
 msgid "Cannot open zip file."
-msgstr ""
+msgstr "Impossibile aprire il file zip."
 
 msgid "Client Config"
-msgstr "Configurazione Client"
+msgstr "Configurazione client"
 
 msgid "Client Number"
-msgstr "Numero Client"
+msgstr "Numero del client"
 
 msgid "Client config"
-msgstr ""
+msgstr "Configurazione client"
 
 msgid "Client config file does not exist.  Please apply changes."
-msgstr ""
+msgstr "File di configurazione client inesistente. Applica le modifiche."
 
 msgid "Client number"
 msgstr "Numero del client"
@@ -61,10 +62,10 @@ msgid "Clients"
 msgstr "Client"
 
 msgid "Config"
-msgstr ""
+msgstr "Configurazione"
 
 msgid "Configure iptables"
-msgstr ""
+msgstr "Configura iptables"
 
 msgid "Create"
 msgstr "Crea"
@@ -73,36 +74,40 @@ msgid "Created client."
 msgstr "Client creato."
 
 msgid "Created custom config."
-msgstr ""
+msgstr "Configurazione personalizzata creata."
 
 msgid "Created tunnel."
 msgstr "Tunnel creato."
 
 msgid "Custom Config"
-msgstr ""
+msgstr "Configurazione personalizzata"
 
 msgid "DNS"
-msgstr ""
+msgstr "DNS"
 
 msgid ""
 "Default networks in the plugin are created in the 10.192.x.x range. Choose a"
 " different range to avoid conflicts."
 msgstr ""
+"Le reti predefinite nel plugin vengono create nell’intervallo 10.192.x.x. "
+"Scegli un intervallo diverso per evitare conflitti."
 
 msgid "Delete"
 msgstr "Elimina"
 
 msgid "Displays wireguard custom config status in a table."
 msgstr ""
+"Mostra lo stato delle configurazioni personalizzate di WireGuard in una "
+"tabella."
 
 msgid "Displays wireguard tunnel status in a table."
-msgstr ""
+msgstr "Mostra lo stato dei tunnel di WireGuard in una tabella."
 
 msgid "Docs"
-msgstr ""
+msgstr "Documentazione"
 
 msgid "Download"
-msgstr ""
+msgstr "Scarica"
 
 msgid "Edit"
 msgstr "Modifica"
@@ -111,7 +116,7 @@ msgid "Edit client."
 msgstr "Modifica client."
 
 msgid "Edit custom config."
-msgstr ""
+msgstr "Modifica configurazione personalizzata."
 
 msgid "Edit tunnel."
 msgstr "Modifica tunnel."
@@ -120,22 +125,22 @@ msgid "Enable"
 msgstr "Abilita"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Abilitato"
 
 msgid "Endpoint"
 msgstr "Endpoint"
 
 msgid "Generate QR Codes"
-msgstr ""
+msgstr "Genera codici QR"
 
 msgid "Generating QR codes ..."
-msgstr ""
+msgstr "Generazione codici QR in corso..."
 
 msgid "Local IP"
-msgstr ""
+msgstr "IP locale"
 
 msgid "MTU"
-msgstr ""
+msgstr "MTU"
 
 msgid "Name"
 msgstr "Nome"
@@ -144,16 +149,18 @@ msgid "Network Adapter"
 msgstr "Scheda di rete"
 
 msgid "Persistent keepalive"
-msgstr ""
+msgstr "Keepalive persistente"
 
 msgid "Please disable client and apply changes before deleting!"
-msgstr ""
+msgstr "Disabilita il client e applica le modifiche prima di eliminare!"
 
 msgid "Please disable custom config and apply changes before deleting!"
 msgstr ""
+"Disabilita la configurazione personalizzata e applica le modifiche prima di "
+"eliminare!"
 
 msgid "Please disable tunnel and apply changes before deleting!"
-msgstr ""
+msgstr "Disabilita il tunnel e applica le modifiche prima di eliminare!"
 
 msgid "Port"
 msgstr "Porta"
@@ -162,52 +169,53 @@ msgid "QR Code"
 msgstr "Codice QR"
 
 msgid "QR code"
-msgstr ""
+msgstr "Codice QR"
 
 msgid "QR codes have been created."
-msgstr ""
+msgstr "I codici QR sono stati creati."
 
 msgid "Restrict"
-msgstr ""
+msgstr "Limita"
 
 msgid "Restrict routing"
-msgstr ""
+msgstr "Limita instradamento"
 
 msgid "Restrict routing to VPN subnet"
-msgstr ""
+msgstr "Limita l’instradamento alla sottorete VPN"
 
 msgid "Restrict routing to local subnet"
-msgstr ""
+msgstr "Limita l’instradamento alla sottorete locale"
 
 msgid "Restrict routing to these additional subnet(s)"
-msgstr ""
+msgstr "Limita l’instradamento a queste sottoreti aggiuntive"
 
 msgid "Running"
-msgstr ""
+msgstr "In esecuzione"
 
 msgid "Set to 0 to disable"
-msgstr ""
+msgstr "Imposta a 0 per disabilitare"
 
 msgid "Set to 0 to disable. Wireguard will use 1420 when disabled."
 msgstr ""
+"Imposta a 0 per disabilitare. WireGuard utilizzerà 1420 quando disabilitato."
 
 msgid "Tunnel"
-msgstr ""
+msgstr "Tunnel"
 
 msgid "Tunnel Config"
-msgstr ""
+msgstr "Configurazione tunnel"
 
 msgid "Tunnel Number"
 msgstr "Numero Tunnel"
 
 msgid "Tunnel config"
-msgstr ""
+msgstr "Configurazione tunnel"
 
 msgid "Tunnel config file does not exist.  Please apply changes."
-msgstr ""
+msgstr "File di configurazione tunnel inesistente. Applica le modifiche."
 
 msgid "Tunnel enable"
-msgstr ""
+msgstr "Abilita tunnel"
 
 msgid "Tunnel number"
 msgstr "Numero del tunnel"
@@ -216,19 +224,19 @@ msgid "Tunnels"
 msgstr "Tunnel"
 
 msgid "VPN"
-msgstr ""
+msgstr "VPN"
 
 msgid "Wireguard"
 msgstr "Wireguard"
 
 msgid "Wireguard custom"
-msgstr ""
+msgstr "WireGuard personalizzato"
 
 msgid "Wireguard tunnels by name"
-msgstr ""
+msgstr "Tunnel WireGuard per nome"
 
 msgid "Wireguard tunnels by number"
-msgstr ""
+msgstr "Tunnel WireGuard per numero"
 
 msgid "omv-extras wiki"
-msgstr ""
+msgstr "Wiki di OMV-Extras"

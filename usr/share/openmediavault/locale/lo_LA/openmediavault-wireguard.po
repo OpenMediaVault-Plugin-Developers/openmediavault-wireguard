@@ -1,0 +1,236 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the openmediavault-wireguard package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# BoneNI, 2026
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: openmediavault-wireguard\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-31 01:31+0000\n"
+"PO-Revision-Date: 2022-08-14 13:07+0000\n"
+"Last-Translator: BoneNI, 2026\n"
+"Language-Team: Lao (Laos) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/lo_LA/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: lo_LA\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Additional subnet(s)"
+msgstr "ຊັບເນັດເພີ່ມເຕີມ"
+
+msgid "Advanced"
+msgstr "ຂັ້ນສູງ"
+
+msgid "All QR codes"
+msgstr "QR code ທັງໝົດ"
+
+msgid "All client configs"
+msgstr "ການຕັ້ງຄ່າລູກຂ່າຍທັງໝົດ"
+
+msgid "All tunnel configs"
+msgstr "ການຕັ້ງຄ່າທະນໍທັງໝົດ"
+
+msgid "Allowed IPs"
+msgstr "IP ທີ່ອະນຸຍາດ"
+
+msgid "Cannot open zip file."
+msgstr "ບໍ່ສາມາດເປີດໄຟລ໌ zip ໄດ້."
+
+msgid "Client Config"
+msgstr "ການຕັ້ງຄ່າລູກຂ່າຍ"
+
+msgid "Client Number"
+msgstr "ໝາຍເລກລູກຂ່າຍ"
+
+msgid "Client config"
+msgstr "ການຕັ້ງຄ່າລູກຂ່າຍ"
+
+msgid "Client config file does not exist.  Please apply changes."
+msgstr "ບໍ່ມີໄຟລ໌ການຕັ້ງຄ່າລູກຂ່າຍ. ກະລຸນານຳໃຊ້ການປ່ຽນແປງ."
+
+msgid "Client number"
+msgstr "ໝາຍເລກລູກຂ່າຍ"
+
+msgid "Clients"
+msgstr "ລູກຂ່າຍ"
+
+msgid "Config"
+msgstr "ການຕັ້ງຄ່າ"
+
+msgid "Configure iptables"
+msgstr "ຕັ້ງຄ່າ iptables"
+
+msgid "Create"
+msgstr "ສ້າງ"
+
+msgid "Created client."
+msgstr "ສ້າງລູກຂ່າຍສຳເລັດແລ້ວ."
+
+msgid "Created custom config."
+msgstr "ສ້າງການຕັ້ງຄ່າກຳນົດເອງສຳເລັດແລ້ວ."
+
+msgid "Created tunnel."
+msgstr "ສ້າງທະນໍສຳເລັດແລ້ວ."
+
+msgid "Custom Config"
+msgstr "ການຕັ້ງຄ່າກຳນົດເອງ"
+
+msgid "DNS"
+msgstr "DNS"
+
+msgid ""
+"Default networks in the plugin are created in the 10.192.x.x range. Choose a"
+" different range to avoid conflicts."
+msgstr ""
+"ເຄືອຂ່າຍເລີ່ມຕົ້ນໃນປລັກອິນແມ່ນຖືກສ້າງຂຶ້ນໃນຊ່ວງ 10.192.x.x. "
+"ເລືອກຊ່ວງອື່ນເພື່ອຫຼີກເວັ້ນການຊ້ຳຊ້ອນກັນ."
+
+msgid "Delete"
+msgstr "ລຶບ"
+
+msgid "Displays wireguard custom config status in a table."
+msgstr "ສະແດງສະຖານະການຕັ້ງຄ່າ WireGuard ທີ່ກຳນົດເອງໃນຕາຕະລາງ."
+
+msgid "Displays wireguard tunnel status in a table."
+msgstr "ສະແດງສະຖານະທະນໍ WireGuard ໃນຕາຕະລາງ."
+
+msgid "Docs"
+msgstr "ເອກະສານ"
+
+msgid "Download"
+msgstr "ດາວໂຫຼດ"
+
+msgid "Edit"
+msgstr "ແກ້ໄຂ"
+
+msgid "Edit client."
+msgstr "ແກ້ໄຂລູກຂ່າຍ."
+
+msgid "Edit custom config."
+msgstr "ແກ້ໄຂການຕັ້ງຄ່າກຳນົດເອງ."
+
+msgid "Edit tunnel."
+msgstr "ແກ້ໄຂທະນໍ."
+
+msgid "Enable"
+msgstr "ເປີດໃຊ້ງານ"
+
+msgid "Enabled"
+msgstr "ເປີດໃຊ້ງານແລ້ວ"
+
+msgid "Endpoint"
+msgstr "ຈຸດປາຍທາງ (Endpoint)"
+
+msgid "Generate QR Codes"
+msgstr "ສ້າງ QR Code"
+
+msgid "Generating QR codes ..."
+msgstr "ກຳລັງສ້າງ QR code ..."
+
+msgid "Local IP"
+msgstr "IP ພາຍໃນ"
+
+msgid "MTU"
+msgstr "MTU"
+
+msgid "Name"
+msgstr "ຊື່"
+
+msgid "Network Adapter"
+msgstr "ອຸປະກອນເຊື່ອມຕໍ່ເຄືອຂ່າຍ"
+
+msgid "Persistent keepalive"
+msgstr "ການຮັກສາການເຊື່ອມຕໍ່ແບບຕໍ່ເນື່ອງ (Persistent keepalive)"
+
+msgid "Please disable client and apply changes before deleting!"
+msgstr "ກະລຸນາປິດການໃຊ້ງານລູກຂ່າຍ ແລະ ນຳໃຊ້ການປ່ຽນແປງກ່ອນທີ່ຈະລຶບ!"
+
+msgid "Please disable custom config and apply changes before deleting!"
+msgstr "ກະລຸນາປິດການໃຊ້ງານການຕັ້ງຄ່າກຳນົດເອງ ແລະ ນຳໃຊ້ການປ່ຽນແປງກ່ອນທີ່ຈະລຶບ!"
+
+msgid "Please disable tunnel and apply changes before deleting!"
+msgstr "ກະລຸນາປິດການໃຊ້ງານທະນໍ ແລະ ນຳໃຊ້ການປ່ຽນແປງກ່ອນທີ່ຈະລຶບ!"
+
+msgid "Port"
+msgstr "ພອດ (Port)"
+
+msgid "QR Code"
+msgstr "QR Code"
+
+msgid "QR code"
+msgstr "QR code"
+
+msgid "QR codes have been created."
+msgstr "ສ້າງ QR code ສຳເລັດແລ້ວ."
+
+msgid "Restrict"
+msgstr "ຈຳກັດ"
+
+msgid "Restrict routing"
+msgstr "ຈຳກັດການກຳນົດເສັ້ນທາງ (Routing)"
+
+msgid "Restrict routing to VPN subnet"
+msgstr "ຈຳກັດການກຳນົດເສັ້ນທາງໄປຍັງຊັບເນັດ VPN"
+
+msgid "Restrict routing to local subnet"
+msgstr "ຈຳກັດການກຳນົດເສັ້ນທາງໄປຍັງຊັບເນັດພາຍໃນ"
+
+msgid "Restrict routing to these additional subnet(s)"
+msgstr "ຈຳກັດການກຳນົດເສັ້ນທາງໄປຍັງຊັບເນັດເພີ່ມເຕີມເຫຼົ່ານີ້"
+
+msgid "Running"
+msgstr "ກຳລັງເຮັດວຽກ"
+
+msgid "Set to 0 to disable"
+msgstr "ຕັ້ງເປັນ 0 ເພື່ອປິດການໃຊ້ງານ"
+
+msgid "Set to 0 to disable. Wireguard will use 1420 when disabled."
+msgstr "ຕັ້ງເປັນ 0 ເພື່ອປິດການໃຊ້ງານ. WireGuard ຈະໃຊ້ 1420 ເມື່ອປິດການໃຊ້ງານ."
+
+msgid "Tunnel"
+msgstr "ທະນໍ (Tunnel)"
+
+msgid "Tunnel Config"
+msgstr "ການຕັ້ງຄ່າທະນໍ"
+
+msgid "Tunnel Number"
+msgstr "ໝາຍເລກທະນໍ"
+
+msgid "Tunnel config"
+msgstr "ການຕັ້ງຄ່າທະນໍ"
+
+msgid "Tunnel config file does not exist.  Please apply changes."
+msgstr "ບໍ່ມີໄຟລ໌ການຕັ້ງຄ່າທະນໍ. ກະລຸນານຳໃຊ້ການປ່ຽນແປງ."
+
+msgid "Tunnel enable"
+msgstr "ເປີດໃຊ້ທະນໍ"
+
+msgid "Tunnel number"
+msgstr "ໝາຍເລກທະນໍ"
+
+msgid "Tunnels"
+msgstr "ທະນໍທັງໝົດ"
+
+msgid "VPN"
+msgstr "VPN"
+
+msgid "Wireguard"
+msgstr "WireGuard"
+
+msgid "Wireguard custom"
+msgstr "WireGuard ກຳນົດເອງ"
+
+msgid "Wireguard tunnels by name"
+msgstr "ທະນໍ WireGuard ຕາມຊື່"
+
+msgid "Wireguard tunnels by number"
+msgstr "ທະນໍ WireGuard ຕາມໝາຍເລກ"
+
+msgid "omv-extras wiki"
+msgstr "omv-extras wiki"

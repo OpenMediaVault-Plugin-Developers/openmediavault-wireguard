@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-22 14:58+0000\n"
+"POT-Creation-Date: 2026-05-31 01:31+0000\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>, 2025\n"
 "Language-Team: Dutch (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/nl/)\n"
@@ -96,6 +96,7 @@ msgstr "Verwijderen"
 
 msgid "Displays wireguard custom config status in a table."
 msgstr ""
+"Toont de status van de aangepaste configuratie van wireguard in een tabel."
 
 msgid "Displays wireguard tunnel status in a table."
 msgstr "Geeft de status van de wireguard-tunnel weer in een tabel."
@@ -228,13 +229,13 @@ msgid "Wireguard"
 msgstr "Wireguard"
 
 msgid "Wireguard custom"
-msgstr ""
+msgstr "Wireguard aangepast"
 
 msgid "Wireguard tunnels by name"
-msgstr ""
+msgstr "Wireguard-tunnels op naam"
 
 msgid "Wireguard tunnels by number"
-msgstr ""
+msgstr "Wireguard-tunnels op nummer"
 
 msgid "omv-extras wiki"
 msgstr "omv-extras wiki"
