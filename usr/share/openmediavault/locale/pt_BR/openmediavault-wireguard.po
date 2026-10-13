@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-31 01:31+0000\n"
+"POT-Creation-Date: 2026-10-13 23:02+0000\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
 "Last-Translator: Marcelo Esteves <marcelopge@gmail.com>, 2022\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/pt_BR/)\n"
@@ -131,6 +131,9 @@ msgstr ""
 msgid "Generating QR codes ..."
 msgstr ""
 
+msgid "Invalid WireGuard key '%s'."
+msgstr ""
+
 msgid "Local IP"
 msgstr ""
 
@@ -144,6 +147,9 @@ msgid "Network Adapter"
 msgstr "Adaptador de rede"
 
 msgid "Persistent keepalive"
+msgstr ""
+
+msgid "Please delete all clients of this tunnel before deleting!"
 msgstr ""
 
 msgid "Please disable client and apply changes before deleting!"

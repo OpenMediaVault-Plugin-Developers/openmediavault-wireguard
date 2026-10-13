@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-31 01:31+0000\n"
+"POT-Creation-Date: 2026-10-13 23:02+0000\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
 "Last-Translator: BoneNI, 2026\n"
 "Language-Team: Lao (Laos) (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/lo_LA/)\n"
@@ -133,6 +133,9 @@ msgstr "ສ້າງ QR Code"
 msgid "Generating QR codes ..."
 msgstr "ກຳລັງສ້າງ QR code ..."
 
+msgid "Invalid WireGuard key '%s'."
+msgstr ""
+
 msgid "Local IP"
 msgstr "IP ພາຍໃນ"
 
@@ -147,6 +150,9 @@ msgstr "ອຸປະກອນເຊື່ອມຕໍ່ເຄືອຂ່າຍ
 
 msgid "Persistent keepalive"
 msgstr "ການຮັກສາການເຊື່ອມຕໍ່ແບບຕໍ່ເນື່ອງ (Persistent keepalive)"
+
+msgid "Please delete all clients of this tunnel before deleting!"
+msgstr ""
 
 msgid "Please disable client and apply changes before deleting!"
 msgstr "ກະລຸນາປິດການໃຊ້ງານລູກຂ່າຍ ແລະ ນຳໃຊ້ການປ່ຽນແປງກ່ອນທີ່ຈະລຶບ!"

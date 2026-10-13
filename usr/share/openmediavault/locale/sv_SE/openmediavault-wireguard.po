@@ -3,13 +3,17 @@
 # This file is distributed under the same license as the openmediavault-wireguard package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Jonatan Nyberg, 2026
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-wireguard\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-31 01:31+0000\n"
+"POT-Creation-Date: 2026-10-13 23:02+0000\n"
 "PO-Revision-Date: 2022-08-14 13:07+0000\n"
+"Last-Translator: Jonatan Nyberg, 2026\n"
 "Language-Team: Swedish (https://app.transifex.com/openmediavault-plugin-developers/teams/1854/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,213 +22,225 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Additional subnet(s)"
-msgstr ""
+msgstr "Ytterligare undernät"
 
 msgid "Advanced"
-msgstr ""
+msgstr "Avancerat"
 
 msgid "All QR codes"
-msgstr ""
+msgstr "Alla QR-koder"
 
 msgid "All client configs"
-msgstr ""
+msgstr "Alla klientkonfigurationer"
 
 msgid "All tunnel configs"
-msgstr ""
+msgstr "Alla tunnelkonfigurationer"
 
 msgid "Allowed IPs"
-msgstr ""
+msgstr "Tillåtna IP-adresser"
 
 msgid "Cannot open zip file."
-msgstr ""
+msgstr "Det går inte att öppna ZIP-filen."
 
 msgid "Client Config"
-msgstr ""
+msgstr "Klientkonfiguration"
 
 msgid "Client Number"
-msgstr ""
+msgstr "Klientnummer"
 
 msgid "Client config"
-msgstr ""
+msgstr "Klientkonfiguration"
 
 msgid "Client config file does not exist.  Please apply changes."
-msgstr ""
+msgstr "Klientens konfigurationsfil finns inte. Verkställ ändringarna."
 
 msgid "Client number"
-msgstr ""
+msgstr "Klientnummer"
 
 msgid "Clients"
-msgstr ""
+msgstr "Klienter"
 
 msgid "Config"
-msgstr ""
+msgstr "Konfiguration"
 
 msgid "Configure iptables"
-msgstr ""
+msgstr "Konfigurera iptables"
 
 msgid "Create"
-msgstr ""
+msgstr "Skapa"
 
 msgid "Created client."
-msgstr ""
+msgstr "Klienten har skapats."
 
 msgid "Created custom config."
-msgstr ""
+msgstr "Den anpassade konfigurationen har skapats."
 
 msgid "Created tunnel."
-msgstr ""
+msgstr "Tunneln har skapats."
 
 msgid "Custom Config"
-msgstr ""
+msgstr "Anpassad konfiguration"
 
 msgid "DNS"
-msgstr ""
+msgstr "DNS"
 
 msgid ""
 "Default networks in the plugin are created in the 10.192.x.x range. Choose a"
 " different range to avoid conflicts."
 msgstr ""
+"Standardnäten i insticksmodulen skapas inom intervallet 10.192.x.x. Välj ett"
+" annat intervall för att undvika konflikter."
 
 msgid "Delete"
-msgstr ""
+msgstr "Ta bort"
 
 msgid "Displays wireguard custom config status in a table."
-msgstr ""
+msgstr "Visar status för anpassade WireGuard-konfigurationer i en tabell."
 
 msgid "Displays wireguard tunnel status in a table."
-msgstr ""
+msgstr "Visar status för WireGuard-tunnlar i en tabell."
 
 msgid "Docs"
-msgstr ""
+msgstr "Dokumentation"
 
 msgid "Download"
-msgstr ""
+msgstr "Hämta"
 
 msgid "Edit"
-msgstr ""
+msgstr "Redigera"
 
 msgid "Edit client."
-msgstr ""
+msgstr "Redigera klienten."
 
 msgid "Edit custom config."
-msgstr ""
+msgstr "Redigera den anpassade konfigurationen."
 
 msgid "Edit tunnel."
-msgstr ""
+msgstr "Redigera tunneln."
 
 msgid "Enable"
-msgstr ""
+msgstr "Aktivera"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Aktiverad"
 
 msgid "Endpoint"
-msgstr ""
+msgstr "Slutpunkt"
 
 msgid "Generate QR Codes"
-msgstr ""
+msgstr "Skapa QR-koder"
 
 msgid "Generating QR codes ..."
+msgstr "Skapar QR-koder…"
+
+msgid "Invalid WireGuard key '%s'."
 msgstr ""
 
 msgid "Local IP"
-msgstr ""
+msgstr "Lokal IP-adress"
 
 msgid "MTU"
-msgstr ""
+msgstr "MTU"
 
 msgid "Name"
-msgstr ""
+msgstr "Namn"
 
 msgid "Network Adapter"
-msgstr ""
+msgstr "Nätverkskort"
 
 msgid "Persistent keepalive"
+msgstr "Beständig keepalive"
+
+msgid "Please delete all clients of this tunnel before deleting!"
 msgstr ""
 
 msgid "Please disable client and apply changes before deleting!"
-msgstr ""
+msgstr "Inaktivera klienten och verkställ ändringarna innan den tas bort."
 
 msgid "Please disable custom config and apply changes before deleting!"
 msgstr ""
+"Inaktivera den anpassade konfigurationen och verkställ ändringarna innan den"
+" tas bort."
 
 msgid "Please disable tunnel and apply changes before deleting!"
-msgstr ""
+msgstr "Inaktivera tunneln och verkställ ändringarna innan den tas bort."
 
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 msgid "QR Code"
-msgstr ""
+msgstr "QR-kod"
 
 msgid "QR code"
-msgstr ""
+msgstr "QR-kod"
 
 msgid "QR codes have been created."
-msgstr ""
+msgstr "QR-koderna har skapats."
 
 msgid "Restrict"
-msgstr ""
+msgstr "Begränsa"
 
 msgid "Restrict routing"
-msgstr ""
+msgstr "Begränsa routning"
 
 msgid "Restrict routing to VPN subnet"
-msgstr ""
+msgstr "Begränsa routningen till VPN-undernätet"
 
 msgid "Restrict routing to local subnet"
-msgstr ""
+msgstr "Begränsa routningen till det lokala undernätet"
 
 msgid "Restrict routing to these additional subnet(s)"
-msgstr ""
+msgstr "Begränsa routningen till följande ytterligare undernät"
 
 msgid "Running"
-msgstr ""
+msgstr "Körs"
 
 msgid "Set to 0 to disable"
-msgstr ""
+msgstr "Ange 0 för att inaktivera"
 
 msgid "Set to 0 to disable. Wireguard will use 1420 when disabled."
 msgstr ""
+"Ange 0 för att inaktivera. WireGuard använder 1420 när inställningen är "
+"inaktiverad."
 
 msgid "Tunnel"
-msgstr ""
+msgstr "Tunnel"
 
 msgid "Tunnel Config"
-msgstr ""
+msgstr "Tunnelkonfiguration"
 
 msgid "Tunnel Number"
-msgstr ""
+msgstr "Tunnelnummer"
 
 msgid "Tunnel config"
-msgstr ""
+msgstr "Tunnelkonfiguration"
 
 msgid "Tunnel config file does not exist.  Please apply changes."
-msgstr ""
+msgstr "Tunnelns konfigurationsfil finns inte. Verkställ ändringarna."
 
 msgid "Tunnel enable"
-msgstr ""
+msgstr "Aktivera tunnel"
 
 msgid "Tunnel number"
-msgstr ""
+msgstr "Tunnelnummer"
 
 msgid "Tunnels"
-msgstr ""
+msgstr "Tunnlar"
 
 msgid "VPN"
-msgstr ""
+msgstr "VPN"
 
 msgid "Wireguard"
-msgstr ""
+msgstr "WireGuard"
 
 msgid "Wireguard custom"
-msgstr ""
+msgstr "Anpassad WireGuard-konfiguration"
 
 msgid "Wireguard tunnels by name"
-msgstr ""
+msgstr "WireGuard-tunnlar efter namn"
 
 msgid "Wireguard tunnels by number"
-msgstr ""
+msgstr "WireGuard-tunnlar efter nummer"
 
 msgid "omv-extras wiki"
-msgstr ""
+msgstr "OMV-Extras-wiki"
