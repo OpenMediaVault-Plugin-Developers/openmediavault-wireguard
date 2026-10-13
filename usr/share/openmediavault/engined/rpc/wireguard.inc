@@ -53,6 +53,31 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod("enumerateCustom");
     }
 
+    private function wgGenerate($subcmd)
+    {
+        $output = [];
+        $cmd = new \OMV\System\Process("wg", $subcmd);
+        $cmd->execute($output);
+        return trim($output[0]);
+    }
+
+    private function wgPubKey($privateKey)
+    {
+        $output = [];
+        $cmd = new \OMV\System\Process("wg", "pubkey");
+        $cmd->setInputFromHereString($privateKey);
+        $cmd->execute($output);
+        return trim($output[0]);
+    }
+
+    private function assertValidKey($key, $name)
+    {
+        if (1 !== preg_match('/^[A-Za-z0-9+\/]{43}=$/', $key)) {
+            throw new \OMV\Exception(sprintf(
+                gettext("Invalid WireGuard key '%s'."), $name));
+        }
+    }
+
     public function getTunnelList($params, $context)
     {
         // Validate the RPC caller context.
@@ -106,36 +131,24 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         // Create keys if empty
         // privatekeyserver
         if (strlen($params["privatekeyserver"]) != 44) {
-            $output = [];
-            $cmdArgs = [];
-            $cmdArgs[] = "genkey";
-            $cmd = new \OMV\System\Process("wg", $cmdArgs);
-            $cmd->execute($output);
-            $params["privatekeyserver"] = $output[0];
+            $params["privatekeyserver"] = $this->wgGenerate("genkey");
         }
+        $this->assertValidKey($params["privatekeyserver"], "privatekeyserver");
         // publickeyserver
         if (strlen($params["publickeyserver"]) != 44) {
-            $output = [];
-            $cmdArgs = [];
-            $cmdArgs[] = sprintf("echo '%s'", $params["privatekeyserver"]);
-            $cmdArgs[] = "| wg pubkey";
-            $cmd = new \OMV\System\Process($cmdArgs);
-            $cmd->execute($output);
-            $params["publickeyserver"] = $output[0];
+            $params["publickeyserver"] = $this->wgPubKey($params["privatekeyserver"]);
         }
+        $this->assertValidKey($params["publickeyserver"], "publickeyserver");
         // Verify that shared folder is set
         $db = \OMV\Config\Database::getInstance();
         // Prepare the configuration object.
         $object = new \OMV\Config\ConfigObject("conf.service.wireguard.tunnel");
         $object->setAssoc($params);
         // Set the configuration object.
-        $isNew = $object->isNew();
-        if (TRUE === $isNew) {
-            // Check uniqueness - name
-            $db->assertIsUnique($object, "tunnelname");
-            $db->assertIsUnique($object, "tunnelnum");
-            $db->assertIsUnique($object, "port");
-        }
+        // Check uniqueness (existing objects are excluded from the check)
+        $db->assertIsUnique($object, "tunnelname");
+        $db->assertIsUnique($object, "tunnelnum");
+        $db->assertIsUnique($object, "port");
         $db->set($object);
         // Return the configuration object.
         return $object->getAssoc();
@@ -158,6 +171,16 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             $msg2 = sprintf("Tunnel '%s' - %s", $object->get("tunnelname"), $msg1);
             throw new \OMV\Exception($msg2);
         }
+        $clients = $db->getByFilter("conf.service.wireguard.client", [
+            "operator" => "stringEquals",
+            "arg0" => "tunnelnum",
+            "arg1" => $tunnelnum
+        ]);
+        if (count($clients) > 0) {
+            $msg1 = gettext("Please delete all clients of this tunnel before deleting!");
+            $msg2 = sprintf("Tunnel '%s' - %s", $object->get("tunnelname"), $msg1);
+            throw new \OMV\Exception($msg2);
+        }
         $db->delete($object);
         // Return the deleted configuration object.
         return $object->getAssoc();
@@ -167,6 +190,8 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
     {
         // Validate the RPC caller context.
         $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, "rpc.common.objectuuid");
         $db = \OMV\Config\Database::getInstance();
         $object = $db->get("conf.service.wireguard.tunnel", $params["uuid"]);
         // Create the background process.
@@ -298,17 +323,19 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $objectsAssoc = [];
         foreach ($objects as $objectk => &$objectv) {
             $tunnelnum = $objectv->get("tunnelnum");
-            $tunnel = $db->getByFilter("conf.service.wireguard.tunnel", [
+            $tunnels = $db->getByFilter("conf.service.wireguard.tunnel", [
                 "operator" => "stringEquals",
                 "arg0" => "tunnelnum",
                 "arg1" => $tunnelnum
-            ], 1);
+            ]);
+            $tunnel = empty($tunnels) ? null : $tunnels[0];
             $restricts = [];
             if ($objectv->get("restrict")) {
                 if ($objectv->get("vpn")) {
                     $restricts[] = sprintf('10.192.%d.0/24', $objectv->get("tunnelnum"));
                 }
-                if ($objectv->get("localip") && strlen($tunnel->get("localserver")) >= 7) {
+                if ($objectv->get("localip") && !is_null($tunnel) &&
+                    strlen($tunnel->get("localserver")) >= 7) {
                     $restricts[] = $tunnel->get("localserver");
                 }
                 if (strlen($objectv->get("subnets")) >= 7) {
@@ -321,7 +348,8 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
                 $restricts[] = "0.0.0.0/0";
             }
             $restricts = array_filter($restricts);
-            $objectv->add("tunnelenable", "boolean", $tunnel->get("enable"));
+            $objectv->add("tunnelenable", "boolean",
+                is_null($tunnel) ? false : $tunnel->get("enable"));
             $objectv->add("allowedips", "string", implode('<br />', $restricts));
             $objectsAssoc[] = $objectv->getAssoc();
         }
@@ -363,45 +391,35 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         // Create keys if empty
         // privatekeyclient
         if (strlen($params["privatekeyclient"]) != 44) {
-            $output = [];
-            $cmdArgs = [];
-            $cmdArgs[] = "genkey";
-            $cmd = new \OMV\System\Process("wg", $cmdArgs);
-            $cmd->execute($output);
-            $params["privatekeyclient"] = $output[0];
+            $params["privatekeyclient"] = $this->wgGenerate("genkey");
         }
+        $this->assertValidKey($params["privatekeyclient"], "privatekeyclient");
         // publickeyclient
         if (strlen($params["publickeyclient"]) != 44) {
-            $output = [];
-            $cmdArgs = [];
-            $cmdArgs[] = sprintf("echo '%s'", $params["privatekeyclient"]);
-            $cmdArgs[] = "| wg pubkey";
-            $cmd = new \OMV\System\Process($cmdArgs);
-            $cmd->execute($output);
-            $params["publickeyclient"] = $output[0];
+            $params["publickeyclient"] = $this->wgPubKey($params["privatekeyclient"]);
         }
+        $this->assertValidKey($params["publickeyclient"], "publickeyclient");
         // presharedkeyclient
         if (strlen($params["presharedkeyclient"]) != 44) {
-            $output = [];
-            $cmdArgs = [];
-            $cmdArgs[] = "genpsk";
-            $cmd = new \OMV\System\Process("wg", $cmdArgs);
-            $cmd->execute($output);
-            $params["presharedkeyclient"] = $output[0];
+            $params["presharedkeyclient"] = $this->wgGenerate("genpsk");
         }
+        $this->assertValidKey($params["presharedkeyclient"], "presharedkeyclient");
         // sort and deduplicate dns servers
         if ($params['dns2'] == 'disable') {
             $params['dns'] = '';
         } else {
-            $dns = str_replace([':',' '], ',', $params['dns']);
+            $dns = $params['dns'];
             if ($params['dns2'] !== 'custom') {
                 $dns .= ',' . $params['dns2'];
             }
-            $dnsa = explode(',', $dns);
-            // remove bad lines in paths
-            foreach ($dnsa as $dnsk => &$dnsv) {
-                $oct = explode('.', $dnsv);
-                if ((strlen($dnsv) < 7) || ($oct[0] == 127 && $oct[3] != 53)) {
+            $dnsa = preg_split('/[\s,;]+/', $dns, -1, PREG_SPLIT_NO_EMPTY);
+            // remove invalid and loopback addresses (except systemd-resolved stub)
+            foreach ($dnsa as $dnsk => $dnsv) {
+                if (false === filter_var($dnsv, FILTER_VALIDATE_IP)) {
+                    unset($dnsa[$dnsk]);
+                } elseif ($dnsv === '::1') {
+                    unset($dnsa[$dnsk]);
+                } elseif (str_starts_with($dnsv, '127.') && !str_ends_with($dnsv, '.53')) {
                     unset($dnsa[$dnsk]);
                 }
             }
@@ -422,12 +440,9 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $object = new \OMV\Config\ConfigObject("conf.service.wireguard.client");
         $object->setAssoc($params);
         // Set the configuration object.
-        $isNew = $object->isNew();
-        if (TRUE === $isNew) {
-            // Check uniqueness - name
-            $db->assertIsUnique($object, "clientname");
-            $db->assertIsUnique($object, "clientnum");
-        }
+        // Check uniqueness (existing objects are excluded from the check)
+        $db->assertIsUnique($object, "clientname");
+        $db->assertIsUnique($object, "clientnum");
         $db->set($object);
         // Return the configuration object.
         return $object->getAssoc();
@@ -535,7 +550,7 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             $cmdArgs[] = sprintf('--read-from=%s', $conf);
             $cmd = new \OMV\System\Process($cmdArgs);
             $cmdLine = $cmd->getCommandLine();
-            if (0 !== $this->exec($cmdLine, $output, $bgOutputFilename)) {
+            if (0 !== $this->exec($cmdLine, $output)) {
                 throw new \OMV\ExecException($cmdLine, $output);
             }
         } else {
@@ -647,7 +662,7 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
                 $cmdArgs[] = '--type=png';
                 $cmdArgs[] = '--output=-';
                 $cmdArgs[] = sprintf('--read-from=%s', $conf);
-                $cmdArgs[] = ' | base64';
+                $cmdArgs[] = '| base64 -w0';
                 $cmd = new \OMV\System\Process($cmdArgs);
                 $cmd->execute($output);
                 $img = trim(implode(PHP_EOL, $output));
@@ -707,11 +722,11 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
             }
         }
         $ipsu = array_unique($ips);
+        asort($ipsu);
+        foreach ($ipsu as $ip) {
+            $dns[] = [ 'dns' => $ip ];
+        }
         if (count($ipsu) > 1) {
-            asort($ipsu);
-            foreach ($ipsu as $ip) {
-                $dns[] = [ 'dns' => $ip ];
-            }
             $dns[] = [ 'dns' => implode(",", $ipsu) ];
         }
         return ($dns);
@@ -755,11 +770,8 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $object = new \OMV\Config\ConfigObject("conf.service.wireguard.custom");
         $object->setAssoc($params);
         // Set the configuration object.
-        $isNew = $object->isNew();
-        if (TRUE === $isNew) {
-            // Check uniqueness - name
-            $db->assertIsUnique($object, "name");
-        }
+        // Check uniqueness (existing objects are excluded from the check)
+        $db->assertIsUnique($object, "name");
         $db->set($object);
         // Return the configuration object.
         return $object->getAssoc();

@@ -118,7 +118,8 @@
           "type": "boolean"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^\\w{1,9}$"
         },
         "customcfg": {
           "type": "string"

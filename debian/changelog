@@ -1,3 +1,15 @@
+openmediavault-wireguard (8.0.4) stable; urgency=low
+
+  * Prevent deleting a tunnel that still has clients
+  * Enforce tunnel/client/custom uniqueness when editing
+  * Validate WireGuard keys and stop passing them through the shell
+  * Keep IPv6 DNS servers and offer a single detected DNS server
+  * Validate custom config names server-side
+  * Remove SaveConfig from generated tunnel configs
+  * Minor RPC fixes
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 13 Oct 2026 21:36:17 +0000
+
 openmediavault-wireguard (8.0.3) stable; urgency=low
 
   * Add custom config status widget

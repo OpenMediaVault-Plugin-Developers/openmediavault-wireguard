@@ -12,12 +12,10 @@
 #   - OMV with the wireguard plugin installed
 #   - wg command available (installed with the wireguard-tools package)
 #
-# NOTE: getTunnelConfig, getClientConfig, downloadTunnelConfig,
-#       downloadClientConfig, and downloadQrCode require the tunnel/client
-#       config files to exist on disk (i.e., after enabling and applying
-#       changes for an existing tunnel/client).  Those tests are skipped when
-#       the files are absent and instead the "no config file" error path is
-#       verified via assert_rpc_fails.
+# WARNING: the "Apply" section enables the test objects and runs
+#          'omv-salt deploy run wireguard'.  The salt state stops and restarts
+#          EVERY wireguard tunnel on the host, not just the test ones.  Only
+#          run this on a development machine.
 
 set -uo pipefail
 
@@ -160,7 +158,8 @@ TEST_TUNNELPORT=51999
 TEST_CLIENTNUM=99
 TEST_CLIENTNAME="omvtest_client"
 
-TEST_CUSTOMNAME="omvtest_custom"
+# Custom names must match ^\w{1,9}$ ("wgnet_" + name must fit IFNAMSIZ)
+TEST_CUSTOMNAME="omvtestcc"
 
 # ---------------------------------------------------------------------------
 # Tracked UUIDs — cleared on successful deletion so cleanup skips them
@@ -189,30 +188,113 @@ for r in rows:
 }
 
 # ---------------------------------------------------------------------------
+# Apply helpers
+# ---------------------------------------------------------------------------
+TUNNEL_CONF="/etc/wireguard/wgnet${TEST_TUNNELNUM}.conf"
+CLIENT_CONF="/etc/wireguard/wgnet_client${TEST_CLIENTNUM}.conf"
+CUSTOM_CONF="/etc/wireguard/wgnet_${TEST_CUSTOMNAME}.conf"
+TEST_CUSTOMPORT=51996
+
+# Set when the test objects have been enabled and deployed; cleanup must then
+# disable and redeploy before the objects can be deleted.
+APPLIED=0
+
+# set_enabled <Tunnel|Client|Custom> <uuid> <true|false> [customcfg]
+# Round-trips the object through get/set with 'enable' changed.  Prints the
+# set* RPC output.
+set_enabled() {
+    local kind=$1 uuid=$2 enable=$3 cfg=${4:-}
+    local data params
+    data=$(omv-rpc -u admin "Wireguard" "get$kind" "{\"uuid\":\"$uuid\"}" 2>&1) || {
+        echo "$data"; return 1; }
+    params=$(CFG="$cfg" python3 -c "
+import sys, json, os
+d = json.loads(sys.argv[1])
+for k in ('numro', 'numclients', 'tunnelenable', 'allowedips'):
+    d.pop(k, None)
+d['enable'] = sys.argv[2] == 'true'
+if os.environ.get('CFG'):
+    d['customcfg'] = os.environ['CFG']
+print(json.dumps(d))
+" "$data" "$enable") || return 1
+    omv-rpc -u admin "Wireguard" "set$kind" "$params" 2>&1
+}
+
+# Wait for any running salt deploy (e.g. one started by applyChanges) to end.
+wait_for_deploys() {
+    local t=0
+    while pgrep -f 'omv-salt deploy|salt-call' >/dev/null && [ $t -lt 180 ]; do
+        sleep 2; ((t += 2)) || true
+    done
+}
+
+# deploy_wireguard — run the wireguard salt state; output in $DEPLOY_OUT.
+DEPLOY_OUT=""
+deploy_wireguard() {
+    local ec=0
+    wait_for_deploys
+    DEPLOY_OUT=$(omv-salt deploy run wireguard 2>&1) || ec=$?
+    return $ec
+}
+
+# Disable every given test object, then deploy so config files are removed.
+disable_and_deploy() {
+    local tunnel=$1 client=$2 custom=$3
+    [ -n "$custom" ] && set_enabled Custom "$custom" false >/dev/null 2>&1
+    [ -n "$client" ] && set_enabled Client "$client" false >/dev/null 2>&1
+    [ -n "$tunnel" ] && set_enabled Tunnel "$tunnel" false >/dev/null 2>&1
+    deploy_wireguard >/dev/null 2>&1
+}
+
+assert_file_contains() {
+    local desc=$1 file=$2 text=$3
+    if grep -qF -- "$text" "$file" 2>/dev/null; then
+        _pass "$desc"
+    else
+        _fail "$desc" "'$text' not found in $file"
+    fi
+}
+
+assert_file_lacks() {
+    local desc=$1 file=$2 text=$3
+    if [ -f "$file" ] && ! grep -qF -- "$text" "$file"; then
+        _pass "$desc"
+    else
+        _fail "$desc" "'$text' found in $file (or file missing)"
+    fi
+}
+
+# ---------------------------------------------------------------------------
 # Pre-cleanup: remove leftover test objects from a previous failed run
 # ---------------------------------------------------------------------------
 pre_cleanup() {
-    local uuid
+    local tunnel client custom
 
-    uuid=$(recover_uuid_from_list "Wireguard" "getTunnelList" "tunnelnum" \
+    tunnel=$(recover_uuid_from_list "Wireguard" "getTunnelList" "tunnelnum" \
         "tunnelname" "$TEST_TUNNELNAME")
-    if [ -n "$uuid" ]; then
-        info "Pre-cleanup: removing leftover tunnel '$TEST_TUNNELNAME' ($uuid)"
-        omv-rpc -u admin "Wireguard" "deleteTunnel" "{\"uuid\":\"$uuid\"}" >/dev/null 2>&1 || true
-    fi
-
-    uuid=$(recover_uuid_from_list "Wireguard" "getClientList" "clientnum" \
+    client=$(recover_uuid_from_list "Wireguard" "getClientList" "clientnum" \
         "clientname" "$TEST_CLIENTNAME")
-    if [ -n "$uuid" ]; then
-        info "Pre-cleanup: removing leftover client '$TEST_CLIENTNAME' ($uuid)"
-        omv-rpc -u admin "Wireguard" "deleteClient" "{\"uuid\":\"$uuid\"}" >/dev/null 2>&1 || true
+    custom=$(recover_uuid_from_list "Wireguard" "getCustomList" "name" \
+        "name" "$TEST_CUSTOMNAME")
+
+    # Leftovers from an interrupted apply cannot be deleted while their
+    # config files exist.
+    if [ -f "$TUNNEL_CONF" ] || [ -f "$CLIENT_CONF" ] || [ -f "$CUSTOM_CONF" ]; then
+        info "Pre-cleanup: disabling leftover test objects and redeploying"
+        disable_and_deploy "$tunnel" "$client" "$custom"
     fi
 
-    uuid=$(recover_uuid_from_list "Wireguard" "getCustomList" "name" \
-        "name" "$TEST_CUSTOMNAME")
-    if [ -n "$uuid" ]; then
-        info "Pre-cleanup: removing leftover custom config '$TEST_CUSTOMNAME' ($uuid)"
-        omv-rpc -u admin "Wireguard" "deleteCustom" "{\"uuid\":\"$uuid\"}" >/dev/null 2>&1 || true
+    if [ -n "$custom" ]; then
+        info "Pre-cleanup: removing leftover custom config '$TEST_CUSTOMNAME' ($custom)"
+        omv-rpc -u admin "Wireguard" "deleteCustom" "{\"uuid\":\"$custom\"}" >/dev/null 2>&1 || true
+    fi
+    if [ -n "$client" ]; then
+        info "Pre-cleanup: removing leftover client '$TEST_CLIENTNAME' ($client)"
+        omv-rpc -u admin "Wireguard" "deleteClient" "{\"uuid\":\"$client\"}" >/dev/null 2>&1 || true
+    fi
+    if [ -n "$tunnel" ]; then
+        info "Pre-cleanup: removing leftover tunnel '$TEST_TUNNELNAME' ($tunnel)"
+        omv-rpc -u admin "Wireguard" "deleteTunnel" "{\"uuid\":\"$tunnel\"}" >/dev/null 2>&1 || true
     fi
 }
 
@@ -221,6 +303,10 @@ pre_cleanup() {
 # ---------------------------------------------------------------------------
 cleanup() {
     section "Cleanup"
+    if [ "$APPLIED" = "1" ]; then
+        info "Disabling test objects and redeploying wireguard"
+        disable_and_deploy "$TUNNEL_UUID" "$CLIENT_UUID" "$CUSTOM_UUID"
+    fi
     if [ -n "$CLIENT_UUID" ]; then
         info "Deleting test client $CLIENT_UUID"
         omv-rpc -u admin "Wireguard" "deleteClient" "{\"uuid\":\"$CLIENT_UUID\"}" >/dev/null 2>&1 || true
@@ -253,7 +339,7 @@ pre_cleanup
 section "Pre-flight"
 # ---------------------------------------------------------------------------
 
-for cmd in omv-rpc python3 wg; do
+for cmd in omv-rpc omv-salt python3 wg; do
     if command -v "$cmd" &>/dev/null; then
         _pass "command available: $cmd"
     else
@@ -382,18 +468,10 @@ if [ -n "$TUNNEL_UUID" ]; then
             "tunnelnum $TEST_TUNNELNUM not found in output"
     fi
 
-    TUNNEL_CONF="/etc/wireguard/wgnet${TEST_TUNNELNUM}.conf"
-    if [ -f "$TUNNEL_CONF" ]; then
-        assert_rpc_bg "getTunnelConfig (bg)" "Wireguard" "getTunnelConfig" \
-            "{\"uuid\":\"$TUNNEL_UUID\"}" "[Interface]"
-        assert_rpc "downloadTunnelConfig" "Wireguard" "downloadTunnelConfig" \
-            "{\"uuid\":\"$TUNNEL_UUID\"}" '"filename"'
-    else
-        _skip "getTunnelConfig (bg)" \
-            "$TUNNEL_CONF not present — enable tunnel and apply changes first"
-        assert_rpc_fails "downloadTunnelConfig (no config file)" \
-            "Wireguard" "downloadTunnelConfig" "{\"uuid\":\"$TUNNEL_UUID\"}"
-    fi
+    # Tunnel is disabled and not deployed yet; the config file is tested in
+    # the Apply section.
+    assert_rpc_fails "downloadTunnelConfig (no config file)" \
+        "Wireguard" "downloadTunnelConfig" "{\"uuid\":\"$TUNNEL_UUID\"}"
 fi
 
 assert_rpc "downloadAllTunnelConfigs" "Wireguard" "downloadAllTunnelConfigs" '{}' '"filename"'
@@ -514,30 +592,16 @@ if [ -n "$CLIENT_UUID" ]; then
         '{"start":0,"limit":100,"sortfield":"clientnum","sortdir":"ASC"}' \
         "\"uuid\":\"$CLIENT_UUID\""
 
-    CLIENT_CONF="/etc/wireguard/wgnet_client${TEST_CLIENTNUM}.conf"
-    if [ -f "$CLIENT_CONF" ]; then
-        assert_rpc_bg "getClientConfig (bg)" "Wireguard" "getClientConfig" \
-            "{\"uuid\":\"$CLIENT_UUID\"}" "[Interface]"
-        assert_rpc "downloadClientConfig" "Wireguard" "downloadClientConfig" \
-            "{\"uuid\":\"$CLIENT_UUID\"}" '"filename"'
-        assert_rpc "downloadQrCode" "Wireguard" "downloadQrCode" \
-            "{\"uuid\":\"$CLIENT_UUID\"}" '"filename"'
-    else
-        _skip "getClientConfig (bg)" \
-            "$CLIENT_CONF not present — enable client and apply changes first"
-        assert_rpc_fails "downloadClientConfig (no config file)" \
-            "Wireguard" "downloadClientConfig" "{\"uuid\":\"$CLIENT_UUID\"}"
-        assert_rpc_fails "downloadQrCode (no config file)" \
-            "Wireguard" "downloadQrCode" "{\"uuid\":\"$CLIENT_UUID\"}"
-    fi
+    # Client is disabled and not deployed yet; the config file is tested in
+    # the Apply section.
+    assert_rpc_fails "downloadClientConfig (no config file)" \
+        "Wireguard" "downloadClientConfig" "{\"uuid\":\"$CLIENT_UUID\"}"
+    assert_rpc_fails "downloadQrCode (no config file)" \
+        "Wireguard" "downloadQrCode" "{\"uuid\":\"$CLIENT_UUID\"}"
 fi
 
 assert_rpc "downloadAllClientConfigs" "Wireguard" "downloadAllClientConfigs" '{}' '"filename"'
 assert_rpc "downloadAllQrCodes"       "Wireguard" "downloadAllQrCodes"       '{}' '"filename"'
-
-# generateQrCodes calls applyChanges internally — skip in automated testing
-_skip "generateQrCodes" \
-    "calls applyChanges; run manually when wireguard is configured and tunnels are active"
 
 # ===========================================================================
 section "Custom configs — CRUD"
@@ -732,16 +796,230 @@ else
     _skip "setCustom — duplicate name" "no test custom config created"
 fi
 
-# deleteTunnel must be blocked when the config file exists (tunnel is active)
-if [ -n "$TUNNEL_UUID" ]; then
-    TUNNEL_CONF="/etc/wireguard/wgnet${TEST_TUNNELNUM}.conf"
-    if [ -f "$TUNNEL_CONF" ]; then
-        assert_rpc_fails "deleteTunnel — blocked by existing config file" \
-            "Wireguard" "deleteTunnel" "{\"uuid\":\"$TUNNEL_UUID\"}"
+BAD_CUSTOM_NAME=$(python3 -c "
+import json
+print(json.dumps({
+    'uuid': '$OMV_NEW_UUID',
+    'enable': False,
+    'name': '../omvtest',
+    'customcfg': '# invalid name'
+}))
+")
+assert_rpc_fails "setCustom — invalid name" "Wireguard" "setCustom" "$BAD_CUSTOM_NAME"
+
+BAD_KEY=$(python3 -c "
+import json
+print(json.dumps({
+    'uuid': '$OMV_NEW_UUID',
+    'enable': False,
+    'tunnelnum': 97,
+    'tunnelname': 'omvtest_badkey',
+    'nic': '',
+    'endpoint': '',
+    'port': 51997,
+    'iptables': False,
+    'persistent': 0,
+    'mtu': 0,
+    'privatekeyserver': \"'\" + 'A' * 42 + '=',
+    'publickeyserver': ''
+}))
+")
+assert_rpc_fails "setTunnel — invalid private key" "Wireguard" "setTunnel" "$BAD_KEY"
+
+# deleteTunnel must be blocked while clients still reference the tunnel
+if [ -n "$TUNNEL_UUID" ] && [ -n "$CLIENT_UUID" ]; then
+    assert_rpc_fails "deleteTunnel — blocked by existing clients" \
+        "Wireguard" "deleteTunnel" "{\"uuid\":\"$TUNNEL_UUID\"}"
+else
+    _skip "deleteTunnel — blocked by existing clients" "no test tunnel/client created"
+fi
+
+# ===========================================================================
+section "Apply — enable and deploy (restarts all wireguard tunnels)"
+# ===========================================================================
+
+if [ -n "$TUNNEL_UUID" ] && [ -n "$CLIENT_UUID" ] && [ -n "$CUSTOM_UUID" ]; then
+    out=$(set_enabled Tunnel "$TUNNEL_UUID" true) \
+        && _pass "setTunnel (enable)" || _fail "setTunnel (enable)" "${out:0:300}"
+    out=$(set_enabled Client "$CLIENT_UUID" true) \
+        && _pass "setClient (enable)" || _fail "setClient (enable)" "${out:0:300}"
+    CUSTOM_CFG=$(printf '[Interface]\nPrivateKey = %s\nListenPort = %s\n' \
+        "$(wg genkey)" "$TEST_CUSTOMPORT")
+    out=$(set_enabled Custom "$CUSTOM_UUID" true "$CUSTOM_CFG") \
+        && _pass "setCustom (enable)" || _fail "setCustom (enable)" "${out:0:300}"
+
+    APPLIED=1
+    if deploy_wireguard; then
+        _pass "omv-salt deploy run wireguard (enable)"
     else
-        _skip "deleteTunnel — blocked by config file" \
-            "$TUNNEL_CONF does not exist on this host"
+        _fail "omv-salt deploy run wireguard (enable)" \
+            "$(echo "$DEPLOY_OUT" | tail -n 20)"
     fi
+
+    T_DATA=$(omv-rpc -u admin "Wireguard" "getTunnel" "{\"uuid\":\"$TUNNEL_UUID\"}" 2>/dev/null)
+    C_DATA=$(omv-rpc -u admin "Wireguard" "getClient" "{\"uuid\":\"$CLIENT_UUID\"}" 2>/dev/null)
+    T_PRIV=$(json_get "$T_DATA" "privatekeyserver")
+    T_PUB=$(json_get "$T_DATA" "publickeyserver")
+    C_PRIV=$(json_get "$C_DATA" "privatekeyclient")
+    C_PUB=$(json_get "$C_DATA" "publickeyclient")
+    C_PSK=$(json_get "$C_DATA" "presharedkeyclient")
+
+    # Generated tunnel config
+    if [ -f "$TUNNEL_CONF" ]; then
+        _pass "tunnel config file created"
+        assert_file_contains "tunnel conf — Address"    "$TUNNEL_CONF" "Address = 10.192.${TEST_TUNNELNUM}.254/24"
+        assert_file_contains "tunnel conf — ListenPort" "$TUNNEL_CONF" "ListenPort = $TEST_TUNNELPORT"
+        assert_file_contains "tunnel conf — PrivateKey" "$TUNNEL_CONF" "PrivateKey = $T_PRIV"
+        assert_file_contains "tunnel conf — client peer" "$TUNNEL_CONF" "PublicKey = $C_PUB"
+        assert_file_contains "tunnel conf — peer AllowedIPs" "$TUNNEL_CONF" \
+            "AllowedIPs = 10.192.${TEST_TUNNELNUM}.${TEST_CLIENTNUM}/32"
+        assert_file_contains "tunnel conf — PresharedKey" "$TUNNEL_CONF" "PresharedKey = $C_PSK"
+        assert_file_lacks    "tunnel conf — no SaveConfig" "$TUNNEL_CONF" "SaveConfig"
+        assert_file_lacks    "tunnel conf — no iptables rules" "$TUNNEL_CONF" "PostUp"
+    else
+        _fail "tunnel config file created" "$TUNNEL_CONF missing"
+    fi
+
+    # Generated client config
+    if [ -f "$CLIENT_CONF" ]; then
+        _pass "client config file created"
+        assert_file_contains "client conf — Address"    "$CLIENT_CONF" \
+            "Address = 10.192.${TEST_TUNNELNUM}.${TEST_CLIENTNUM}/24"
+        assert_file_contains "client conf — PrivateKey" "$CLIENT_CONF" "PrivateKey = $C_PRIV"
+        assert_file_contains "client conf — server peer" "$CLIENT_CONF" "PublicKey = $T_PUB"
+        assert_file_contains "client conf — Endpoint"   "$CLIENT_CONF" \
+            "Endpoint = vpn.example.com:$TEST_TUNNELPORT"
+        assert_file_contains "client conf — AllowedIPs (unrestricted)" "$CLIENT_CONF" \
+            "AllowedIPs = 0.0.0.0/0"
+        assert_file_contains "client conf — PersistentKeepalive" "$CLIENT_CONF" \
+            "PersistentKeepalive = 25"
+        assert_file_lacks    "client conf — no DNS line" "$CLIENT_CONF" "DNS ="
+    else
+        _fail "client config file created" "$CLIENT_CONF missing"
+    fi
+
+    # Custom config
+    if [ -f "$CUSTOM_CONF" ]; then
+        _pass "custom config file created"
+        assert_file_contains "custom conf — content" "$CUSTOM_CONF" "ListenPort = $TEST_CUSTOMPORT"
+    else
+        _fail "custom config file created" "$CUSTOM_CONF missing"
+    fi
+
+    # Services and live interfaces
+    for svc in "wgnet${TEST_TUNNELNUM}" "wgnet_${TEST_CUSTOMNAME}"; do
+        if systemctl is-active --quiet "wg-quick@$svc"; then
+            _pass "wg-quick@$svc active"
+        else
+            _fail "wg-quick@$svc active" "$(systemctl is-active "wg-quick@$svc" 2>&1)"
+        fi
+    done
+    port=$(wg show "wgnet${TEST_TUNNELNUM}" listen-port 2>/dev/null)
+    if [ "$port" = "$TEST_TUNNELPORT" ]; then
+        _pass "wg show — tunnel listen port"
+    else
+        _fail "wg show — tunnel listen port" "expected $TEST_TUNNELPORT, got '$port'"
+    fi
+    if wg show "wgnet${TEST_TUNNELNUM}" peers 2>/dev/null | grep -qF -- "$C_PUB"; then
+        _pass "wg show — client peer present"
+    else
+        _fail "wg show — client peer present" "client public key not in peer list"
+    fi
+    port=$(wg show "wgnet_${TEST_CUSTOMNAME}" listen-port 2>/dev/null)
+    if [ "$port" = "$TEST_CUSTOMPORT" ]; then
+        _pass "wg show — custom listen port"
+    else
+        _fail "wg show — custom listen port" "expected $TEST_CUSTOMPORT, got '$port'"
+    fi
+
+    assert_rpc "enumerateTunnels — test tunnel running" "Wireguard" "enumerateTunnels" '{}'
+    if echo "$RPC_OUT" | python3 -c "
+import sys, json
+rows = json.load(sys.stdin)
+sys.exit(0 if any(r['tunnelnum'] == $TEST_TUNNELNUM and r['running'] for r in rows) else 1)
+" 2>/dev/null; then
+        _pass "enumerateTunnels — running=true"
+    else
+        _fail "enumerateTunnels — running=true" "test tunnel not reported running"
+    fi
+
+    # RPC methods that need the config files
+    assert_rpc_bg "getTunnelConfig (bg)" "Wireguard" "getTunnelConfig" \
+        "{\"uuid\":\"$TUNNEL_UUID\"}" "[Interface]"
+    assert_rpc "downloadTunnelConfig" "Wireguard" "downloadTunnelConfig" \
+        "{\"uuid\":\"$TUNNEL_UUID\"}" '"filename"'
+    assert_rpc_bg "getClientConfig (bg)" "Wireguard" "getClientConfig" \
+        "{\"uuid\":\"$CLIENT_UUID\"}" "[Interface]"
+    assert_rpc "downloadClientConfig" "Wireguard" "downloadClientConfig" \
+        "{\"uuid\":\"$CLIENT_UUID\"}" '"filename"'
+    assert_rpc "downloadQrCode" "Wireguard" "downloadQrCode" \
+        "{\"uuid\":\"$CLIENT_UUID\"}" '"filename"'
+
+    # generateQrCodes stores a base64 PNG per client and triggers applyChanges
+    assert_rpc "generateQrCodes" "Wireguard" "generateQrCodes" '{}'
+    wait_for_deploys
+    QR=$(json_get "$(omv-rpc -u admin "Wireguard" "getClient" \
+        "{\"uuid\":\"$CLIENT_UUID\"}" 2>/dev/null)" "qr")
+    if [[ "$QR" == data:image/png\;base64,* ]] && [ ${#QR} -gt 500 ]; then
+        _pass "generateQrCodes — client QR stored"
+    else
+        _fail "generateQrCodes — client QR stored" "qr='${QR:0:80}…' (${#QR} chars)"
+    fi
+    if [[ "$QR" != *$'\n'* ]]; then
+        _pass "generateQrCodes — QR base64 has no line breaks"
+    else
+        _fail "generateQrCodes — QR base64 has no line breaks" "newline found in qr"
+    fi
+    if echo "${QR#data:image/png;base64,}" | base64 -d 2>/dev/null | head -c 8 \
+        | grep -q "PNG"; then
+        _pass "generateQrCodes — QR decodes to PNG"
+    else
+        _fail "generateQrCodes — QR decodes to PNG" "decoded data is not a PNG"
+    fi
+    assert_rpc "downloadAllQrCodes (after generate)" "Wireguard" "downloadAllQrCodes" \
+        '{}' '"filename"'
+
+    # Deletes are refused while config files exist
+    assert_rpc_fails "deleteTunnel — blocked by existing config file" \
+        "Wireguard" "deleteTunnel" "{\"uuid\":\"$TUNNEL_UUID\"}"
+    assert_rpc_fails "deleteClient — blocked by existing config file" \
+        "Wireguard" "deleteClient" "{\"uuid\":\"$CLIENT_UUID\"}"
+    assert_rpc_fails "deleteCustom — blocked by existing config file" \
+        "Wireguard" "deleteCustom" "{\"uuid\":\"$CUSTOM_UUID\"}"
+
+    # -----------------------------------------------------------------------
+    # Teardown: disable and redeploy, files and services must be gone
+    # -----------------------------------------------------------------------
+    out=$(set_enabled Custom "$CUSTOM_UUID" false) \
+        && _pass "setCustom (disable)" || _fail "setCustom (disable)" "${out:0:300}"
+    out=$(set_enabled Client "$CLIENT_UUID" false) \
+        && _pass "setClient (disable)" || _fail "setClient (disable)" "${out:0:300}"
+    out=$(set_enabled Tunnel "$TUNNEL_UUID" false) \
+        && _pass "setTunnel (disable)" || _fail "setTunnel (disable)" "${out:0:300}"
+    if deploy_wireguard; then
+        _pass "omv-salt deploy run wireguard (disable)"
+        APPLIED=0
+    else
+        _fail "omv-salt deploy run wireguard (disable)" \
+            "$(echo "$DEPLOY_OUT" | tail -n 20)"
+    fi
+
+    for f in "$TUNNEL_CONF" "$CLIENT_CONF" "$CUSTOM_CONF"; do
+        if [ ! -e "$f" ]; then
+            _pass "removed after disable: $(basename "$f")"
+        else
+            _fail "removed after disable: $(basename "$f")" "$f still exists"
+        fi
+    done
+    for svc in "wgnet${TEST_TUNNELNUM}" "wgnet_${TEST_CUSTOMNAME}"; do
+        if ! systemctl is-active --quiet "wg-quick@$svc"; then
+            _pass "wg-quick@$svc stopped"
+        else
+            _fail "wg-quick@$svc stopped" "service still active"
+        fi
+    done
+else
+    _skip "Apply section" "test tunnel/client/custom config not all created"
 fi
 
 # ===========================================================================
@@ -749,7 +1027,6 @@ section "Delete test objects"
 # ===========================================================================
 
 if [ -n "$CUSTOM_UUID" ]; then
-    CUSTOM_CONF="/etc/wireguard/wgnet_${TEST_CUSTOMNAME}.conf"
     if [ -f "$CUSTOM_CONF" ]; then
         _skip "deleteCustom" "$CUSTOM_CONF exists — disable and apply changes first"
     else
@@ -759,7 +1036,6 @@ if [ -n "$CUSTOM_UUID" ]; then
 fi
 
 if [ -n "$CLIENT_UUID" ]; then
-    CLIENT_CONF="/etc/wireguard/wgnet_client${TEST_CLIENTNUM}.conf"
     if [ -f "$CLIENT_CONF" ]; then
         _skip "deleteClient" "$CLIENT_CONF exists — disable and apply changes first"
     else
@@ -769,7 +1045,6 @@ if [ -n "$CLIENT_UUID" ]; then
 fi
 
 if [ -n "$TUNNEL_UUID" ]; then
-    TUNNEL_CONF="/etc/wireguard/wgnet${TEST_TUNNELNUM}.conf"
     if [ -f "$TUNNEL_CONF" ]; then
         _skip "deleteTunnel" "$TUNNEL_CONF exists — disable and apply changes first"
     else
