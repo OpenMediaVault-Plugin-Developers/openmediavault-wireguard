@@ -30,8 +30,8 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod("setTunnel");
         $this->registerMethod("deleteTunnel");
         $this->registerMethod("getTunnelConfig");
-        $this->registerMethod("downloadTunnelConfig");
-        $this->registerMethod("downloadAllTunnelConfigs");
+        $this->registerMethod("downloadTunnelConfig", null, ["allowlist" => ["download"]]);
+        $this->registerMethod("downloadAllTunnelConfigs", null, ["allowlist" => ["download"]]);
         $this->registerMethod("enumerateTunnels");
 
         $this->registerMethod("getClientList");
@@ -39,10 +39,10 @@ class OMVRpcServiceWireGuard extends \OMV\Rpc\ServiceAbstract
         $this->registerMethod("setClient");
         $this->registerMethod("deleteClient");
         $this->registerMethod("getClientConfig");
-        $this->registerMethod("downloadClientConfig");
-        $this->registerMethod("downloadQrCode");
-        $this->registerMethod("downloadAllClientConfigs");
-        $this->registerMethod("downloadAllQrCodes");
+        $this->registerMethod("downloadClientConfig", null, ["allowlist" => ["download"]]);
+        $this->registerMethod("downloadQrCode", null, ["allowlist" => ["download"]]);
+        $this->registerMethod("downloadAllClientConfigs", null, ["allowlist" => ["download"]]);
+        $this->registerMethod("downloadAllQrCodes", null, ["allowlist" => ["download"]]);
         $this->registerMethod("generateQrCodes");
         $this->registerMethod("enumerateDns");
 
