@@ -78,6 +78,42 @@ assert_rpc() {
     return 0
 }
 
+# Assert whether an administrator may call an RPC method via the given
+# entrypoint (`rpc` or `download`). omv-rpc calls are internal and skip this
+# check, so ask the RPC service directly.
+# Usage: assert_entrypoint <desc> <service> <method> <entrypoint> <allowed|denied>
+assert_entrypoint() {
+    local desc=$1 svc=$2 method=$3 ep=$4 want=$5 got
+    got=$(php -d error_reporting=E_ERROR -d display_errors=stderr -r '
+        require_once "openmediavault/autoloader.inc";
+        require_once "openmediavault/functions.inc";
+        $base = \OMV\Environment::get("OMV_ENGINED_DIR");
+        foreach (["inc", "rpc"] as $sub) {
+            foreach (listdir(build_path(DIRECTORY_SEPARATOR, $base, $sub),
+                    "inc") as $path) {
+                require_once $path;
+            }
+        }
+        $mngr = &\OMV\Rpc\ServiceManager::getInstance();
+        $mngr->initializeServices();
+        $service = $mngr->getService($argv[1]);
+        if ((false === $service) || !$service->hasMethod($argv[2])) {
+            echo "missing";
+            exit(0);
+        }
+        $context = \OMV\Rpc\Rpc::createContext("admin",
+            OMV_ROLE_ADMINISTRATOR, ["entrypoint" => $argv[3]]);
+        echo $service->isMethodAllowed($argv[2], $context) ?
+            "allowed" : "denied";
+    ' -- "$svc" "$method" "$ep" 2>/dev/null | tail -1)
+    if [ "$got" = "$want" ]; then
+        _pass "$desc"
+        return 0
+    fi
+    _fail "$desc" "expected '$want', got '${got:-no output}'"
+    return 1
+}
+
 assert_rpc_fails() {
     local desc=$1 svc=$2 method=$3 params=${4:-'{}'}
     local out ec=0
@@ -352,6 +388,25 @@ if ! omv-rpc -u admin "Config" "isDirty" '{}' &>/dev/null; then
     exit 1
 fi
 _pass "omv-rpc functional"
+
+# ---------------------------------------------------------------------------
+section "Download entrypoint"
+# ---------------------------------------------------------------------------
+# openmediavault >= 8.7.2 only allows methods with an explicit
+# `download` allowlist to be called via /download.
+
+assert_entrypoint "downloadTunnelConfig allowed via download" Wireguard downloadTunnelConfig download allowed
+assert_entrypoint "downloadTunnelConfig denied via rpc"       Wireguard downloadTunnelConfig rpc      denied
+assert_entrypoint "downloadAllTunnelConfigs allowed via download" Wireguard downloadAllTunnelConfigs download allowed
+assert_entrypoint "downloadAllTunnelConfigs denied via rpc"       Wireguard downloadAllTunnelConfigs rpc      denied
+assert_entrypoint "downloadClientConfig allowed via download" Wireguard downloadClientConfig download allowed
+assert_entrypoint "downloadClientConfig denied via rpc"       Wireguard downloadClientConfig rpc      denied
+assert_entrypoint "downloadQrCode allowed via download" Wireguard downloadQrCode download allowed
+assert_entrypoint "downloadQrCode denied via rpc"       Wireguard downloadQrCode rpc      denied
+assert_entrypoint "downloadAllClientConfigs allowed via download" Wireguard downloadAllClientConfigs download allowed
+assert_entrypoint "downloadAllClientConfigs denied via rpc"       Wireguard downloadAllClientConfigs rpc      denied
+assert_entrypoint "downloadAllQrCodes allowed via download" Wireguard downloadAllQrCodes download allowed
+assert_entrypoint "downloadAllQrCodes denied via rpc"       Wireguard downloadAllQrCodes rpc      denied
 
 # ===========================================================================
 section "Tunnels — CRUD"
