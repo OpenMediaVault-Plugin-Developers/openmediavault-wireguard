@@ -80,7 +80,8 @@ assert_rpc() {
 
 # Assert whether an administrator may call an RPC method via the given
 # entrypoint (`rpc` or `download`). omv-rpc calls are internal and skip this
-# check, so ask the RPC service directly.
+# check, so ask the RPC service directly. Included files may print stray
+# whitespace, so the result is printed on its own line and trimmed.
 # Usage: assert_entrypoint <desc> <service> <method> <entrypoint> <allowed|denied>
 assert_entrypoint() {
     local desc=$1 svc=$2 method=$3 ep=$4 want=$5 got
@@ -98,14 +99,14 @@ assert_entrypoint() {
         $mngr->initializeServices();
         $service = $mngr->getService($argv[1]);
         if ((false === $service) || !$service->hasMethod($argv[2])) {
-            echo "missing";
+            echo PHP_EOL . "missing";
             exit(0);
         }
         $context = \OMV\Rpc\Rpc::createContext("admin",
             OMV_ROLE_ADMINISTRATOR, ["entrypoint" => $argv[3]]);
-        echo $service->isMethodAllowed($argv[2], $context) ?
-            "allowed" : "denied";
-    ' -- "$svc" "$method" "$ep" 2>/dev/null | tail -1)
+        echo PHP_EOL . ($service->isMethodAllowed($argv[2], $context) ?
+            "allowed" : "denied");
+    ' -- "$svc" "$method" "$ep" 2>/dev/null | tail -1 | tr -d '[:space:]')
     if [ "$got" = "$want" ]; then
         _pass "$desc"
         return 0
